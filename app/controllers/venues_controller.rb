@@ -13,10 +13,12 @@ class VenuesController < ApplicationController
   # GET /venues/new
   def new
     @venue = Venue.new
+    @regions = Region.all
   end
 
   # GET /venues/1/edit
   def edit
+    @regions = Region.all
   end
 
   # POST /venues or /venues.json
@@ -65,6 +67,6 @@ class VenuesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def venue_params
-      params.require(:venue).permit(:name, :address)
+      params.require(:venue).permit(:name, :address, :region_id)
     end
 end

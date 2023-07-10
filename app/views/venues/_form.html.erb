@@ -20,6 +20,13 @@
     <%= form.label :address, style: "display: block" %>
     <%= form.text_field :address %>
   </div>
+  
+  <div>
+    <%= form.label 'Region', style: "display: block" %>
+    <%= form.select :region_id, (@regions.map do |region|
+          [region.name, region.id] 
+        end) %>
+  </div>
 
   <div>
     <%= form.submit %>
