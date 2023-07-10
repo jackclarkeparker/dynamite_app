@@ -1,5 +1,6 @@
 class VenuesController < ApplicationController
   before_action :set_venue, only: %i[ show edit update destroy ]
+  before_action :set_regions, only: %i[ new edit ]
 
   # GET /venues or /venues.json
   def index
@@ -13,12 +14,10 @@ class VenuesController < ApplicationController
   # GET /venues/new
   def new
     @venue = Venue.new
-    @regions = Region.all
   end
 
   # GET /venues/1/edit
   def edit
-    @regions = Region.all
   end
 
   # POST /venues or /venues.json
@@ -63,6 +62,10 @@ class VenuesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_venue
       @venue = Venue.find(params[:id])
+    end
+
+    def set_regions
+      @regions = Region.all
     end
 
     # Only allow a list of trusted parameters through.
