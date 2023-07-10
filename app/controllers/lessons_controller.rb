@@ -1,5 +1,7 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[ show edit update destroy ]
+  before_action :set_tutors, only: %i[ new edit ]
+  before_action :set_venues, only: %i[ new edit ]
 
   # GET /lessons or /lessons.json
   def index
@@ -58,6 +60,14 @@ class LessonsController < ApplicationController
   end
 
   private
+    def set_tutors
+      @tutors = Tutor.all
+    end
+
+    def set_venues
+      @venues = Venue.all
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_lesson
       @lesson = Lesson.find(params[:id])

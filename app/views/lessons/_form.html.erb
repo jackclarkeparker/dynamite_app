@@ -13,12 +13,16 @@
 
   <div>
     <%= form.label :tutor_id, style: "display: block" %>
-    <%= form.text_field :tutor_id %>
+    <%= form.select :tutor_id, (@tutors.map do |tutor|
+          [tutor.preferred_name, tutor.id]
+        end) %>
   </div>
 
   <div>
     <%= form.label :venue_id, style: "display: block" %>
-    <%= form.text_field :venue_id %>
+    <%= form.select :venue_id, (@venues.map do |venue|
+          [venue.name, venue.id]
+        end) %>
   </div>
 
   <div>
