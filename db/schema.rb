@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_09_235501) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_10_020429) do
   create_table "tutors", force: :cascade do |t|
     t.string "preferred_name"
     t.string "first_name"
     t.string "last_name"
     t.string "email_address"
     t.string "phone_number"
-    t.string "mail_address"
+    t.string "delivery_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
