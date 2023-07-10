@@ -11,34 +11,36 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :preferred_name, style: "display: block" %>
-    <%= form.text_field :preferred_name %>
-  </div>
+  <div class="row gx-5 row-cols-3">    
+    <div class="col">
+      <%= form.label :preferred_name, style: "display: block" %>
+      <%= form.text_field :preferred_name %>
+    </div>
 
-  <div>
-    <%= form.label :first_name, style: "display: block" %>
-    <%= form.text_field :first_name %>
-  </div>
+    <div class="col">
+      <%= form.label :first_name, style: "display: block" %>
+      <%= form.text_field :first_name %>
+    </div>
 
-  <div>
-    <%= form.label :last_name, style: "display: block" %>
-    <%= form.text_field :last_name %>
-  </div>
+    <div class="col">
+      <%= form.label :last_name, style: "display: block" %>
+      <%= form.text_field :last_name %>
+    </div>
 
-  <div>
-    <%= form.label :email_address, style: "display: block" %>
-    <%= form.text_field :email_address %>
-  </div>
+    <div class="col">
+      <%= form.label :email_address, style: "display: block" %>
+      <%= form.text_field :email_address %>
+    </div>
 
-  <div>
-    <%= form.label :phone_number, style: "display: block" %>
-    <%= form.text_field :phone_number %>
-  </div>
+    <div class="col">
+      <%= form.label :phone_number, style: "display: block" %>
+      <%= form.text_field :phone_number %>
+    </div>
 
-  <div>
-    <%= form.label :mail_address, style: "display: block" %>
-    <%= form.text_field :mail_address %>
+    <div class="col">
+      <%= form.label :mail_address, style: "display: block" %>
+      <%= form.text_field :mail_address %>
+    </div>
   </div>
 
   <div>
