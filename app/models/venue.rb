@@ -1,5 +1,4 @@
 class Venue < ApplicationRecord
-  def region
-    Region.find(self.region_id)
-  end
+  belongs_to :region
+  has_many :lessons
 end
