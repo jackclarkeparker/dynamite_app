@@ -1,7 +1,7 @@
 databases:
-  - name: current
-    databaseName: current_production
-    user: current
+  - name: dynamite_db
+    databaseName: dynamite_db
+    user: jack
 
 services:
   - type: web
