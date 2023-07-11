@@ -1,6 +1,6 @@
 databases:
   - name: Dynamite Postgres
-    databaseName: dpg-cimttg5ph6evlau7qj40-a
+    databaseName: dynamite_db
     plan: free
     user: jack
 
