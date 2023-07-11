@@ -1,6 +1,7 @@
 databases:
-  - name: dpg-cimttg5ph6evlau7qj40-a
-    databaseName: dynamite_db
+  - name: Dynamite Postgres
+    databaseName: dpg-cimttg5ph6evlau7qj40-a
+    plan: free
     user: jack
 
 services:
