@@ -1,6 +1,7 @@
 databases:
   - name: Dynamite Postgres
     databaseName: dynamite_db
+    region: singapore
     plan: free
     user: jack
 
