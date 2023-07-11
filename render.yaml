@@ -1,12 +1,9 @@
-databases:
-  - name: dynamite_db
-    databaseName: dynamite_db
-    user: jack
-
 services:
   - type: web
     name: current
     runtime: ruby
+    region: singapore
+    plan: free
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
