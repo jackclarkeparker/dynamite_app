@@ -1,3 +1,8 @@
+databases:
+  - name: dpg-cimttg5ph6evlau7qj40-a
+    databaseName: dynamite_db
+    user: jack
+
 services:
   - type: web
     name: current
