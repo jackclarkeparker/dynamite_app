@@ -10,11 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_10_202100) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_11_034410) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "lessons", force: :cascade do |t|
     t.integer "tutor_id", null: false
     t.integer "venue_id", null: false
-    t.integer "day"
+    t.integer "week_day_index"
     t.time "start_time"
     t.integer "capacity"
     t.integer "standard_price"

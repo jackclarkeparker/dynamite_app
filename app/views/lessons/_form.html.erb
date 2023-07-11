@@ -27,7 +27,10 @@
 
   <div>
     <%= form.label :day, style: "display: block" %>
-    <%= form.number_field :day %>
+    <%= form.select :week_day_index,
+        (Date::DAYNAMES.map.with_index do |day, index|
+          [day, index]
+        end) %>
   </div>
 
   <div>
