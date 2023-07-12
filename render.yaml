@@ -7,7 +7,7 @@ databases:
 
 services:
   - type: web
-    name: current
+    name: Dynamite App
     runtime: ruby
     region: singapore
     plan: free
