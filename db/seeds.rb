@@ -53,7 +53,7 @@ Lesson.create!([
     start_time: '15:30:00',
     capacity: 4,
     occupancy: 3,
-    standard_price: 1650,
+    standard_price: 16.5,
   },
   {
     tutor_id: andy.id,
@@ -62,7 +62,7 @@ Lesson.create!([
     start_time: '16:00:00',
     capacity: 4,
     occupancy: 4,
-    standard_price: 1650,
+    standard_price: 16.5,
   },
   {
     tutor_id: andy.id,
@@ -71,7 +71,7 @@ Lesson.create!([
     start_time: '16:30:00',
     capacity: 3,
     occupancy: 3,
-    standard_price: 1650,
+    standard_price: 16.5,
   },
   {
     tutor_id: andy.id,
@@ -80,7 +80,7 @@ Lesson.create!([
     start_time: '17:00:00',
     capacity: 4,
     occupancy: 2,
-    standard_price: 1650,
+    standard_price: 16.5,
   },
   {
     tutor_id: natalie.id,
@@ -89,7 +89,7 @@ Lesson.create!([
     start_time: '09:20:00',
     capacity: 4,
     occupancy: 4,
-    standard_price: 1600,
+    standard_price: 16,
   },
   {
     tutor_id: natalie.id,
@@ -98,7 +98,7 @@ Lesson.create!([
     start_time: '09:55:00',
     capacity: 4,
     occupancy: 3,
-    standard_price: 1600,
+    standard_price: 16,
   },
   {
     tutor_id: natalie.id,
@@ -107,6 +107,6 @@ Lesson.create!([
     start_time: '10:30:00',
     capacity: 4,
     occupancy: 4,
-    standard_price: 1600,
+    standard_price: 16,
   },
 ])
