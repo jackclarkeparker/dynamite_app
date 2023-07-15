@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+form input, form select {
+  width: 14.5rem;
+  height: 2rem;
+}
+
+form input[type="submit"] {
+  margin-top: 22px;
+  height: 3.2rem;
+}
