@@ -44,6 +44,11 @@
   </div>
 
   <div>
+    <%= form.label :duration, style: "display: block" %>
+    <%= form.number_field :duration, in: 10..90, value: 30 %>
+  </div>
+
+  <div>
     <%= form.label :standard_price, style: "display: block" %>
     <%= form.number_field :standard_price, in: 1.0..50.0, step: 0.5, value: 16.5 %>
   </div>

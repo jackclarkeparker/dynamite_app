@@ -53,6 +53,7 @@ Lesson.create!([
     start_time: '15:30:00',
     capacity: 4,
     availability: 1,
+    duration: 30,
     standard_price: 16.5,
   },
   {
@@ -62,6 +63,7 @@ Lesson.create!([
     start_time: '16:00:00',
     capacity: 4,
     availability: 0,
+    duration: 30,
     standard_price: 16.5,
   },
   {
@@ -71,6 +73,7 @@ Lesson.create!([
     start_time: '16:30:00',
     capacity: 3,
     availability: 0,
+    duration: 30,
     standard_price: 16.5,
   },
   {
@@ -80,6 +83,7 @@ Lesson.create!([
     start_time: '17:00:00',
     capacity: 4,
     availability: 2,
+    duration: 30,
     standard_price: 16.5,
   },
   {
@@ -89,6 +93,7 @@ Lesson.create!([
     start_time: '09:20:00',
     capacity: 4,
     availability: 0,
+    duration: 30,
     standard_price: 16,
   },
   {
@@ -98,6 +103,7 @@ Lesson.create!([
     start_time: '09:55:00',
     capacity: 4,
     availability: 1,
+    duration: 30,
     standard_price: 16,
   },
   {
@@ -107,6 +113,7 @@ Lesson.create!([
     start_time: '10:30:00',
     capacity: 4,
     availability: 0,
+    duration: 30,
     standard_price: 16,
   },
 ])
