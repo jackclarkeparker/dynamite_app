@@ -24,6 +24,7 @@ class LessonsController < ApplicationController
   # POST /lessons or /lessons.json
   def create
     @lesson = Lesson.new(lesson_params)
+    @lesson.availability = @lesson.capacity
 
     respond_to do |format|
       if @lesson.save
