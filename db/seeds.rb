@@ -31,17 +31,23 @@ andy, natalie = Tutor.create!([
     preferred_name: 'Andy',
     first_name: 'Andrew',
     last_name: 'Taylor',
+    full_name: 'Andrew Taylor',
     email_address: 'andy@dynamitemusic.co.nz',
     phone_number: '021 123 4567',
     delivery_address: '13 Clyde Street, Island Bay, 6023',
+    entity_id: 1,
+    valid_until: ApplicationRecord::FUTURE_EPOCH,
   },
   {
     preferred_name: 'Natalie',
     first_name: 'Natalie',
     last_name: 'Jones',
+    full_name: 'Natalie Jones',
     email_address: 'natalie@dynamitemusic.co.nz',
     phone_number: '021 765 4321',
     delivery_address: '18 Blackbridge Road, Wadestown, 6012',
+    entity_id: 2,
+    valid_until: ApplicationRecord::FUTURE_EPOCH,
   },
 ])
 
