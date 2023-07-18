@@ -1,4 +1,6 @@
 class TutorsController < ApplicationController
+  include EntityHelpers
+
   before_action :set_tutor, only: %i[ show edit update destroy ]
 
   # GET /tutors or /tutors.json
@@ -22,6 +24,7 @@ class TutorsController < ApplicationController
   # POST /tutors or /tutors.json
   def create
     @tutor = Tutor.new(tutor_params)
+    set_entity_id(@tutor)
 
     respond_to do |format|
       if @tutor.save
