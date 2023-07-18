@@ -3,7 +3,7 @@
 one:
   tutor: jack
   venue: one
-  day: 1
+  week_day_index: 1
   start_time: 2023-07-10 14:32:07
   capacity: 1
   standard_price: 1
