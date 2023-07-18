@@ -59,7 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_15_233511) do
     t.datetime "updated_at", null: false
     t.string "full_name"
     t.integer "entity_id"
-    t.datetime "valid_until"
+    t.datetime "valid_until", precision: nil
   end
 
   create_table "venues", force: :cascade do |t|
