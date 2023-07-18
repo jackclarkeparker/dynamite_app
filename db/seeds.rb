@@ -17,12 +17,14 @@ miramar, newtown = Venue.create!([
   {
     name: 'Miramar Community Centre',
     address: '27 Chelsea Street, Miramar, Wellington 6022',
-    region_id: wellington.id 
+    region_id: wellington.id,
+    standard_price: 16.5,
   },
   {
     name: 'Newtown School',
     address: 'Mein Street',
-    region_id: wellington.id
+    region_id: wellington.id,
+    standard_price: 16,
   }
 ])
 

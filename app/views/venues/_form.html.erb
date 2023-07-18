@@ -17,15 +17,20 @@
   </div>
 
   <div>
+    <%= form.label 'Region', style: "display: block" %>
+    <%= form.select :region_id, (@regions.map do |region|
+          [region.name, region.id] 
+        end) %>
+  </div>
+
+  <div>
     <%= form.label :address, style: "display: block" %>
     <%= form.text_field :address %>
   </div>
   
   <div>
-    <%= form.label 'Region', style: "display: block" %>
-    <%= form.select :region_id, (@regions.map do |region|
-          [region.name, region.id] 
-        end) %>
+    <%= form.label :standard_price, style: "display: block" %>
+    <%= form.number_field :standard_price, in: 1.0..50.0, step: 0.5 value: 0 %>
   </div>
 
   <div>
