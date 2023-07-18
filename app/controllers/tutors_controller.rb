@@ -49,10 +49,13 @@ class TutorsController < ApplicationController
 
   # DELETE /tutors/1 or /tutors/1.json
   def destroy
-    @tutor.destroy
+    @tutor.valid_until = Time.now
+    @tutor.save
 
     respond_to do |format|
-      format.html { redirect_to tutors_url, notice: "Tutor was successfully destroyed." }
+      format.html do
+        redirect_to tutors_url, notice: "Tutor was successfully destroyed."
+      end
       format.json { head :no_content }
     end
   end
