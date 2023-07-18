@@ -39,11 +39,22 @@ class TutorsController < ApplicationController
 
   # PATCH/PUT /tutors/1 or /tutors/1.json
   def update
+    new_tutor = Tutor.new(tutor_params)
+    new_tutor.entity_id = @tutor.entity_id
+
     respond_to do |format|
-      if @tutor.update(tutor_params)
-        format.html { redirect_to tutor_url(@tutor), notice: "Tutor was successfully updated." }
-        format.json { render :show, status: :ok, location: @tutor }
+      if new_tutor.same_attributes_as(@tutor)
+        format.html do
+          redirect_to tutor_url(@tutor), alert: "No changes made to tutor."
+        end
+      elsif new_tutor.save
+        decomission_old_version(decomission_timestamp: new_tutor.created_at)
+        format.html do
+          redirect_to tutor_url(new_tutor), notice: "Tutor was successfully updated."
+        end
+        format.json { render :show, status: :ok, location: new_tutor }
       else
+        @tutor = new_tutor
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @tutor.errors, status: :unprocessable_entity }
       end
@@ -72,5 +83,10 @@ class TutorsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def tutor_params
       params.require(:tutor).permit(:preferred_name, :first_name, :last_name, :email_address, :phone_number, :delivery_address)
+    end
+
+    def decomission_old_version(decomission_timestamp:)
+      @tutor.valid_until = decomission_timestamp
+      @tutor.save
     end
 end
