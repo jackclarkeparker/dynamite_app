@@ -1,17 +1,12 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  preferred_name: MyString
-  first_name: MyString
-  last_name: MyString
-  email_address: MyString
-  phone_number: MyString
-  mail_address: MyString
-
-two:
-  preferred_name: MyString
-  first_name: MyString
-  last_name: MyString
-  email_address: MyString
-  phone_number: MyString
-  mail_address: MyString
+jack:
+  preferred_name: Jack
+  first_name: Jack
+  last_name: Clarke-Parker
+  email_address: jack@dynamite_music.co.nz
+  phone_number: 0210492174
+  delivery_address: 137 Clyde Street, Island Bay, 6023
+  entity_id: 1
+  full_name: Jack Clarke-Parker
+  valid_until: <%= Time.new(9999, 12, 31) %>
