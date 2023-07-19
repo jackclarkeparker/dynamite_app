@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Lessons</h1>
+
+<div id="lessons">
+  <% @lesson_schedule.each_pair do |venue, days| %>
+    <h2><%= venue %></h2>
+      <% days.each_pair do |day, lessons| %>
+        <h3><%= day %></h3>
+        <ul class='list-unstyled'>
+          <% lessons.each do |lesson| %>
+            <li class=''>
+              <%= lesson.start_time %> | <%= link_to "Show this lesson", lesson %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+  <% end %>
+</div>

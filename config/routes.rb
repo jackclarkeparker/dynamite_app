@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "regions#index"
+
+  get "/lesson_booker", to: 'lessons#booker'
 end
