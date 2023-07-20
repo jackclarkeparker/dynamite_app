@@ -1,0 +1,19 @@
+div#lessons table td {
+  background-color: #E2F6D1;
+}
+
+div#lessons table tr:nth-of-type(odd) td {
+  background-color: #cbfbfc;
+}
+
+#lessons table td:nth-child(1) {
+  width: 45%;
+}
+
+#lessons table td:nth-child(2) {
+  width: 30%;
+}
+
+#lessons table td:nth-child(3) {
+  width: 25%;
+}
