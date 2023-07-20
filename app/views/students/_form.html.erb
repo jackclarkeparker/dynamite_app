@@ -12,11 +12,6 @@
   <% end %>
 
   <div>
-    <%= form.label :preferred_name, style: "display: block" %>
-    <%= form.text_field :preferred_name %>
-  </div>
-
-  <div>
     <%= form.label :first_name, style: "display: block" %>
     <%= form.text_field :first_name %>
   </div>
@@ -27,8 +22,19 @@
   </div>
 
   <div>
-    <%= form.label :birthday, style: "display: block" %>
-    <%= form.date_field :birthday %>
+    <%= form.label "Preferred name (if applicable):", style: "display: block" %>
+    <%= form.text_field :preferred_name %>
+  </div>
+
+  <div>
+    <%= form.label :region, style: "display: block" %>
+    <%= form.select :region_id, options_for_select(
+          @regions.map { |region| [region.name, region.id] }
+            .unshift(['Region']), {
+            selected: 'Region',
+            disabled: 'Region'
+          }
+        ) %>
   </div>
 
   <div>
@@ -37,13 +43,18 @@
   </div>
 
   <div>
-    <%= form.label :gender, style: "display: block" %>
-    <%= form.text_field :gender %>
+    <%= form.label :birthday, style: "display: block" %>
+    <%= form.date_field :birthday %>
   </div>
 
   <div>
-    <%= form.label :region_id, style: "display: block" %>
-    <%= form.text_field :region_id %>
+    <%= form.label :gender, style: "display: block" %>
+    <%= form.select :gender, options_for_select(
+          ['Gender', 'male', 'female', 'other'], {
+            selected: (@student && @student.gender) || 'Gender',
+            disabled: 'Gender'
+          }
+        ) %>
   </div>
 
   <div>
