@@ -1,7 +1,9 @@
 class LessonsController < ApplicationController
+  include EntityHelpers
+  include SelectData
+
   before_action :set_lesson, only: %i[ show edit update destroy ]
-  before_action :set_tutors, only: %i[ new edit ]
-  before_action :set_venues, only: %i[ new edit ]
+  before_action :set_tutors, :set_venues, only: %i[ new edit ]
 
   # GET /lessons or /lessons.json
   def index
@@ -19,6 +21,10 @@ class LessonsController < ApplicationController
       schedule[l.venue.name][l.day] << l
       schedule
     end
+
+    # What do we need to do to have the venues displayed in
+    # alphabetical order?
+    # Also, this implementation still doesn't handle regions
   end
 
   # GET /lessons/1 or /lessons/1.json
@@ -74,13 +80,6 @@ class LessonsController < ApplicationController
   end
 
   private
-    def set_tutors
-      @tutors = Tutor.all
-    end
-
-    def set_venues
-      @venues = Venue.all
-    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_lesson
