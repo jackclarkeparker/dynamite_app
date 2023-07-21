@@ -1,13 +1,18 @@
 class Tutor < ApplicationRecord
+  include PhoneNumberFormatting
+
   has_many :lessons
 
   validates :first_name, :last_name, :email_address,
             :phone_number, :delivery_address,
             :entity_id, presence: true
-  
-  # No two active tutors with same email address, or phone number.
+  validates :phone_number, format: {
+    with: /\s/,
+    message: 'suffix must be between six and nine digits long'
+  }, allow_blank: true
   validates_with UniqueTutorPhoneAndEmailValidator
 
+  after_initialize :format_phone_number
   before_create :set_full_name_and_valid_until
 
   def same_attributes_as(other_tutor)

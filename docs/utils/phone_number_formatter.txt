@@ -1,0 +1,177 @@
+DECISIONS
+-> I'll stick to NZ numbers at this point.
+-> Use spaces to separate chunks of number
+
+Input - String
+* A string representing a phone number
+  - May include dashes
+  - May include spaces
+  - May include digits
+-> FE Validation should challenge anything else
+-> If an attacker supplies other values, we can substitute them for empty spaces.
+
+Output - Returned String
+* A formatted string phone number for storage in the DB and displaying across app.
+
+RULES
+- Input string may feature varying counts of digits.
+  -> Where the string has to few digits, return only digits, no chunking
+  -> Where the string has to many digits, return only digits, no chunking
+- Input string may represent a mobile phone, or a landline.
+- Substitute non-valid characters with empty spaces
+- Output string consists of digits and whitespace only
+
+CHUNKING RULES
+
+-> Length of each chunk is dependent on two factors;
+   Mobile phone / landline, and total digit count
+
+-> Mobiles begin with `02`, landlines begin with anything else
+    
+MOBILE CHUNKING RULES
+-> First three digits are the first chunk
+-> Remaining digit counts, and corresponding chunks:
+   - 6: [3, 3]
+   - 7: [3, 4]
+   - 8: [4, 4]
+   - 9: [3, 3, 3]
+
+LANDLINES
+-> Landlines may or may not include an area code.
+-> An area code is /0[3-9]/
+
+LANDLINE CHUNKING RULES
+-> If area code present, chunked as two digits
+-> Remaining digit counts, and corresponding chunks:
+   - 6: [3, 3]
+   - 7: [3, 4]
+   - 8: [4, 4]
+   - 9: [3, 3, 3]
+
+EXAMPLES
+
+puts PhoneNumberFormatter.format('021 049 2174') == '021 049 2174'
+puts PhoneNumberFormatter.format('021-049-2174') == '021 049 2174'
+puts PhoneNumberFormatter.format('0210492174') == '021 049 2174'
+
+# MOBILE LENGTHS
+puts PhoneNumberFormatter.format('027123456') == '027 123 456'
+puts PhoneNumberFormatter.format('0271234567') == '027 123 4567'
+puts PhoneNumberFormatter.format('02712345678') == '027 1234 5678'
+puts PhoneNumberFormatter.format('027123456789') == '027 123 456 789'
+
+puts PhoneNumberFormatter.format('0271234567891') == '0271234567891'
+
+# LANDLINE LENGTHS
+puts PhoneNumberFormatter.format('04973123') == '04 973 123'
+puts PhoneNumberFormatter.format('049731234') == '04 973 1234'
+puts PhoneNumberFormatter.format('0497312345') == '04 9731 2345'
+puts PhoneNumberFormatter.format('04973123456') == '04 973 123 456'
+
+puts PhoneNumberFormatter.format('049731234567') == '049731234567'
+
+puts PhoneNumberFormatter.format('9731234') == '973 1234'
+puts PhoneNumberFormatter.format('09731234') == '09 731 234'
+puts PhoneNumberFormatter.format('210492174') == '210 492 174'
+
+# OTHER CHARS
+puts PhoneNumberFormatter.format('other text0210492174 bla.') == '021 049 2174'
+puts PhoneNumberFormatter.format('other text') == ''
+puts PhoneNumberFormatter.format('     ') == ''
+puts PhoneNumberFormatter.format(' 3    ') == '3'
+puts PhoneNumberFormatter.format('0 2 1 0 4 9 2 1 7 4') == '021 049 2174'
+puts PhoneNumberFormatter.format('&*()') == ''
+puts PhoneNumberFormatter.format('+') == ''
+
+# I SHOULD THINK ABOUT +64 numbers being entered!
+puts PhoneNumberFormatter.format('+64 21 363 0565') == '021 363 0565'
+puts PhoneNumberFormatter.format('+64 4 973 1234') == '04 973 1234'
+
+# Interpretted as landline without an area code. Not building for this.
+puts PhoneNumberFormatter.format('+86 21 363 0565') == '86213630565'
+puts PhoneNumberFormatter.format('+86 2 123 456') == '862 123 456'
+puts PhoneNumberFormatter.format('+86 2 123 4567') == '8621234567'
+
+# TO FEW DIGITS
+puts PhoneNumberFormatter.format('3') == '3'
+puts PhoneNumberFormatter.format('33') == '33'
+puts PhoneNumberFormatter.format('333') == '333'
+puts PhoneNumberFormatter.format('3333') == '3333'
+puts PhoneNumberFormatter.format('33333') == '33333'
+
+# LOWEST VALID DIGIT-COUNT
+puts PhoneNumberFormatter.format('333333') == '333 333'
+
+APPROACH
+
+- I think I need to determine the prefix first, which will have different rules
+  depending on whether the input is mobile, landline w areacode,
+  or landline w/out area code.
+
+- After that there will be default formula to apply to the remaining digits.
+- I can extract the digits from the front of the number while determining the
+  prefix.
+
+- I can begin the entire process by:
+
+  replace_plus_64_with_0
+
+
+  - replacing a leading +64 with 0
+    -> The +64 might not be the first characters, but there
+       should be no digits before it.
+    -> cleaning everything that's not a digit out.
+
+- I can then extract the prefix.
+
+- Then, if the length is not within bounds, I can return the digits as is.
+  -> The shortest length a suffix can have is six digits.
+  -> The longest length a suffix can have is nine digits.
+
+ALGORITHM
+
+Input - String(input_number)
+
+1. Replace a leading '+64' with a 0.
+2. Replace all non-digits with empty space
+3. Declare `prefix` and `suffix` to the return value of a
+   find_prefix_and_suffix invocation
+4. If `suffix` has a length between 6 and 9,
+   - reassign `suffix` to a distribute_suffix_chunks invocation
+   - Return prefix plus suffix
+
+5. If `prefix` has a length greater than 0,
+   -> Return prefix plus whitespace plus suffix
+   OTHERWISE,
+   -> Return prefix plus suffix
+
+
+4. If `suffix` doesn't have a length between 6 and 9,
+   => return a string interpolation of `prefix` and `suffix`
+   OTHERWISE,
+   => return a string interpolation of `prefix`, ' ', and
+   the distribute_suffix_chunks invocation, taking suffix
+   as an argument.
+
+Output - Returned String
+
+ALGORITHM - find_prefix_and_suffix
+
+Input - String(input_number)
+
+1. if input_number begins with '02',
+  -> Return the first three characters, and the remaining characters
+2. if input_number begins with '0[3-9]'
+  -> Return the first two characters, and the remaining characters
+3. OTHERWISE,
+   => Return an empty string, and the input_number
+
+Output - Two returned Strings
+
+ALGORITHM - distribute_suffix_chunks
+
+Input - String(suffix)
+
+1. Case statement of the length of `suffix`
+
+Output - Returned String
