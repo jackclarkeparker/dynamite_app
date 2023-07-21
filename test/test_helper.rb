@@ -10,4 +10,17 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  def default_tutor_params
+    {
+      tutor: {
+        first_name: 'Gary',
+        last_name: 'Mason',
+        preferred_name: 'Gee',
+        email_address: 'gary@email.com',
+        phone_number: '022 676 7676',
+        delivery_address: '39 Majoribanks St',
+      }
+    }
+  end
 end

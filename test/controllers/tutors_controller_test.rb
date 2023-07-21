@@ -1,7 +1,7 @@
 require "test_helper"
 
 class TutorsControllerTest < ActionDispatch::IntegrationTest
-  QUOTE_HTML_ENTITY = '&#39;'
+  QUOTE_UNICODE = '&#39;'
 
   setup do
     @tutor = tutors(:jack)
@@ -19,16 +19,7 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create tutor" do
     assert_difference("Tutor.count", 1) do
-      post tutors_url, params: {
-        tutor: {
-          email_address: 'gary@email.com',
-          first_name: 'Gary',
-          last_name: 'Mason',
-          delivery_address: '39 Majoribanks St',
-          phone_number: '022 676 3747',
-          preferred_name: 'Gee'
-        }
-      }
+      post tutors_url, params: default_tutor_params
     end
 
     assert_redirected_to tutor_url(Tutor.last)
@@ -39,17 +30,11 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create tutor without preferred name" do
+    params = default_tutor_params
+    params[:tutor][:preferred_name] = ''
+
     assert_difference("Tutor.count", 1) do
-      post tutors_url, params: {
-        tutor: {
-          email_address: 'gary@email.com',
-          first_name: 'Sam',
-          last_name: 'Mason',
-          delivery_address: '39 Majoribanks St',
-          phone_number: '022 676 3747',
-          preferred_name: ''
-        }
-      }
+      post tutors_url, params: params
     end
 
     assert_redirected_to tutor_url(Tutor.last)
@@ -58,17 +43,37 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'p', "Tutor was successfully created."
   end
 
-  test "should fail to create tutor" do
+  test "should fail to create tutor with missing params" do
     assert_difference("Tutor.count", 0) do
       post tutors_url, params: {
         tutor: {
-          email_address: 'jack@dynamite_music.co.nz',
-          first_name: 'Jack',
-          last_name: 'Guy',
-          delivery_address: '145 Marion St',
-          phone_number: '0210492174',
+          email_address: '',
+          first_name: '',
+          last_name: '',
+          delivery_address: '',
+          phone_number: '',
         }
       }
+    end
+
+    assert_response 422
+
+    assert_match '<h1>New tutor</h1>', response.body
+    assert_match '<h2>5 errors prohibited this tutor from being saved:</h2>', response.body
+    assert_match "<li>First name can#{QUOTE_UNICODE}t be blank</li>", response.body
+    assert_match "<li>Last name can#{QUOTE_UNICODE}t be blank</li>", response.body
+    assert_match "<li>Email address can#{QUOTE_UNICODE}t be blank</li>", response.body
+    assert_match "<li>Phone number can#{QUOTE_UNICODE}t be blank</li>", response.body
+    assert_match "<li>Delivery address can#{QUOTE_UNICODE}t be blank</li>", response.body
+  end
+
+  test "should fail to create tutor with duplicate email / phone" do
+    params = default_tutor_params
+    params[:tutor][:email_address] = 'jack@dynamite_music.co.nz'
+    params[:tutor][:phone_number] = '021 049 2174'
+
+    assert_difference("Tutor.count", 0) do
+      post tutors_url, params: params
     end
 
     assert_response 422
@@ -78,6 +83,36 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
     assert_match '<h2>2 errors prohibited this tutor from being saved:</h2>', response.body
     assert_match '<li>Email address in use by another tutor</li>', response.body
     assert_match '<li>Phone number in use by another tutor</li>', response.body
+  end
+
+  test "should complain about too-many-digits phone number" do
+    params = default_tutor_params
+    params[:tutor][:phone_number] = '027 1234567890'
+
+    assert_difference("Tutor.count", 0) do
+      post tutors_url, params: params
+    end
+
+    assert_response 422
+
+    assert_match '<h1>New tutor</h1>', response.body
+    assert_match '<h2>1 error prohibited this tutor from being saved:</h2>', response.body
+    assert_match "<li>Phone number suffix must be between six and nine digits long</li>", response.body
+  end
+
+  test "should complain about too-few-digits phone number" do
+    params = default_tutor_params
+    params[:tutor][:phone_number] = '027 12345'
+
+    assert_difference("Tutor.count", 0) do
+      post tutors_url, params: params
+    end
+
+    assert_response 422
+
+    assert_match '<h1>New tutor</h1>', response.body
+    assert_match '<h2>1 error prohibited this tutor from being saved:</h2>', response.body
+    assert_match "<li>Phone number suffix must be between six and nine digits long</li>", response.body
   end
 
   test "should show tutor" do
@@ -146,7 +181,7 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
     assert_match '<h1>Editing tutor</h1>', response.body
 
     assert_match '<h2>1 error prohibited this tutor from being saved:</h2>', response.body
-    assert_match "<li>First name can#{QUOTE_HTML_ENTITY}t be blank</li>", response.body
+    assert_match "<li>First name can#{QUOTE_UNICODE}t be blank</li>", response.body
   end
 
   # test "should destroy tutor" do
