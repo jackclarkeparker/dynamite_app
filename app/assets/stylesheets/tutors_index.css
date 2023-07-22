@@ -1,0 +1,15 @@
+div#tutors ul.list-group-horizontal li {
+  background-color: #E2F6D1;
+}
+
+div#tutors ul.list-group-horizontal li:nth-child(1) {
+  width: 20%;
+}
+
+div#tutors ul.list-group-horizontal li:nth-child(2) {
+  width: 30%;
+}
+
+div#tutors ul.list-group-horizontal li:nth-child(3) {
+  width: 20%;
+}

@@ -4,10 +4,14 @@
 
 <div id="tutors">
   <% @tutors.each do |tutor| %>
-    <%= render tutor %>
-    <p>
-      <%= link_to "Show this tutor", tutor %>
-    </p>
+    <ul class="list-group list-group-horizontal">
+      <li class="list-group-item"><%= preferred_name_if_present(tutor) %></li>
+      <li class="list-group-item"><%= tutor.email_address %></li>
+      <li class="list-group-item"><%= tutor.phone_number %></li>
+      <li class="list-group-item">
+        <%= link_to "more details", tutor %>
+      </li>
+    </ul>
   <% end %>
 </div>
 
