@@ -7,14 +7,19 @@ class LessonsController < ApplicationController
 
   # GET /lessons or /lessons.json
   def index
-    @lessons = Lesson.all
+    @lesson_schedule = Lesson.includes(:venue, :tutor).order(
+      :venue_id, :week_day_index, :start_time
+    ).reduce({}) do |schedule, l|
+      schedule[l.venue.name] ||= {}
+      schedule[l.venue.name][l.day] ||= []
+      schedule[l.venue.name][l.day] << l
+      schedule
+    end
   end
 
   def booker
     @lesson_schedule = Lesson.includes(:venue).order(
-      :venue_id,
-      :week_day_index,
-      :start_time
+      :venue_id, :week_day_index, :start_time
     ).reduce({}) do |schedule, l|
       schedule[l.venue.name] ||= {}
       schedule[l.venue.name][l.day] ||= []

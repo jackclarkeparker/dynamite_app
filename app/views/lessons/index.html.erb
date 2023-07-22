@@ -3,11 +3,26 @@
 <h1>Lessons</h1>
 
 <div id="lessons">
-  <% @lessons.each do |lesson| %>
-    <%= render lesson %>
-    <p>
-      <%= link_to "Show this lesson", lesson %>
-    </p>
+  <% @lesson_schedule.each_pair do |venue, days| %>
+    <h2><%= venue %></h2>
+      <% days.each_pair do |day, lessons| %>
+        <h3><%= day %></h3>
+          <div class="horizontal-list-set">
+            <% lessons.each do |lesson| %>
+              <ul class="list-group list-group-horizontal">
+                <li class="list-group-item"><%= lesson.tutor %></li>
+                <li class="list-group-item"><%= display_start_time(lesson) %></li>
+                <li class="list-group-item">
+                  <%= lesson.availability %>
+                  <%= "availability".pluralize(lesson.availability) %>
+                </li>
+                <li class="list-group-item">
+                  <%= link_to "Details", lesson_path(lesson) %>
+                </li>
+              </ul>
+            <% end %>
+          </div>
+      <% end %>
   <% end %>
 </div>
 
