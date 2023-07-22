@@ -1,6 +1,7 @@
 class TutorsController < ApplicationController
   include EntityHelpers
-
+  include SelectData
+  before_action :set_regions, only: %i[ new create edit update ]
   before_action :set_tutor, only: %i[ show edit update destroy ]
 
   # GET /tutors or /tutors.json
@@ -82,7 +83,11 @@ class TutorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tutor_params
-      params.require(:tutor).permit(:preferred_name, :first_name, :last_name, :email_address, :phone_number, :delivery_address)
+      params.require(:tutor).permit(
+        :first_name, :last_name, :preferred_name,
+        :email_address, :phone_number,
+        :region_id, :delivery_address
+      )
     end
 
     def decomission_old_version(decomission_timestamp:)

@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   include SelectData
 
   before_action :set_student, only: %i[ show edit update destroy ]
-  before_action :set_regions, only: %i[ new edit create ]
+  before_action :set_regions, only: %i[ new edit create update]
 
   # GET /students or /students.json
   def index

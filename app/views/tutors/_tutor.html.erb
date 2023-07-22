@@ -1,10 +1,5 @@
 <div id="<%= dom_id tutor %>">
   <p>
-    <strong>Preferred name:</strong>
-    <%= tutor.preferred_name %>
-  </p>
-
-  <p>
     <strong>First name:</strong>
     <%= tutor.first_name %>
   </p>
@@ -12,6 +7,11 @@
   <p>
     <strong>Last name:</strong>
     <%= tutor.last_name %>
+  </p>
+
+  <p>
+    <strong>Preferred name:</strong>
+    <%= tutor.preferred_name %>
   </p>
 
   <p>
@@ -25,8 +25,12 @@
   </p>
 
   <p>
+    <strong>Region:</strong>
+    <%= tutor.region.name %>
+  </p>
+
+  <p>
     <strong>Delivery address:</strong>
     <%= tutor.delivery_address %>
   </p>
-
 </div>

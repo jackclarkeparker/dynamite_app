@@ -37,6 +37,17 @@
       <%= form.text_field :phone_number %>
     </div>
 
+    <div>
+      <%= form.label :region, style: "display: block" %>
+      <%= form.select :region_id, options_for_select(
+            @regions.map { |region| [region.name, region.id] }
+              .unshift(['Region']), {
+              selected: tutor.region || 'Region',
+              disabled: 'Region'
+            }
+          ) %>
+    </div>
+
     <div class="col">
       <%= form.label :delivery_address, style: "display: block" %>
       <%= form.text_field :delivery_address %>

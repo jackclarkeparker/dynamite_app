@@ -1,11 +1,13 @@
 class Tutor < ApplicationRecord
   include PhoneNumberFormatting
 
+  belongs_to :region, optional: true
   has_many :lessons
 
   validates :first_name, :last_name, :email_address,
             :phone_number, :delivery_address,
             :entity_id, presence: true
+  validates :region_id, presence: { message: "must be selected" }
   validates :phone_number, format: {
     with: /\s/,
     message: 'suffix must be between six and nine digits long'

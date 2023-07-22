@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_18_215641) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_22_005715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_18_215641) do
     t.string "full_name"
     t.integer "entity_id"
     t.datetime "valid_until", precision: nil
+    t.bigint "region_id", null: false
+    t.index ["region_id"], name: "index_tutors_on_region_id"
   end
 
   create_table "venues", force: :cascade do |t|
@@ -74,4 +76,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_18_215641) do
   add_foreign_key "lessons", "tutors"
   add_foreign_key "lessons", "venues"
   add_foreign_key "students", "regions"
+  add_foreign_key "tutors", "regions"
 end
