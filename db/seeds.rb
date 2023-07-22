@@ -8,9 +8,9 @@
 
 Student.delete_all
 Lesson.delete_all
-Region.delete_all
-Venue.delete_all
 Tutor.delete_all
+Venue.delete_all
+Region.delete_all
 
 wellington, new_plymouth = Region.create!([{ name: 'Wellington' }, { name: 'New Plymouth' }])
 
