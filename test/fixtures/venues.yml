@@ -3,7 +3,9 @@
 one:
   name: MyString
   address: MyString
+  region: one
 
 two:
   name: MyString
   address: MyString
+  region: one
