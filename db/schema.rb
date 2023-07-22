@@ -69,12 +69,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_005715) do
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "region_id"
     t.decimal "standard_price", precision: 4, scale: 2
+    t.bigint "region_id", null: false
+    t.index ["region_id"], name: "index_venues_on_region_id"
   end
 
   add_foreign_key "lessons", "tutors"
   add_foreign_key "lessons", "venues"
   add_foreign_key "students", "regions"
   add_foreign_key "tutors", "regions"
+  add_foreign_key "venues", "regions"
 end
