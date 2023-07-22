@@ -4,10 +4,12 @@
 
 <div id="regions">
   <% @regions.each do |region| %>
-    <%= render region %>
-    <p>
-      <%= link_to "Show this region", region %>
-    </p>
+    <ul class="list-group list-group-horizontal">
+      <li class="list-group-item"><%= region.name %></li>
+      <li class="list-group-item">
+        <%= link_to "edit", edit_region_path(region) %>
+      </li>
+    </ul>
   <% end %>
 </div>
 

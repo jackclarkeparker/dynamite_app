@@ -1,0 +1,7 @@
+div#regions ul.list-group-horizontal li {
+  background-color: #E2F6D1;
+}
+
+div#regions ul.list-group-horizontal li:nth-child(1) {
+  width: 50%;
+}
