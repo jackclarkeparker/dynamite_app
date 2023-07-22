@@ -2,7 +2,7 @@
 
 <h1>Tutors</h1>
 
-<div id="tutors">
+<div id="tutors" class="horizontal-list-set">
   <% @tutors.each do |tutor| %>
     <ul class="list-group list-group-horizontal">
       <li class="list-group-item"><%= preferred_name_if_present(tutor) %></li>

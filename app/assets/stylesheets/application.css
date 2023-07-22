@@ -23,3 +23,7 @@ form input[type="submit"] {
   margin-top: 22px;
   height: 3.2rem;
 }
+
+div.horizontal-list-set {
+  padding-bottom: 1rem;
+}
