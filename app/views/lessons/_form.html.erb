@@ -28,7 +28,7 @@
 
   <div>
     <%= form.label :start_time, style: "display: block" %>
-    <%= form.time_field :start_time, value: "15:30:00" %>
+    <%= form.time_field :start_time, value: default_start_time %>
   </div>
 
   <div>
@@ -38,12 +38,12 @@
 
   <div>
     <%= form.label :capacity, style: "display: block" %>
-    <%= form.number_field :capacity, in: 1..6, value: 4 %>
+    <%= form.number_field :capacity, in: 1..6, value: default_capacity %>
   </div>
 
   <div>
     <%= form.label :duration, style: "display: block" %>
-    <%= form.number_field :duration, in: 10..90, value: 30 %>
+    <%= form.number_field :duration, in: 10..90, value: default_duration %>
   </div>
 
   <div>

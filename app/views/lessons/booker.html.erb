@@ -12,7 +12,7 @@
             <% lessons.each do |lesson| %>
               <% if lesson.availability > 0 %>
                 <tr>
-                  <td class="rounded-start-pill" scope="row"><%= display_start_time(lesson) %></td>
+                  <td class="rounded-start-pill" scope="row"><%= display_lesson_time_range(lesson) %></td>
                   <td>
                     <%= lesson.availability %>
                     <%= "availability".pluralize(lesson.availability) %>
@@ -23,7 +23,7 @@
                 </tr>
               <% else %>
                 <tr>
-                  <td class="rounded-start-pill"  scope="row"><%= display_start_time(lesson) %></td>
+                  <td class="rounded-start-pill"  scope="row"><%=  display_lesson_time_range(lesson) %></td>
                   <td>
                     No availabilities
                   </td>
