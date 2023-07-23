@@ -8,6 +8,7 @@ class Tutor < ApplicationRecord
             :phone_number, :delivery_address,
             :entity_id, presence: true
   validates :region_id, presence: { message: "must be selected" }
+  validate :validate_region_id
   validates :phone_number, format: {
     with: /\s/,
     message: 'suffix must be between six and nine digits long'
@@ -39,5 +40,11 @@ class Tutor < ApplicationRecord
     def set_full_name_and_valid_until
       self.full_name = "#{self.first_name} #{self.last_name}"
       self.valid_until = ApplicationRecord::FUTURE_EPOCH
+    end
+
+    def validate_region_id
+      if region_id && !Region.exists?(id: region_id)
+        errors.add(:region, 'must be a valid selection')
+      end
     end
 end
