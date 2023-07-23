@@ -39,20 +39,20 @@ class TutorsController < ApplicationController
 
   # PATCH/PUT /tutors/1 or /tutors/1.json
   def update
-    new_tutor = Tutor.new(tutor_params)
-    new_tutor.entity_id = @tutor.entity_id
+    new_version = Tutor.new(tutor_params)
+    new_version.entity_id = @tutor.entity_id
 
     respond_to do |format|
-      if new_tutor.same_attributes_as(@tutor)
+      if new_version.same_attributes_as(@tutor)
         format.html do
           redirect_to tutor_url(@tutor), alert: "No changes made to tutor."
         end
-      elsif new_tutor.save
-        decomission_old_version(decomission_timestamp: new_tutor.created_at)
+      elsif new_version.save
+        decomission_old_version(decomission_timestamp: new_version.created_at)
         format.html do
-          redirect_to tutor_url(new_tutor), notice: "Tutor was successfully updated."
+          redirect_to tutor_url(new_version), notice: "Tutor was successfully updated."
         end
-        format.json { render :show, status: :ok, location: new_tutor }
+        format.json { render :show, status: :ok, location: new_version }
       else
         @tutor = new_tutor
         format.html { render :edit, status: :unprocessable_entity }
