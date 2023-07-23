@@ -1,7 +1,6 @@
 class TutorsController < ApplicationController
   include EntityHelpers
-  include SelectData
-  before_action :set_regions, only: %i[ new create edit update ]
+
   before_action :set_tutor, only: %i[ show edit update destroy ]
 
   # GET /tutors or /tutors.json

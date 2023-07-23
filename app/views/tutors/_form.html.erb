@@ -39,13 +39,7 @@
 
     <div>
       <%= form.label :region, style: "display: block" %>
-      <%= form.select :region_id, options_for_select(
-            @regions.map { |region| [region.name, region.id] }
-              .unshift(['Region']), {
-              selected: tutor.region || 'Region',
-              disabled: 'Region'
-            }
-          ) %>
+      <%= form.select :region_id, regions_select(tutor) %>
     </div>
 
     <div class="col">

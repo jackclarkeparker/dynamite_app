@@ -18,9 +18,7 @@
 
   <div>
     <%= form.label 'Region', style: "display: block" %>
-    <%= form.select :region_id, (@regions.map do |region|
-          [region.name, region.id] 
-        end) %>
+    <%= form.select :region_id, regions_select(venue) %>
   </div>
 
   <div>

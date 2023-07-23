@@ -1,9 +1,7 @@
 class LessonsController < ApplicationController
   include EntityHelpers
-  include SelectData
 
   before_action :set_lesson, only: %i[ show edit update destroy ]
-  before_action :set_tutors, :set_venues, only: %i[ new edit ]
 
   # GET /lessons or /lessons.json
   def index

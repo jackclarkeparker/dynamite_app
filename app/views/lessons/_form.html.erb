@@ -12,30 +12,23 @@
   <% end %>
 
   <div>
+    <%= form.label :venue_id, style: "display: block" %>
+    <%= form.select :venue_id, venues_select(lesson) %>
+  </div>
+
+  <div>
     <%= form.label :tutor_id, style: "display: block" %>
-    <%= form.select :tutor_id, (@tutors.map do |tutor|
-          [tutor.preferred_name, tutor.id]
-        end) %>
+    <%= form.select :tutor_id, tutors_select(lesson) %>
+  </div>
+
+  <div>
+    <%= form.label :day, style: "display: block" %>
+    <%= form.select :week_day_index, week_day_select(lesson) %>
   </div>
 
   <div>
     <%= form.label :start_time, style: "display: block" %>
     <%= form.time_field :start_time, value: "15:30:00" %>
-  </div>
-
-  <div>
-    <%= form.label :day, style: "display: block" %>
-    <%= form.select :week_day_index,
-        (Date::DAYNAMES.map.with_index do |day, index|
-          [day, index]
-        end) %>
-  </div>
-
-  <div>
-    <%= form.label :venue_id, style: "display: block" %>
-    <%= form.select :venue_id, (@venues.map do |venue|
-          [venue.name, venue.id]
-        end) %>
   </div>
 
   <div>

@@ -1,6 +1,5 @@
 class VenuesController < ApplicationController
   before_action :set_venue, only: %i[ show edit update destroy ]
-  before_action :set_regions, only: %i[ new edit ]
 
   # GET /venues or /venues.json
   def index
