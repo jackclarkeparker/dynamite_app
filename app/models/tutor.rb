@@ -16,7 +16,6 @@ class Tutor < ApplicationRecord
   }, allow_blank: true
   validates_with UniqueTutorPhoneAndEmailValidator
 
-  after_initialize :format_phone_number
   before_create :set_full_name_and_valid_until
 
   def same_attributes_as(other_tutor)

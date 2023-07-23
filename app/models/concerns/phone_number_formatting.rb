@@ -2,7 +2,7 @@ module PhoneNumberFormatting
   extend ActiveSupport::Concern
 
   included do
-    before_validation :format_phone_number
+    after_initialize :format_phone_number
   end
 
   private
