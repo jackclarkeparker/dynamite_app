@@ -117,6 +117,19 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
     assert_match "<li>Phone number suffix must be between six and nine digits long</li>", response.body
   end
 
+  test "Should fail to make tutor with invalid region selection" do
+    params = default_tutor_params
+    params[:tutor][:region_id] = 123456789
+
+    post tutors_url, params: params
+
+    assert_response 422
+
+    assert_match '<h1>New tutor</h1>', response.body
+    assert_match '<h2>1 error prohibited this tutor from being saved:</h2>', response.body
+    assert_match "<li>Region must be selected</li>", response.body
+  end
+
   test "should show tutor" do
     get tutor_url(@tutor)
     assert_response :success

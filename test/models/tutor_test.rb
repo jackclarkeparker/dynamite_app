@@ -8,6 +8,7 @@ class TutorTest < ActiveSupport::TestCase
       phone_number: '021 049 2174',
       email_address: 'jack@dynamitemusic.co.nz',
       delivery_address: '137 Clyde Street, Island Bay',
+      region_id: regions(:one).id
     })
     jack.entity_id = 1
     jack.save
@@ -27,6 +28,15 @@ class TutorTest < ActiveSupport::TestCase
     #     phone_number: @tutor.phone_number,
     #   }
     # }
+  end
+
+  test "region_id must be valid" do
+    params = default_tutor_params
+    params[:tutor][:region_id] = 123456789
+
+    tutor = Tutor.new(params[:tutor])
+    assert tutor.invalid?
+    assert tutor.errors[:region].any?
   end
 
 
