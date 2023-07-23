@@ -1,0 +1,12 @@
+<%= form_with(
+    scope: :tutor,
+    url: tutor_url(id_for_url),
+    method: 'patch'
+  ) do |form| %>
+  <%= render template: "tutors/_form_inputs",
+             locals: { tutor: tutor, form: form } %>
+
+  <div>
+    <%= form.submit 'Update Tutor' %>
+  </div>
+<% end %>

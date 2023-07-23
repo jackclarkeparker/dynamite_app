@@ -54,7 +54,8 @@ class TutorsController < ApplicationController
         end
         format.json { render :show, status: :ok, location: new_version }
       else
-        @tutor = new_tutor
+        @id_for_url = @tutor.id
+        @tutor = new_version
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @tutor.errors, status: :unprocessable_entity }
       end

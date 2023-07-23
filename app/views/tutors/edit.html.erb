@@ -1,6 +1,10 @@
 <h1>Editing tutor</h1>
 
-<%= render "form", tutor: @tutor %>
+<% if @id_for_url %>
+  <%= render "failed_edit", tutor: @tutor, id_for_url: @id_for_url %>
+<% else %>
+  <%= render "form", tutor: @tutor %>
+<% end %>
 
 <br>
 
