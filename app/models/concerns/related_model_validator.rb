@@ -14,7 +14,7 @@ module RelatedModelValidator
     end
 
     def validate_venue_id
-      if !Tutor.exists?(id: venue_id)
+      if !Venue.exists?(id: venue_id)
         errors.add(:venue, 'must be selected')
       end
     end
