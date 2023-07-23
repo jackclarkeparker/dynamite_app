@@ -1,13 +1,14 @@
 module SelectHelper
   def tutors_select(entity)
     tutors = Tutor.order(:first_name)
+                  .where(valid_until: ApplicationRecord::FUTURE_EPOCH)
     select_components = tutors.map do |tutor|
       [tutor.preferred_name, tutor.id]
     end.unshift(['Tutor'])
 
     options_for_select(
       select_components,
-      selected: entity.tutor || 'Tutor',
+      selected: default_select_option(:tutor_id, entity, 'Tutor'),
       disabled: 'Tutor'
     )
   end
@@ -20,7 +21,7 @@ module SelectHelper
 
     options_for_select(
       select_components,
-      selected: entity.venue || 'Venue',
+      selected: default_select_option(:venue_id, entity, 'Venue'),
       disabled: 'Venue'
     )
   end
@@ -32,7 +33,7 @@ module SelectHelper
 
     options_for_select(
       select_components,
-      selected: entity.week_day_index || 'Day',
+      selected: default_select_option(:week_day_index, entity, 'Day'),
       disabled: 'Day'
     )
   end
@@ -43,9 +44,10 @@ module SelectHelper
       [region.name, region.id]
     end.unshift(['Region'])
 
+    sym = to_symbol(entity)
     options_for_select(
       select_components,
-      selected: entity.region || 'Region',
+      selected: default_select_option(:region_id, entity, 'Region'),
       disabled: 'Region'
     )
   end
@@ -53,9 +55,23 @@ module SelectHelper
   def gender_select(entity)
     options_for_select(
       ['Gender', 'male', 'female', 'other'], {
-        selected: entity.gender || 'Gender',
+        selected: default_select_option(:gender, entity, 'Gender'),
         disabled: 'Gender'
       }
     )
   end
+
+  private
+
+    def default_select_option(attribute, entity, simple_string)
+      sym = to_symbol(entity)
+
+      params[sym] && params[sym][attribute] ||
+      entity.send(attribute) ||
+      simple_string
+    end
+
+    def to_symbol(entity)
+      entity.class.to_s.downcase.to_sym
+    end
 end
