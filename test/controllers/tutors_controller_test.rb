@@ -127,7 +127,7 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
 
     assert_match '<h1>New tutor</h1>', response.body
     assert_match '<h2>1 error prohibited this tutor from being saved:</h2>', response.body
-    assert_match "<li>Region must be a valid selection</li>", response.body
+    assert_match "<li>Region must be selected</li>", response.body
   end
 
   test "should show tutor" do

@@ -44,7 +44,7 @@ class Tutor < ApplicationRecord
 
     def validate_region_id
       if region_id && !Region.exists?(id: region_id)
-        errors.add(:region, 'must be a valid selection')
+        errors.add(:region, 'must be selected')
       end
     end
 end
