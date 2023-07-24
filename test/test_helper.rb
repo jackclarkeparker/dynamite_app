@@ -19,7 +19,7 @@ class ActiveSupport::TestCase
         preferred_name: 'Gee',
         email_address: 'gary@email.com',
         phone_number: '022 676 7676',
-        region_id: regions(:one).id,
+        region_id: regions(:wellington).id,
         delivery_address: '39 Majoribanks St',
       }
     }

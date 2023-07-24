@@ -1,14 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-jack:
-  first_name: Jack
-  last_name: Clarke-Parker
-  preferred_name: Jack
-  email_address: jack@dynamite_music.co.nz
-  phone_number: 021 049 2174
-  region: one
-  delivery_address: 137 Clyde Street, Island Bay, 6023
-  full_name: Jack Clarke-Parker
+andy:
+  first_name: Andrew
+  last_name: Taylor
+  preferred_name: Andy
+  email_address: andrew@dynamite_music.co.nz
+  phone_number: 021 123 4567
+  region: wellington
+  delivery_address: 13 Clyde Street, Island Bay, 6023
+  full_name: Andrew Taylor
   valid_until: <%= Time.new(9999, 12, 31) %>
   entity_id: 1
-  

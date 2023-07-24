@@ -8,7 +8,7 @@ class TutorTest < ActiveSupport::TestCase
       phone_number: '021 049 2174',
       email_address: 'jack@dynamitemusic.co.nz',
       delivery_address: '137 Clyde Street, Island Bay',
-      region_id: regions(:one).id
+      region_id: regions(:wellington).id
     })
     jack.entity_id = 1
     jack.save

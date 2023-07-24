@@ -2,7 +2,7 @@ require "test_helper"
 
 class LessonsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @lesson = lessons(:one)
+    @lesson = lessons(:miramar_lesson)
   end
 
   test "should get index" do

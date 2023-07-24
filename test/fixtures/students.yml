@@ -7,7 +7,7 @@ one:
   birthday: 2023-07-13
   year_group: 1
   gender: MyString
-  region: one
+  region: wellington
 
 two:
   preferred_name: MyString
@@ -16,4 +16,4 @@ two:
   birthday: 2023-07-13
   year_group: 1
   gender: MyString
-  region: two
+  region: wellington

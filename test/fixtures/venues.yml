@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  address: MyString
-  region: one
+miramar:
+  name: Miramar Community Centre
+  address: Address
+  region: wellington
 
-two:
-  name: MyString
-  address: MyString
-  region: one
+newtown:
+  name: Newtown School
+  address: Mein Street
+  region: wellington

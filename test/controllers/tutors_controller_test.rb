@@ -4,7 +4,7 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
   QUOTE_UNICODE = '&#39;'
 
   setup do
-    @tutor = tutors(:jack)
+    @tutor = tutors(:andy)
   end
 
   test "should get index" do
@@ -71,8 +71,8 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should fail to create tutor with duplicate email / phone" do
     params = default_tutor_params
-    params[:tutor][:email_address] = 'jack@dynamite_music.co.nz'
-    params[:tutor][:phone_number] = '021 049 2174'
+    params[:tutor][:email_address] = 'andrew@dynamite_music.co.nz'
+    params[:tutor][:phone_number] = '021 123 4567'
 
     assert_difference("Tutor.count", 0) do
       post tutors_url, params: params
