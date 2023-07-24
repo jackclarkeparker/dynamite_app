@@ -6,7 +6,8 @@ class Lesson < ApplicationRecord
 
   before_validation :set_end_time
 
-  validates :standard_price, :capacity, :duration, :start_time, presence: true
+  validates :standard_price, :capacity, :duration,
+            :start_time, presence: true
   validate :validate_venue_id
   validate :validate_tutor_id
   validate :validate_day
