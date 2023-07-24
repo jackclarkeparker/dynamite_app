@@ -1,8 +1,6 @@
 require "test_helper"
 
 class TutorsControllerTest < ActionDispatch::IntegrationTest
-  QUOTE_UNICODE = '&#39;'
-
   setup do
     @tutor = tutors(:andy)
   end
@@ -26,7 +24,7 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select 'p', "Tutor was successfully created."
-    assert_select 'main div p', /First name:.*Gary/m
+    assert_select 'main div p', /First name:.{5}Gary/m
   end
 
   test "should create tutor without preferred name" do

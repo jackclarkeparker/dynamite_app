@@ -11,6 +11,8 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
+  QUOTE_UNICODE = '&#39;'
+
   def default_tutor_params
     {
       tutor: {
