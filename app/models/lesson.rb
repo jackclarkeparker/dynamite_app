@@ -20,6 +20,16 @@ class Lesson < ApplicationRecord
   validate :validate_tutor_clash
   validate :validate_venue_clash
 
+  def ==(other_lesson)
+    self.venue_id == other_lesson.venue_id &&
+    self.tutor_id == other_lesson.tutor_id &&
+    self.week_day_index == other_lesson.week_day_index &&
+    self.start_time == other_lesson.start_time &&
+    self.duration == other_lesson.duration &&
+    self.capacity == other_lesson.capacity &&
+    self.standard_price == other_lesson.standard_price
+  end
+
   def day
     Date::DAYNAMES[self.week_day_index]
   end

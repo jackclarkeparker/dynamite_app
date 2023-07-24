@@ -43,7 +43,7 @@ class TutorsController < ApplicationController
     new_version.entity_id = @tutor.entity_id
 
     respond_to do |format|
-      if new_version.same_attributes_as(@tutor)
+      if new_version == @tutor
         format.html do
           redirect_to tutor_url(@tutor), alert: "No changes made to tutor."
         end
