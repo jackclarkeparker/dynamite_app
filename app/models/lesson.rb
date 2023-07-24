@@ -11,10 +11,10 @@ class Lesson < ApplicationRecord
   validate :validate_tutor_id
   validate :validate_day
   validates :standard_price, numericality: {
-    in: 1..50, message: "must be no less tha 1, and no greater than 50"
+    in: 1..50, message: "must be no less than 1, and no greater than 50"
   }, allow_blank: true
   validates :capacity, numericality: {
-    in: 1..6, message: "can't be greater than 6"
+    in: 1..6, message: "must be no less than 1, and no greater than 6"
   }, allow_blank: true
 
   validate :validate_tutor_clash

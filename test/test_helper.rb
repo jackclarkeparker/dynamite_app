@@ -26,4 +26,19 @@ class ActiveSupport::TestCase
       }
     }
   end
+
+  def default_lesson_params
+    {
+      lesson: {
+        tutor_id: tutors(:andy).id,
+        venue_id: venues(:miramar).id,
+        week_day_index: Date::DAYNAMES.index('Monday'),
+        start_time: '09:00:00',
+        duration: 30,
+        capacity: 4,
+        availability: 4,
+        standard_price: 16,
+      }
+    }
+  end
 end
