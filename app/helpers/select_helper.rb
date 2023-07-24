@@ -44,7 +44,6 @@ module SelectHelper
       [region.name, region.id]
     end.unshift(['Region'])
 
-    sym = to_symbol(entity)
     options_for_select(
       select_components,
       selected: default_select_option(:region_id, entity, 'Region'),
@@ -64,14 +63,20 @@ module SelectHelper
   private
 
     def default_select_option(attribute, entity, simple_string)
-      sym = to_symbol(entity)
+      entity_symbol = to_symbol(entity)
 
-      params[sym] && params[sym][attribute] ||
+      params[entity_symbol] && params[entity_symbol][attribute] ||
       entity.send(attribute) ||
       simple_string
     end
 
     def to_symbol(entity)
-      entity.class.to_s.downcase.to_sym
+      class_name = entity.class.to_s
+      with_underscores = underscores_between_class_name_components(class_name)
+      with_underscores.downcase.to_sym
+    end
+
+    def underscores_between_class_name_components(class_name)
+      class_name.gsub(/(.)([A-Z])/, '\1_\2')
     end
 end
