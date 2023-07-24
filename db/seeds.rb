@@ -234,3 +234,26 @@ Lesson.create!([
     standard_price: 16.5,
   },
 ])
+
+Student.create!([
+  {
+    first_name: 'Joel',
+    last_name: 'Sandwich',
+    full_name: 'Joel Sanwich',
+    preferred_name: '',
+    birthday: '2013-04-13',
+    year_group: 6,
+    gender: 'male',
+    region_id: wellington.id
+  },
+  {
+    first_name: 'Alice',
+    last_name: 'Dewie',
+    full_name: 'Alice Dewie',
+    preferred_name: '',
+    birthday: '2015-10-04',
+    year_group: 4,
+    gender: 'female',
+    region_id: wellington.id
+  }
+])

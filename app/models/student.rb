@@ -10,6 +10,8 @@ class Student < ApplicationRecord
     in: 1..13, message: "Must be no less than 1, and no greater than 13"
   }, allow_blank: true
 
+  before_create :set_full_name
+
   def self.two_years_ago
     today = Date.today
     day = today.day
@@ -22,4 +24,10 @@ class Student < ApplicationRecord
   validates :birthday, comparison: {
     less_than: two_years_ago, message: "must be more than two years ago"
   }
+
+  private
+
+    def set_full_name
+      self.full_name = "#{self.first_name} #{self.last_name}"
+    end
 end
