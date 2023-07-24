@@ -4,7 +4,7 @@ class Lesson < ApplicationRecord
   belongs_to :tutor, optional: true
   belongs_to :venue, optional: true
 
-  after_initialize :set_end_time
+  before_validation :set_end_time
 
   validates :standard_price, :capacity, :duration, :start_time, presence: true
   validate :validate_venue_id
@@ -16,6 +16,7 @@ class Lesson < ApplicationRecord
   validates :capacity, numericality: {
     in: 1..6, message: "can't be greater than 6"
   }, allow_blank: true
+
   validate :validate_tutor_clash
   validate :validate_venue_clash
 
