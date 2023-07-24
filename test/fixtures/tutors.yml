@@ -9,5 +9,17 @@ andy:
   region: wellington
   delivery_address: 13 Clyde Street, Island Bay, 6023
   full_name: Andrew Taylor
-  valid_until: <%= Time.new(9999, 12, 31) %>
+  valid_until: <%= ApplicationRecord::FUTURE_EPOCH %>
   entity_id: 1
+
+natalie:
+  first_name: Natalie
+  last_name: Jones
+  preferred_name:
+  email_address: natalie@dynamite_music.co.nz
+  phone_number: 021 765 4321
+  region: wellington
+  delivery_address: 18 Blackbridge Road, Wadestown, 6012
+  full_name: Natalie Jones
+  valid_until: <%= ApplicationRecord::FUTURE_EPOCH %>
+  entity_id: 2
