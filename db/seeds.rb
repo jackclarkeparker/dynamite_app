@@ -244,7 +244,8 @@ Student.create!([
     birthday: '2013-04-13',
     year_group: 6,
     gender: 'male',
-    region_id: wellington.id
+    region_id: wellington.id,
+    keyboard: 'Keyboard',
   },
   {
     first_name: 'Alice',
@@ -254,6 +255,7 @@ Student.create!([
     birthday: '2015-10-04',
     year_group: 4,
     gender: 'female',
-    region_id: wellington.id
+    region_id: wellington.id,
+    keyboard: 'Touch-sensitive Keyboard',
   }
 ])
