@@ -60,6 +60,18 @@ module SelectHelper
     )
   end
 
+  def keyboard_select(entity)
+    options_for_select(
+      [
+        'Unknown', 'No instrument', 'Keyboard',
+        'Touch-sensitive Keyboard', 'Piano',
+      ],
+      {
+        selected: default_select_option(:keyboard, entity, 'Unknown'),
+      }
+    )
+  end
+
   private
 
     def default_select_option(attribute, entity, simple_string)
