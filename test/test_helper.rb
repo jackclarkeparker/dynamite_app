@@ -57,4 +57,15 @@ class ActiveSupport::TestCase
       }
     }
   end
+
+  def default_venue_params
+    {
+      venue: {
+        region_id: regions(:wellington).id,
+        name: 'EBIS',
+        address: '14A Kemp Street, Kilbirnie, Wellington 6022',
+        standard_price: 16.5
+      }
+    }
+  end
 end

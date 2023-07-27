@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 miramar:
+  region: wellington
   name: Miramar Community Centre
   address: Address
-  region: wellington
+  standard_price: 16.5
 
 newtown:
+  region: wellington
   name: Newtown School
   address: Mein Street
-  region: wellington
+  standard_price: 16
