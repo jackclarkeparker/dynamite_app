@@ -11,6 +11,12 @@ class Venue < ApplicationRecord
 
   before_destroy :ensure_no_active_lessons
 
+  def ==(other_venue)
+    self.region_id == other_venue.region_id &&
+    self.name == other_venue.name &&
+    self.address == other_venue.address &&
+    self.standard_price == other_venue.standard_price
+  end
 
   private
 

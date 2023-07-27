@@ -42,7 +42,10 @@ class VenuesController < ApplicationController
   # PATCH/PUT /venues/1 or /venues/1.json
   def update
     respond_to do |format|
-      if @venue.update(venue_params)
+      if Venue.new(venue_params) == @venue
+        format.html { redirect_to venue_url(@venue), notice: "No changes made to venue." }
+        format.json { render :show, status: :ok, location: @venue }
+      elsif @venue.update(venue_params)
         format.html { redirect_to venue_url(@venue), notice: "Venue was successfully updated." }
         format.json { render :show, status: :ok, location: @venue }
       else
