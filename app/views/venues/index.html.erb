@@ -3,11 +3,19 @@
 <h1>Venues</h1>
 
 <div id="venues">
-  <% @venues.each do |venue| %>
-    <%= render venue %>
-    <p>
-      <%= link_to "Show this venue", venue %>
-    </p>
+  <% @venues_by_region.each_pair do |region, venues| %>
+    <h2><%= region %></h2>
+    <div class="horizontal-list-set">
+      <% venues.each do |venue| %>
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item"><%= venue.name %></li>
+          <li class="list-group-item"><%= venue.address %></li>
+          <li class="list-group-item">
+            <%= link_to "Details", venue_path(venue) %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
   <% end %>
 </div>
 

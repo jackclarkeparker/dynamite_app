@@ -3,7 +3,12 @@ class VenuesController < ApplicationController
 
   # GET /venues or /venues.json
   def index
-    @venues = Venue.all
+    @venues_by_region = Venue.includes(:region).order(:region_id, 'venues.name')
+                             .reduce({}) do |venue_list, venue|
+      venue_list[venue.region.name] ||= []
+      venue_list[venue.region.name] << venue
+      venue_list
+    end
   end
 
   # GET /venues/1 or /venues/1.json

@@ -1,0 +1,19 @@
+div#venues h2 {
+  font-size: 1.7rem;
+}
+
+div#venues h3 {
+  font-size: 1.4rem;
+}
+
+div#venues ul.list-group-horizontal li {
+  background-color: #E2F6D1;
+}
+
+div#venues ul.list-group-horizontal li:nth-child(1) {
+  width: 27%;
+}
+
+div#venues ul.list-group-horizontal li:nth-child(2) {
+  width: 50%;
+}
