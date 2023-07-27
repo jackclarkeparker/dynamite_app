@@ -157,7 +157,7 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select 'p', "Tutor was successfully updated."
-    assert_select 'main div p', /Email address:.*new@email.com/m
+    assert_select 'main div p', /Email address:.{5}new@email.com/m
   end
 
   test "should alert of update without changes" do
