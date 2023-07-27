@@ -41,4 +41,20 @@ class ActiveSupport::TestCase
       }
     }
   end
+
+  def default_student_params
+    {
+      student: {
+        first_name: 'Arya',
+        last_name: 'Babblehauer',
+        full_name: 'Arya Babblehauer',
+        preferred_name: '',
+        birthday: '2014-03-13',
+        year_group: 5,
+        gender: 'female',
+        region_id: regions(:wellington).id,
+        keyboard: 'Unknown',
+      }
+    }
+  end
 end

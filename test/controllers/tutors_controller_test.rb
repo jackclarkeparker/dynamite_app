@@ -178,7 +178,7 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'p', "No changes made to tutor."
   end
 
-  test "should fail to update tutor" do
+  test "should fail to update tutor when missing params" do
     patch tutor_url(@tutor), params: {
       tutor: {
         first_name: '',

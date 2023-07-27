@@ -1,4 +1,14 @@
 <div id="<%= dom_id student %>">
+  <p>
+    <strong>Region:</strong>
+    <%= student.region.name %>
+  </p>
+
+  <p>
+    <strong>First name:</strong>
+    <%= student.first_name %>
+  </p>
+
   <% if student.preferred_name && student.preferred_name.length > 0 %>
     <p>
       <strong>Preferred name:</strong>
@@ -7,23 +17,8 @@
   <% end %>
 
   <p>
-    <strong>First name:</strong>
-    <%= student.first_name %>
-  </p>
-
-  <p>
     <strong>Last name:</strong>
     <%= student.last_name %>
-  </p>
-
-  <p>
-    <strong>Instrument:</strong>
-    <%= student.keyboard %>
-  </p>
-
-  <p>
-    <strong>Birthday:</strong>
-    <%= student.birthday %>
   </p>
 
   <p>
@@ -32,12 +27,17 @@
   </p>
 
   <p>
+    <strong>Birthday:</strong>
+    <%= student.birthday %>
+  </p>
+
+  <p>
     <strong>Gender:</strong>
     <%= student.gender %>
   </p>
 
   <p>
-    <strong>Region:</strong>
-    <%= student.region.name %>
+    <strong>Instrument:</strong>
+    <%= student.keyboard %>
   </p>
 </div>

@@ -37,7 +37,11 @@ class StudentsController < ApplicationController
   # PATCH/PUT /students/1 or /students/1.json
   def update
     respond_to do |format|
-      if @student.update(student_params)
+      if Student.new(student_params) == @student
+        format.html do
+          redirect_to student_url(@student), alert: "No changes made to student."
+        end
+      elsif @student.update(student_params)
         format.html { redirect_to student_url(@student), notice: "Student was successfully updated." }
         format.json { render :show, status: :ok, location: @student }
       else
@@ -65,6 +69,6 @@ class StudentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.require(:student).permit(:preferred_name, :first_name, :last_name, :birthday, :year_group, :gender, :region_id)
+      params.require(:student).permit(:preferred_name, :first_name, :last_name, :birthday, :year_group, :gender, :region_id, :keyboard)
     end
 end

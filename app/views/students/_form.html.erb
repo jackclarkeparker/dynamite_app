@@ -12,13 +12,13 @@
   <% end %>
 
   <div>
-    <%= form.label :first_name, style: "display: block" %>
-    <%= form.text_field :first_name %>
+    <%= form.label :region, style: "display: block" %>
+    <%= form.select :region_id, regions_select(student) %>
   </div>
 
   <div>
-    <%= form.label :last_name, style: "display: block" %>
-    <%= form.text_field :last_name %>
+    <%= form.label :first_name, style: "display: block" %>
+    <%= form.text_field :first_name %>
   </div>
 
   <div>
@@ -27,8 +27,8 @@
   </div>
 
   <div>
-    <%= form.label :region, style: "display: block" %>
-    <%= form.select :region_id, regions_select(student) %>
+    <%= form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name %>
   </div>
 
   <div>
@@ -44,6 +44,11 @@
   <div>
     <%= form.label :gender, style: "display: block" %>
     <%= form.select :gender, gender_select(student) %>
+  </div>
+
+  <div>
+    <%= form.label :instrument, style: "display: block" %>
+    <%= form.select :keyboard, keyboard_select(student) %>
   </div>
 
   <div>
