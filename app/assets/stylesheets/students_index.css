@@ -1,0 +1,23 @@
+div#students h2 {
+  font-size: 1.7rem;
+}
+
+div#students h3 {
+  font-size: 1.4rem;
+}
+
+div#students ul.list-group-horizontal li {
+  background-color: #E2F6D1;
+}
+
+div#students ul.list-group-horizontal li:nth-child(1) {
+  width: 20%;
+}
+
+div#students ul.list-group-horizontal li:nth-child(2) {
+  width: 10%;
+}
+
+div#students ul.list-group-horizontal li:nth-child(3) {
+  width: 30%;
+}

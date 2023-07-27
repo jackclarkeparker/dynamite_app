@@ -3,11 +3,20 @@
 <h1>Students</h1>
 
 <div id="students">
-  <% @students.each do |student| %>
-    <%= render student %>
-    <p>
-      <%= link_to "Show this student", student %>
-    </p>
+  <% @students_by_region.each_pair do |region, students| %>
+    <h2><%= region %></h2>
+    <div class="horizontal-list-set">
+      <% students.each do |student| %>
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item"><%= student.full_name %></li>
+          <li class="list-group-item">Year <%= student.year_group %></li>
+          <li class="list-group-item"><%= student.keyboard %></li>
+          <li class="list-group-item">
+            <%= link_to "Details", student_path(student) %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
   <% end %>
 </div>
 
