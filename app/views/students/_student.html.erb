@@ -1,8 +1,10 @@
 <div id="<%= dom_id student %>">
-  <p>
-    <strong>Preferred name:</strong>
-    <%= student.preferred_name %>
-  </p>
+  <% if student.preferred_name && student.preferred_name.length > 0 %>
+    <p>
+      <strong>Preferred name:</strong>
+      <%= student.preferred_name %>
+    </p>
+  <% end %>
 
   <p>
     <strong>First name:</strong>
@@ -12,6 +14,11 @@
   <p>
     <strong>Last name:</strong>
     <%= student.last_name %>
+  </p>
+
+  <p>
+    <strong>Instrument:</strong>
+    <%= student.keyboard %>
   </p>
 
   <p>
