@@ -1,11 +1,11 @@
 <% if notice %>
   <div class="alert alert-primary" role="alert">
-    <p><%= notice %></p>
+    <p><%== sanitize(notice) %></p>
   </div>
 <% end %>
 
 <% if flash[:alert] %>
   <div class="alert alert-warning" role="alert">
-    <p><%= flash[:alert] %></p>
+    <p><%== sanitize(flash[:alert]) %></p>
   </div>
 <% end %>

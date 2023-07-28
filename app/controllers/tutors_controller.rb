@@ -64,14 +64,18 @@ class TutorsController < ApplicationController
 
   # DELETE /tutors/1 or /tutors/1.json
   def destroy
-    @tutor.valid_until = Time.now
-    @tutor.save
+    can_be_decomissioned = @tutor.run_callbacks(:destroy)
 
     respond_to do |format|
-      format.html do
-        redirect_to tutors_url, notice: "Tutor was successfully destroyed."
+      if can_be_decomissioned
+        decomission_old_version(decomission_timestamp: Time.now)
+        format.html { redirect_to tutors_url, notice: "Tutor was successfully destroyed." }
+        format.json { head :no_content }
+      else
+        error_messages = @tutor.errors.full_messages.join("\n")
+        flash[:alert] = error_messages.gsub("\n", "<br>")
+        format.html { redirect_to tutor_url(@tutor) }
       end
-      format.json { head :no_content }
     end
   end
 

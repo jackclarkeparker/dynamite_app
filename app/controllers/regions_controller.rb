@@ -49,11 +49,15 @@ class RegionsController < ApplicationController
 
   # DELETE /regions/1 or /regions/1.json
   def destroy
-    @region.destroy
-
     respond_to do |format|
-      format.html { redirect_to regions_url, notice: "Region was successfully destroyed." }
-      format.json { head :no_content }
+      if @region.destroy
+        format.html { redirect_to regions_url, notice: "Region was successfully destroyed." }
+        format.json { head :no_content }
+      else
+        error_messages = @region.errors.full_messages.join("\n")
+        flash[:alert] = error_messages.gsub("\n", "<br>")
+        format.html { redirect_to regions_url }
+      end
     end
   end
 
