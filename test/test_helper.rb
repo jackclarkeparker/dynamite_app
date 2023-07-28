@@ -68,4 +68,8 @@ class ActiveSupport::TestCase
       }
     }
   end
+
+  def default_region_params
+    { region: { name: 'Auckland' } }
+  end
 end
