@@ -72,4 +72,8 @@ class ActiveSupport::TestCase
   def default_region_params
     { region: { name: 'Auckland' } }
   end
+
+  def active_tutor_count
+    "Tutor.where(valid_until: ApplicationRecord::FUTURE_EPOCH).count"
+  end
 end

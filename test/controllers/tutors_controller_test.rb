@@ -199,11 +199,29 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
     assert_match "<li>First name can#{QUOTE_UNICODE}t be blank</li>", response.body
   end
 
-  # test "should destroy tutor" do
-  #   assert_difference("Tutor.count", -1) do
-  #     delete tutor_url(@tutor)
-  #   end
+  test "should fail to destroy tutor with associations" do
+    assert_difference("Tutor.count", 0) do
+      delete tutor_url(@tutor)
+    end
 
-  #   assert_redirected_to tutors_url
-  # end
+    assert_redirected_to tutor_url(@tutor)
+    follow_redirect!
+
+    assert_select 'p', "Rejected destruction of tutor 'Andy' because it: - has associated lessons."
+  end
+
+  test "should destroy tutor" do
+    assert_difference(active_tutor_count, 1) do
+      post tutors_url, params: default_tutor_params
+    end
+
+    assert_difference(active_tutor_count, -1) do
+      delete tutor_url(Tutor.last)
+    end
+
+    assert_redirected_to tutors_url
+    follow_redirect!
+
+    assert_select 'p', 'Tutor was successfully destroyed.'
+  end
 end
