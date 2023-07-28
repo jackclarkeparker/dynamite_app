@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_232512) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_233707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_232512) do
     t.datetime "valid_until", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "region_id", null: false
+    t.index ["region_id"], name: "index_contacts_on_region_id"
   end
 
   create_table "lesson_members", force: :cascade do |t|
@@ -102,6 +104,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_232512) do
     t.index ["region_id"], name: "index_venues_on_region_id"
   end
 
+  add_foreign_key "contacts", "regions"
   add_foreign_key "lesson_members", "lessons"
   add_foreign_key "lesson_members", "students"
   add_foreign_key "lessons", "tutors"
