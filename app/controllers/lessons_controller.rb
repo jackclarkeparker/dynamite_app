@@ -1,33 +1,12 @@
 class LessonsController < ApplicationController
   include EntityHelpers
+  include LessonQueryHelper
 
   before_action :set_lesson, only: %i[ show edit update destroy ]
 
   # GET /lessons or /lessons.json
   def index
-    @lesson_schedule = Lesson.includes(:venue, :tutor).order(
-      :venue_id, :week_day_index, :start_time
-    ).reduce({}) do |schedule, l|
-      schedule[l.venue.name] ||= {}
-      schedule[l.venue.name][l.day] ||= []
-      schedule[l.venue.name][l.day] << l
-      schedule
-    end
-  end
-
-  def booker
-    @lesson_schedule = Lesson.includes(:venue).order(
-      :venue_id, :week_day_index, :start_time
-    ).reduce({}) do |schedule, l|
-      schedule[l.venue.name] ||= {}
-      schedule[l.venue.name][l.day] ||= []
-      schedule[l.venue.name][l.day] << l
-      schedule
-    end
-
-    # What do we need to do to have the venues displayed in
-    # alphabetical order?
-    # Also, this implementation still doesn't handle regions
+    @lesson_schedule = lessons_by_venue_by_day(other_includes: [:tutor])
   end
 
   # GET /lessons/1 or /lessons/1.json
