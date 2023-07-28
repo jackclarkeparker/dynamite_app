@@ -145,10 +145,10 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
       delete venue_url(@venue)
     end
 
-    assert_redirected_to venues_url
+    assert_redirected_to venue_url(@venue)
     follow_redirect!
 
-    assert_select 'p', "Venue not destroyed - still hosts active lessons"
+    assert_select 'p', "Rejected destruction of venue 'Miramar Community Centre' because it: - has associated lessons."
   end
 
   test "should destroy venue" do

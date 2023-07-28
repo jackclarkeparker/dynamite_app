@@ -58,12 +58,13 @@ class VenuesController < ApplicationController
   # DELETE /venues/1 or /venues/1.json
   def destroy
     respond_to do |format|
-      if @venue.lessons.empty?
-        @venue.destroy
+      if @venue.destroy
         format.html { redirect_to venues_url, notice: "Venue was successfully destroyed." }
         format.json { head :no_content }
       else
-        format.html { redirect_to venues_url, alert: "Venue not destroyed - still hosts active lessons" }
+        error_messages = @venue.errors.full_messages.join("\n")
+        flash[:alert] = error_messages.gsub("\n", "<br>")
+        format.html { redirect_to venue_url(@venue) }
       end
     end
   end

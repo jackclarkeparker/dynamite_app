@@ -1,4 +1,5 @@
 class Venue < ApplicationRecord
+  include NotReferencedBeforeDestroy
   include RelatedModelValidator
 
   belongs_to :region, optional: true
@@ -16,6 +17,10 @@ class Venue < ApplicationRecord
     self.name == other_venue.name &&
     self.address == other_venue.address &&
     self.standard_price == other_venue.standard_price
+  end
+
+  def to_s
+    name
   end
 
   private
