@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_151411) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_232512) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contacts", force: :cascade do |t|
+    t.integer "entity_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "full_name"
+    t.string "preferred_name"
+    t.string "email_address"
+    t.string "phone_number"
+    t.string "bank_account"
+    t.string "csc_number"
+    t.datetime "valid_until", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "lesson_members", force: :cascade do |t|
     t.bigint "lesson_id", null: false

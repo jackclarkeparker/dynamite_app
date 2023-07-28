@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  entity_id: 1
+  first_name: MyString
+  last_name: MyString
+  full_name: MyString
+  preferred_name: MyString
+  email_address: MyString
+  phone_number: MyString
+  bank_account: MyString
+  csc_number: MyString
+  valid_until: 2023-07-29 11:25:12
+
+two:
+  entity_id: 1
+  first_name: MyString
+  last_name: MyString
+  full_name: MyString
+  preferred_name: MyString
+  email_address: MyString
+  phone_number: MyString
+  bank_account: MyString
+  csc_number: MyString
+  valid_until: 2023-07-29 11:25:12
