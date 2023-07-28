@@ -37,7 +37,11 @@ class RegionsController < ApplicationController
   # PATCH/PUT /regions/1 or /regions/1.json
   def update
     respond_to do |format|
-      if @region.update(region_params)
+      if Region.new(region_params) == @region
+        format.html do
+          redirect_to regions_url, alert: "No changes made to region."
+        end
+      elsif @region.update(region_params)
         format.html { redirect_to regions_url, notice: "Region was successfully updated." }
         format.json { render :show, status: :ok, location: @region }
       else

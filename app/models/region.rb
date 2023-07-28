@@ -7,6 +7,10 @@ class Region < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  def ==(other_region)
+    name == other_region.name
+  end
+
   def to_s
     name
   end
