@@ -1,5 +1,6 @@
 class Contact < ApplicationRecord
   include RelatedModelValidator
+  include PhoneNumberFormatting
 
   belongs_to :region, optional: true
 
