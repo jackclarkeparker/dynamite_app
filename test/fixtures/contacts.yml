@@ -1,25 +1,27 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+dennis:
   entity_id: 1
-  first_name: MyString
-  last_name: MyString
-  full_name: MyString
-  preferred_name: MyString
-  email_address: MyString
-  phone_number: MyString
-  bank_account: MyString
-  csc_number: MyString
-  valid_until: 2023-07-29 11:25:12
+  region: wellington
+  first_name: 'Dennis'
+  last_name: ''
+  full_name: ''
+  preferred_name: ''
+  email_address: 'dennis@email.com'
+  phone_number: ''
+  bank_account: ''
+  csc_number: ''
+  valid_until: <%= ApplicationRecord::FUTURE_EPOCH %>
 
-two:
-  entity_id: 1
-  first_name: MyString
-  last_name: MyString
-  full_name: MyString
-  preferred_name: MyString
-  email_address: MyString
-  phone_number: MyString
-  bank_account: MyString
-  csc_number: MyString
-  valid_until: 2023-07-29 11:25:12
+winona:
+  entity_id: 2
+  region: wellington
+  first_name: 'Winona'
+  last_name: 'Dewie'
+  full_name: 'Winona Dewie'
+  preferred_name: 'Win'
+  email_address: 'Winona@email.com'
+  phone_number: '027 567 1234'
+  bank_account: '12 1234 1234567 123'
+  csc_number: '123 456 789'
+  valid_until: <%= ApplicationRecord::FUTURE_EPOCH %>

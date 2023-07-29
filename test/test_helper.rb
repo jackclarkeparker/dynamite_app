@@ -13,6 +13,14 @@ class ActiveSupport::TestCase
 
   QUOTE_UNICODE = '&#39;'
 
+  def active_tutor_count
+    "Tutor.where(valid_until: ApplicationRecord::FUTURE_EPOCH).count"
+  end
+
+  def active_contact_count
+    "Contact.where(valid_until: ApplicationRecord::FUTURE_EPOCH).count"
+  end
+
   def default_tutor_params
     {
       tutor: {
@@ -58,6 +66,21 @@ class ActiveSupport::TestCase
     }
   end
 
+  def default_contact_params
+    {
+      contact: {
+        region_id: regions(:wellington).id,
+        first_name: 'Cal',
+        last_name: 'Newtown',
+        preferred_name: '',
+        email_address: 'cal@email.com',
+        phone_number: '027 345 1267',
+        bank_account: '98 9876 9876543 987',
+        csc_number: '987 654 321',
+      }
+    }
+  end
+
   def default_venue_params
     {
       venue: {
@@ -71,9 +94,5 @@ class ActiveSupport::TestCase
 
   def default_region_params
     { region: { name: 'Auckland' } }
-  end
-
-  def active_tutor_count
-    "Tutor.where(valid_until: ApplicationRecord::FUTURE_EPOCH).count"
   end
 end
