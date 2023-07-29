@@ -1,5 +1,4 @@
 class LessonsController < ApplicationController
-  include EntityHelpers
   include LessonQueryHelper
 
   before_action :set_lesson, only: %i[ show edit update destroy ]

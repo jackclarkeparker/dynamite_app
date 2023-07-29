@@ -1,5 +1,5 @@
 class TutorsController < ApplicationController
-  include EntityHelpers
+  include SlowlyChangingDimensionHelpers
 
   before_action :set_tutor, only: %i[ show edit update destroy ]
 
@@ -48,7 +48,7 @@ class TutorsController < ApplicationController
           redirect_to tutor_url(@tutor), alert: "No changes made to tutor."
         end
       elsif new_version.save
-        decomission_old_version(decomission_timestamp: new_version.created_at)
+        decomission_old_version(@tutor, decomission_timestamp: new_version.created_at)
         format.html do
           redirect_to tutor_url(new_version), notice: "Tutor was successfully updated."
         end
@@ -68,7 +68,7 @@ class TutorsController < ApplicationController
 
     respond_to do |format|
       if can_be_decomissioned
-        decomission_old_version(decomission_timestamp: Time.now)
+        decomission_old_version(@tutor, decomission_timestamp: Time.now)
         format.html { redirect_to tutors_url, notice: "Tutor was successfully destroyed." }
         format.json { head :no_content }
       else
@@ -92,10 +92,5 @@ class TutorsController < ApplicationController
         :email_address, :phone_number,
         :region_id, :delivery_address
       )
-    end
-
-    def decomission_old_version(decomission_timestamp:)
-      @tutor.valid_until = decomission_timestamp
-      @tutor.save
     end
 end
