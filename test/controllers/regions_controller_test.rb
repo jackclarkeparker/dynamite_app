@@ -35,9 +35,9 @@ class RegionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New region</h1>', response.body
-    assert_match '<h2>1 error prohibited this region from being saved:</h2>', response.body
-    assert_match "<li>Name can#{QUOTE_UNICODE}t be blank</li>", response.body
+    assert_select 'h1', 'New region'
+    assert_select 'h2', '1 error prohibited this region from being saved:'
+    assert_select 'li', "Name can't be blank"
   end
 
   test "should fail to create region with duplicate name" do
@@ -47,9 +47,9 @@ class RegionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New region</h1>', response.body
-    assert_match '<h2>1 error prohibited this region from being saved:</h2>', response.body
-    assert_match "<li>Name has already been taken</li>", response.body
+    assert_select 'h1', 'New region'
+    assert_select 'h2', '1 error prohibited this region from being saved:'
+    assert_select 'li', 'Name has already been taken'
   end
 
   test "should show region" do
@@ -86,9 +86,9 @@ class RegionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>Editing region</h1>', response.body
-    assert_match '<h2>1 error prohibited this region from being saved:</h2>', response.body
-    assert_match "<li>Name can#{QUOTE_UNICODE}t be blank</li>", response.body
+    assert_select 'h1', 'Editing region'
+    assert_select 'h2', '1 error prohibited this region from being saved:'
+    assert_select 'li', "Name can't be blank"
   end
 
   test "should fail to destroy region with associations" do
@@ -99,7 +99,7 @@ class RegionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to regions_url
     follow_redirect!
 
-    assert_select 'p', "Rejected destruction of region 'Wellington' because it: - has associated venues. - has associated tutors. - has associated students."
+    assert_select 'p', "Rejected destruction of region 'Wellington' because it: - has associated venues. - has associated tutors. - has associated students. - has associated contacts."
   end
 
   test "should destroy region" do

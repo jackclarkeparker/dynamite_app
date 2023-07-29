@@ -43,15 +43,15 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_match '<h1>New lesson</h1>', response.body
-    assert_match '<h2>7 errors prohibited this lesson from being saved:</h2>', response.body
-    assert_match "<li>Standard price can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Capacity can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Duration can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Start time can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Venue must be selected</li>", response.body
-    assert_match "<li>Tutor must be selected</li>", response.body
-    assert_match "<li>Day must be selected</li>", response.body
+    assert_select 'h1', 'New lesson'
+    assert_select 'h2', '7 errors prohibited this lesson from being saved:'
+    assert_select 'li', "Standard price can't be blank"
+    assert_select 'li', "Capacity can't be blank"
+    assert_select 'li', "Duration can't be blank"
+    assert_select 'li', "Start time can't be blank"
+    assert_select 'li', 'Venue must be selected'
+    assert_select 'li', 'Tutor must be selected'
+    assert_select 'li', 'Day must be selected'
   end
 
   test "should fail to create lesson with standard_price outside bounds" do
@@ -66,9 +66,9 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
       post lessons_url, params: params
     end
 
-    assert_match '<h1>New lesson</h1>', response.body
-    assert_match '<h2>1 error prohibited this lesson from being saved:</h2>', response.body
-    assert_match "<li>Standard price must be no less than 1, and no greater than 50</li>", response.body
+    assert_select 'h1', 'New lesson'
+    assert_select 'h2', '1 error prohibited this lesson from being saved:'
+    assert_select 'li', 'Standard price must be no less than 1, and no greater than 50'
   end
 
   test "should fail to create lesson with capacity outside bounds" do
@@ -83,9 +83,9 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
       post lessons_url, params: params
     end
 
-    assert_match '<h1>New lesson</h1>', response.body
-    assert_match '<h2>1 error prohibited this lesson from being saved:</h2>', response.body
-    assert_match "<li>Capacity must be no less than 1, and no greater than 6</li>", response.body
+    assert_select 'h1', 'New lesson'
+    assert_select 'h2', '1 error prohibited this lesson from being saved:'
+    assert_select 'li', 'Capacity must be no less than 1, and no greater than 6'
   end
 
   test "should fail to create lesson when venue already in use" do
@@ -97,21 +97,21 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
       post lessons_url, params: params
     end
 
-    assert_match '<h1>New lesson</h1>', response.body
-    assert_match '<h2>1 error prohibited this lesson from being saved:</h2>', response.body
-    assert_match "<li>Venue is already being used during this timeslot</li>", response.body
+    assert_select 'h1', 'New lesson'
+    assert_select 'h2', '1 error prohibited this lesson from being saved:'
+    assert_select 'li', 'Venue is already being used during this timeslot'
 
     params[:lesson][:start_time] = '14:31:00'
     assert_difference("Lesson.count", 0) do
       post lessons_url, params: params
     end
-    assert_match "<li>Venue is already being used during this timeslot</li>", response.body
+    assert_select 'li', 'Venue is already being used during this timeslot'
 
     params[:lesson][:start_time] = '15:29:00'
     assert_difference("Lesson.count", 0) do
       post lessons_url, params: params
     end
-    assert_match "<li>Venue is already being used during this timeslot</li>", response.body
+    assert_select 'li', 'Venue is already being used during this timeslot'
 
     params[:lesson][:start_time] = '14:30:00'
     assert_difference("Lesson.count", 1) do
@@ -137,21 +137,21 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
       post lessons_url, params: params
     end
 
-    assert_match '<h1>New lesson</h1>', response.body
-    assert_match '<h2>1 error prohibited this lesson from being saved:</h2>', response.body
-    assert_match "<li>Tutor is already teaching during this timeslot</li>", response.body
+    assert_select 'h1', 'New lesson'
+    assert_select 'h2', '1 error prohibited this lesson from being saved:'
+    assert_select 'li', 'Tutor is already teaching during this timeslot'
 
     params[:lesson][:start_time] = '14:31:00'
     assert_difference("Lesson.count", 0) do
       post lessons_url, params: params
     end
-    assert_match "<li>Tutor is already teaching during this timeslot</li>", response.body
+    assert_select 'li', 'Tutor is already teaching during this timeslot'
 
     params[:lesson][:start_time] = '15:29:00'
     assert_difference("Lesson.count", 0) do
       post lessons_url, params: params
     end
-    assert_match "<li>Tutor is already teaching during this timeslot</li>", response.body
+    assert_select 'li', 'Tutor is already teaching during this timeslot'
 
     params[:lesson][:start_time] = '14:30:00'
     assert_difference("Lesson.count", 1) do
@@ -209,10 +209,10 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
       }
     }
 
-    assert_match '<h1>Editing lesson</h1>', response.body
+    assert_select 'h1', 'Editing lesson'
 
-    assert_match '<h2>1 error prohibited this lesson from being saved:</h2>', response.body
-    assert_match "<li>Duration can#{QUOTE_UNICODE}t be blank</li>", response.body
+    assert_select 'h2', '1 error prohibited this lesson from being saved:'
+    assert_select 'li', "Duration can't be blank"
   end
 
   # test "should destroy lesson" do

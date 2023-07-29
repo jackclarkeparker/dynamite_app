@@ -42,12 +42,12 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New venue</h1>', response.body
-    assert_match '<h2>4 errors prohibited this venue from being saved:</h2>', response.body
-    assert_match "<li>Name can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Address can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Standard price can#{QUOTE_UNICODE}t be blank</li>", response.body    
-    assert_match "<li>Region must be selected</li>", response.body
+    assert_select 'h1', 'New venue'
+    assert_select 'h2', '4 errors prohibited this venue from being saved:'
+    assert_select 'li', "Name can't be blank"
+    assert_select 'li', "Address can't be blank"
+    assert_select 'li', "Standard price can't be blank"
+    assert_select 'li', 'Region must be selected'
   end
 
   test "should fail to create venue with non-unique name / address" do
@@ -61,11 +61,11 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New venue</h1>', response.body
+    assert_select 'h1', 'New venue'
 
-    assert_match '<h2>2 errors prohibited this venue from being saved:</h2>', response.body
-    assert_match '<li>Name already used by another venue in this region</li>', response.body
-    assert_match '<li>Address in use by another venue</li>', response.body
+    assert_select 'h2', '2 errors prohibited this venue from being saved:'
+    assert_select 'li', 'Name already used by another venue in this region'
+    assert_select 'li', 'Address in use by another venue'
   end
 
   test "should create venue with duplicate name if in a different region" do
@@ -92,9 +92,9 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New venue</h1>', response.body
-    assert_match '<h2>1 error prohibited this venue from being saved:</h2>', response.body
-    assert_match "<li>Region must be selected</li>", response.body
+    assert_select 'h1', 'New venue'
+    assert_select 'h2', '1 error prohibited this venue from being saved:'
+    assert_select 'li', 'Region must be selected'
   end
 
   test "should show venue" do

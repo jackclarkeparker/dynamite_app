@@ -58,12 +58,12 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New student</h1>', response.body
-    assert_match '<h2>4 errors prohibited this student from being saved:</h2>', response.body
-    assert_match "<li>First name can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Last name can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Gender can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Region must be selected</li>", response.body
+    assert_select 'h1', 'New student'
+    assert_select 'h2', '4 errors prohibited this student from being saved:'
+    assert_select 'li', "First name can't be blank"
+    assert_select 'li', "Last name can't be blank"
+    assert_select 'li', "Gender can't be blank"
+    assert_select 'li', 'Region must be selected'
   end
 
   test "Should fail to create student with invalid region selection" do
@@ -74,9 +74,9 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New student</h1>', response.body
-    assert_match '<h2>1 error prohibited this student from being saved:</h2>', response.body
-    assert_match "<li>Region must be selected</li>", response.body
+    assert_select 'h1', 'New student'
+    assert_select 'h2', '1 error prohibited this student from being saved:'
+    assert_select 'li', 'Region must be selected'
   end
 
   test "should show student" do
@@ -145,10 +145,10 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>Editing student</h1>', response.body
+    assert_select 'h1', 'Editing student'
 
-    assert_match '<h2>1 error prohibited this student from being saved:</h2>', response.body
-    assert_match "<li>Gender can#{QUOTE_UNICODE}t be blank</li>", response.body
+    assert_select 'h2', '1 error prohibited this student from being saved:'
+    assert_select 'li', "Gender can't be blank"
   end
 
   test "should destroy student" do

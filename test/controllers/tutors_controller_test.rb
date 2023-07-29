@@ -57,14 +57,14 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New tutor</h1>', response.body
-    assert_match '<h2>6 errors prohibited this tutor from being saved:</h2>', response.body
-    assert_match "<li>First name can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Last name can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Email address can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Phone number can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Delivery address can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Region must be selected</li>", response.body
+    assert_select 'h1', 'New tutor'
+    assert_select 'h2', '6 errors prohibited this tutor from being saved:'
+    assert_select 'li', "First name can't be blank"
+    assert_select 'li', "Last name can't be blank"
+    assert_select 'li', "Email address can't be blank"
+    assert_select 'li', "Phone number can't be blank"
+    assert_select 'li', "Delivery address can't be blank"
+    assert_select 'li', 'Region must be selected'
   end
 
   test "should fail to create tutor with duplicate email / phone" do
@@ -78,11 +78,11 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New tutor</h1>', response.body
+    assert_select 'h1', 'New tutor'
 
-    assert_match '<h2>2 errors prohibited this tutor from being saved:</h2>', response.body
-    assert_match '<li>Email address in use by another tutor</li>', response.body
-    assert_match '<li>Phone number in use by another tutor</li>', response.body
+    assert_select 'h2', '2 errors prohibited this tutor from being saved:'
+    assert_select 'li', 'Email address in use by another tutor'
+    assert_select 'li', 'Phone number in use by another tutor'
   end
 
   test "should complain about too-many-digits phone number" do
@@ -95,9 +95,9 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New tutor</h1>', response.body
-    assert_match '<h2>1 error prohibited this tutor from being saved:</h2>', response.body
-    assert_match "<li>Phone number suffix must be between six and nine digits long</li>", response.body
+    assert_select 'h1', 'New tutor'
+    assert_select 'h2', '1 error prohibited this tutor from being saved:'
+    assert_select 'li', 'Phone number suffix must be between six and nine digits long'
   end
 
   test "should complain about too-few-digits phone number" do
@@ -110,9 +110,9 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New tutor</h1>', response.body
-    assert_match '<h2>1 error prohibited this tutor from being saved:</h2>', response.body
-    assert_match "<li>Phone number suffix must be between six and nine digits long</li>", response.body
+    assert_select 'h1', 'New tutor'
+    assert_select 'h2', '1 error prohibited this tutor from being saved:'
+    assert_select 'li', 'Phone number suffix must be between six and nine digits long'
   end
 
   test "Should fail to make tutor with invalid region selection" do
@@ -123,9 +123,9 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New tutor</h1>', response.body
-    assert_match '<h2>1 error prohibited this tutor from being saved:</h2>', response.body
-    assert_match "<li>Region must be selected</li>", response.body
+    assert_select 'h1', 'New tutor'
+    assert_select 'h2', '1 error prohibited this tutor from being saved:'
+    assert_select 'li', 'Region must be selected'
   end
 
   test "should show tutor" do
@@ -193,10 +193,21 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>Editing tutor</h1>', response.body
+    assert_select 'h1', 'Editing tutor'
 
-    assert_match '<h2>1 error prohibited this tutor from being saved:</h2>', response.body
-    assert_match "<li>First name can#{QUOTE_UNICODE}t be blank</li>", response.body
+    assert_select 'h2', '1 error prohibited this tutor from being saved:'
+    assert_select 'li', "First name can't be blank"
+
+    # I want to assert that the contents of a "form div" includes:
+    # - A label with content "First name"
+    # - An input with value ""
+
+    # debugger
+
+    # assert_selector 'form div' do |div|
+    #   assert_selector 'label', text: 'First name', within: div
+    #   assert_selector 'input[value=""]', within: div
+    # end
   end
 
   test "should fail to destroy tutor with associations" do

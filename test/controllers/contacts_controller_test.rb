@@ -68,11 +68,11 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>New contact</h1>', response.body
-    assert_match '<h2>3 errors prohibited this contact from being saved:</h2>', response.body
-    assert_match "<li>Region must be selected</li>", response.body
-    assert_match "<li>First name can#{QUOTE_UNICODE}t be blank</li>", response.body
-    assert_match "<li>Email address can#{QUOTE_UNICODE}t be blank</li>", response.body
+    assert_select 'h1', 'New contact'
+    assert_select 'h2', '3 errors prohibited this contact from being saved:'
+    assert_select 'li', 'Region must be selected'
+    assert_select 'li', "First name can't be blank"
+    assert_select 'li', "Email address can't be blank"
   end
 
   test "should show contact" do
@@ -147,10 +147,10 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 422
 
-    assert_match '<h1>Editing contact</h1>', response.body
+    assert_select 'h1', 'Editing contact'
 
-    assert_match '<h2>1 error prohibited this contact from being saved:</h2>', response.body
-    assert_match "<li>First name can#{QUOTE_UNICODE}t be blank</li>", response.body
+    assert_select 'h2', '1 error prohibited this contact from being saved:'
+    assert_select 'li', "First name can't be blank"
   end
 
   test "should destroy contact" do

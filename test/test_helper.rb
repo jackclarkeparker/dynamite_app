@@ -11,8 +11,6 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
-  QUOTE_UNICODE = '&#39;'
-
   def active_tutor_count
     "Tutor.where(valid_until: ApplicationRecord::FUTURE_EPOCH).count"
   end
