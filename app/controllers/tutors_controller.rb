@@ -54,8 +54,7 @@ class TutorsController < ApplicationController
         end
         format.json { render :show, status: :ok, location: new_version }
       else
-        @id_for_url = @tutor.id
-        @tutor = new_version
+        prepare_edit_following_failed_attempt(new_version)
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @tutor.errors, status: :unprocessable_entity }
       end
@@ -80,6 +79,13 @@ class TutorsController < ApplicationController
   end
 
   private
+
+    def prepare_edit_following_failed_attempt(new_version)
+      @render_failed_edit = true
+      @original_id = @tutor.id
+      @tutor = new_version
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_tutor
       @tutor = Tutor.find(params[:id])

@@ -1,6 +1,5 @@
 <%= form_with(model: tutor) do |form| %>
-  <%= render template: "tutors/_form_inputs",
-             locals: { tutor: tutor, form: form } %>
+  <%= render template: "tutors/_form_inputs", locals: { tutor: tutor, form: form } %>
 
   <div>
     <%= form.submit %>
