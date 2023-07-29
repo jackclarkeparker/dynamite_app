@@ -1,9 +1,11 @@
 class ContactsController < ApplicationController
+  include SlowlyChangingDimensionHelpers
+
   before_action :set_contact, only: %i[ show edit update destroy ]
 
   # GET /contacts or /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = Contact.all.where(valid_until: ApplicationRecord::FUTURE_EPOCH)
   end
 
   # GET /contacts/1 or /contacts/1.json
@@ -22,6 +24,7 @@ class ContactsController < ApplicationController
   # POST /contacts or /contacts.json
   def create
     @contact = Contact.new(contact_params)
+    set_entity_id(@contact)
 
     respond_to do |format|
       if @contact.save
@@ -36,10 +39,16 @@ class ContactsController < ApplicationController
 
   # PATCH/PUT /contacts/1 or /contacts/1.json
   def update
+    new_version = Contact.new(contact_params)
+    new_version.entity_id = @contact.entity_id
+
     respond_to do |format|
-      if @contact.update(contact_params)
-        format.html { redirect_to contact_url(@contact), notice: "Contact was successfully updated." }
-        format.json { render :show, status: :ok, location: @contact }
+      if new_version == @contact
+        format.html { redirect_to contact_url(@contact), alert: "No changes made to contact." }
+      elsif new_version.save
+        decomission_old_version(@contact, decomission_timestamp: new_version.created_at)
+        format.html { redirect_to contact_url(new_version), notice: "Contact was successfully updated." }
+        format.json { render :show, status: :ok, location: new_version }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
@@ -49,9 +58,8 @@ class ContactsController < ApplicationController
 
   # DELETE /contacts/1 or /contacts/1.json
   def destroy
-    @contact.destroy
-
     respond_to do |format|
+      decomission_old_version(@contact, decomission_timestamp: Time.now)
       format.html { redirect_to contacts_url, notice: "Contact was successfully destroyed." }
       format.json { head :no_content }
     end
