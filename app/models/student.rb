@@ -6,7 +6,8 @@ class Student < ApplicationRecord
   # has_many :lesson_members
   # has_many :student_contacts
 
-  validates :first_name, :last_name, :gender, presence: true
+  validates :first_name, :last_name, :gender, :age, presence: true
+  validates :age, numericality: { greater_than: 2 }, allow_blank: true
 
   validate :validate_region_id
   validates :year_group, numericality: {
@@ -22,6 +23,7 @@ class Student < ApplicationRecord
     self.preferred_name == other_student.preferred_name &&
     self.last_name == other_student.last_name &&
     self.year_group == other_student.year_group &&
+    self.age == other_student.age &&
     self.birthday == other_student.birthday &&
     self.gender == other_student.gender &&
     self.keyboard == other_student.keyboard

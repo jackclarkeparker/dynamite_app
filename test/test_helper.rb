@@ -55,6 +55,7 @@ class ActiveSupport::TestCase
         last_name: 'Babblehauer',
         full_name: 'Arya Babblehauer',
         preferred_name: '',
+        age: 9,
         birthday: '2014-03-13',
         year_group: 5,
         gender: 'female',

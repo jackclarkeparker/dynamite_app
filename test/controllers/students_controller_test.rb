@@ -59,9 +59,10 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_response 422
 
     assert_select 'h1', 'New student'
-    assert_select 'h2', '4 errors prohibited this student from being saved:'
+    assert_select 'h2', '5 errors prohibited this student from being saved:'
     assert_select 'li', "First name can't be blank"
     assert_select 'li', "Last name can't be blank"
+    assert_select 'li', "Age can't be blank"
     assert_select 'li', "Gender can't be blank"
     assert_select 'li', 'Region must be selected'
   end
@@ -112,6 +113,7 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
   test "should alert of update without changes" do
     patch student_url(@student), params: {
       student: {
+        age: @student.age,
         birthday: @student.birthday,
         first_name: @student.first_name,
         gender: @student.gender,
@@ -132,6 +134,7 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
   test "should fail to update student when missing params" do
     patch student_url(@student), params: {
       student: {
+        age: @student.age,
         birthday: @student.birthday,
         first_name: @student.first_name,
         gender: '',
