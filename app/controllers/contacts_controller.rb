@@ -50,6 +50,7 @@ class ContactsController < ApplicationController
         format.html { redirect_to contact_url(new_version), notice: "Contact was successfully updated." }
         format.json { render :show, status: :ok, location: new_version }
       else
+        prepare_edit_following_failed_attempt(new_version)
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
@@ -66,6 +67,13 @@ class ContactsController < ApplicationController
   end
 
   private
+
+    def prepare_edit_following_failed_attempt(new_version)
+      @render_failed_edit = true
+      @original_id = @contact.id
+      @contact = new_version
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
       @contact = Contact.find(params[:id])

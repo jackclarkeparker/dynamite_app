@@ -1,6 +1,10 @@
 <h1>Editing contact</h1>
 
-<%= render "form", contact: @contact %>
+<% if @render_failed_edit %>
+  <%= render "failed_edit", contact: @contact, original_id: @original_id %>
+<% else %>
+  <%= render "form", contact: @contact %>
+<% end %>
 
 <br>
 
