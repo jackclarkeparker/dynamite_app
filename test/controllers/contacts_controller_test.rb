@@ -148,16 +148,34 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
     assert_response 422
 
     assert_select 'h1', 'Editing contact'
-
     assert_select 'h2', '1 error prohibited this contact from being saved:'
     assert_select 'li', "First name can't be blank"
+
+    assert_select 'form div' do
+      assert_select 'label', 'First name'
+      assert_select 'input', ''
+    end
   end
 
+  # test "should fail to destroy contact with associations" do
+  #   assert_difference(active_contact_count, 0) do
+  #     delete contact_url(@contact)
+  #   end
+
+  #   assert_redirected_to contact_url(@contact)
+  #   follow_redirect!
+
+  #   assert_select 'p', "Rejected destruction of contact 'Debbus' because it: - has associated student contacts"
+  # end
+
   test "should destroy contact" do
-    assert_difference("Contact.count", -1) do
+    assert_difference(active_contact_count, -1) do
       delete contact_url(@contact)
     end
 
     assert_redirected_to contacts_url
+    follow_redirect!
+
+    assert_select 'p', 'Contact was successfully destroyed.'
   end
 end
