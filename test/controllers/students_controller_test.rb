@@ -136,8 +136,8 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
       student: {
         age: @student.age,
         birthday: @student.birthday,
-        first_name: @student.first_name,
-        gender: '',
+        first_name: '',
+        gender: @student.gender,
         last_name: @student.last_name,
         preferred_name: @student.preferred_name,
         region_id: @student.region_id,
@@ -151,12 +151,10 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'h1', 'Editing student'
 
     assert_select 'h2', '1 error prohibited this student from being saved:'
-    assert_select 'li', "Gender can't be blank"
+    assert_select 'li', "First name can't be blank"
 
-    assert_select 'form div' do
-      assert_select 'label', 'First name'
-      assert_select 'input', ''
-    end
+    assert_select 'form div.field_with_errors label', 'First name'
+    assert_select 'form div.field_with_errors input', ''
   end
 
   test "should destroy student" do
@@ -165,5 +163,8 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to students_url
+    follow_redirect!
+
+    assert_select 'p', 'Student was successfully destroyed.'
   end
 end

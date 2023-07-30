@@ -151,10 +151,8 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'h2', '1 error prohibited this contact from being saved:'
     assert_select 'li', "First name can't be blank"
 
-    assert_select 'form div' do
-      assert_select 'label', 'First name'
-      assert_select 'input', ''
-    end
+    assert_select 'form div.field_with_errors label', 'First name'
+    assert_select 'form div.field_with_errors input', ''
   end
 
   # test "should fail to destroy contact with associations" do

@@ -214,10 +214,8 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'h2', '1 error prohibited this lesson from being saved:'
     assert_select 'li', "Duration can't be blank"
 
-    assert_select 'form div' do
-      assert_select 'label', 'Duration'
-      assert_select 'input', ''
-    end
+    assert_select 'form div.field_with_errors label', 'Duration'
+    assert_select 'form div.field_with_errors input', ''
   end
 
   # test "should destroy lesson" do

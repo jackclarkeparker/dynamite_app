@@ -198,10 +198,19 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'h2', '1 error prohibited this tutor from being saved:'
     assert_select 'li', "First name can't be blank"
 
-    assert_select 'form div' do
-      assert_select 'label', 'First name'
-      assert_select 'input', ''
+    # This works. I'll use the simpler approach in other tests
+    first_name_is_empty = false
+    css_select('form div').each do |div|
+      target_label = css_select(div, 'label').text == 'First name'
+      input_value_empty = css_select(div, 'input').attribute('value')&.text == ''
+
+      if target_label && input_value_empty
+        first_name_is_empty = true
+        break
+      end
     end
+
+    assert first_name_is_empty
   end
 
   test "should fail to destroy tutor with associations" do
