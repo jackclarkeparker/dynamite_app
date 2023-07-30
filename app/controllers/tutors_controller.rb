@@ -1,6 +1,5 @@
 class TutorsController < ApplicationController
   include SlowlyChangingDimensionHelpers
-  include ErrorToFlash
 
   before_action :set_tutor, only: %i[ show edit update destroy ]
 

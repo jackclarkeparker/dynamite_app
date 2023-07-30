@@ -58,8 +58,7 @@ class RegionsController < ApplicationController
         format.html { redirect_to regions_url, notice: "Region was successfully destroyed." }
         format.json { head :no_content }
       else
-        error_messages = @region.errors.full_messages.join("\n")
-        flash[:alert] = error_messages.gsub("\n", "<br>")
+        set_flash_alert_with_errors_of(@region)
         format.html { redirect_to regions_url }
       end
     end

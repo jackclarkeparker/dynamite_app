@@ -62,8 +62,7 @@ class VenuesController < ApplicationController
         format.html { redirect_to venues_url, notice: "Venue was successfully destroyed." }
         format.json { head :no_content }
       else
-        error_messages = @venue.errors.full_messages.join("\n")
-        flash[:alert] = error_messages.gsub("\n", "<br>")
+        set_flash_alert_with_errors_of(@venue)
         format.html { redirect_to venue_url(@venue) }
       end
     end
