@@ -140,6 +140,28 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'p', "No changes made to venue."
   end
 
+  test "should fail to update venue with missing params" do
+    patch venue_url(@venue), params: {
+      venue: {
+        region_id: @venue.region_id,
+        name: '',
+        address: @venue.address,
+        standard_price: @venue.standard_price,
+      }
+    }
+
+    assert_response 422
+
+    assert_select 'h1', "Editing venue"
+    assert_select 'h2', '1 error prohibited this venue from being saved:'
+    assert_select 'li', "Name can't be blank"
+
+    assert_select 'form div' do
+      assert_select 'label', 'Name'
+      assert_select 'input', ''
+    end
+  end
+
   test "should fail to destroy venue with lessons" do
     assert_difference("Venue.count", 0) do
       delete venue_url(@venue)

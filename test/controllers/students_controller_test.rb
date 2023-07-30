@@ -149,6 +149,11 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select 'h2', '1 error prohibited this student from being saved:'
     assert_select 'li', "Gender can't be blank"
+
+    assert_select 'form div' do
+      assert_select 'label', 'First name'
+      assert_select 'input', ''
+    end
   end
 
   test "should destroy student" do

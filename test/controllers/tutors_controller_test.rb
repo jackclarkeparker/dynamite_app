@@ -198,16 +198,10 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'h2', '1 error prohibited this tutor from being saved:'
     assert_select 'li', "First name can't be blank"
 
-    # I want to assert that the contents of a "form div" includes:
-    # - A label with content "First name"
-    # - An input with value ""
-
-    # debugger
-
-    # assert_selector 'form div' do |div|
-    #   assert_selector 'label', text: 'First name', within: div
-    #   assert_selector 'input[value=""]', within: div
-    # end
+    assert_select 'form div' do
+      assert_select 'label', 'First name'
+      assert_select 'input', ''
+    end
   end
 
   test "should fail to destroy tutor with associations" do

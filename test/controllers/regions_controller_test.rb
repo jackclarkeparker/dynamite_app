@@ -89,6 +89,11 @@ class RegionsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'h1', 'Editing region'
     assert_select 'h2', '1 error prohibited this region from being saved:'
     assert_select 'li', "Name can't be blank"
+
+    assert_select 'form div' do
+      assert_select 'label', 'Name'
+      assert_select 'input', ''
+    end
   end
 
   test "should fail to destroy region with associations" do
