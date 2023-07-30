@@ -60,11 +60,14 @@ class LessonsController < ApplicationController
 
   # DELETE /lessons/1 or /lessons/1.json
   def destroy
-    @lesson.destroy
-
     respond_to do |format|
-      format.html { redirect_to lessons_url, notice: "Lesson was successfully destroyed." }
-      format.json { head :no_content }
+      if @lesson.destroy
+        format.html { redirect_to lessons_url, notice: "Lesson was successfully destroyed." }
+        format.json { head :no_content }
+      else
+        set_flash_alert_with_errors_of(@lesson)
+        format.html { redirect_to lesson_url(@lesson) }
+      end
     end
   end
 

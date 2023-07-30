@@ -1,5 +1,4 @@
 class Venue < ApplicationRecord
-  include NotReferencedBeforeDestroy
   include RelatedModelValidator
 
   belongs_to :region, optional: true

@@ -4,6 +4,8 @@ class Lesson < ApplicationRecord
   belongs_to :tutor, optional: true
   belongs_to :venue, optional: true
 
+  # has_many :lesson_members
+
   before_validation :set_end_time
 
   validates :standard_price, :capacity, :duration,

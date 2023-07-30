@@ -1,7 +1,6 @@
 class Tutor < ApplicationRecord
   include PhoneNumberFormatting
   include RelatedModelValidator
-  include NotReferencedBeforeDestroy
 
   belongs_to :region, optional: true
   has_many :lessons

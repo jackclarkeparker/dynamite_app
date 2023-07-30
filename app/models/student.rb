@@ -3,6 +3,9 @@ class Student < ApplicationRecord
 
   belongs_to :region, optional: true
 
+  # has_many :lesson_members
+  # has_many :student_contacts
+
   validates :first_name, :last_name, :gender, presence: true
 
   validate :validate_region_id

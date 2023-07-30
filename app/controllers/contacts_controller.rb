@@ -59,10 +59,17 @@ class ContactsController < ApplicationController
 
   # DELETE /contacts/1 or /contacts/1.json
   def destroy
+    can_be_decomissioned = @contact.run_callbacks(:destroy)
+
     respond_to do |format|
-      decomission_old_version(@contact, decomission_timestamp: Time.now)
-      format.html { redirect_to contacts_url, notice: "Contact was successfully destroyed." }
-      format.json { head :no_content }
+      if can_be_decomissioned
+        decomission_old_version(@contact, decomission_timestamp: Time.now)
+        format.html { redirect_to contacts_url, notice: "Contact was successfully destroyed." }
+        format.json { head :no_content }
+      else
+        set_flash_alert_with_errors_of(@contact)
+        format.html { redirect_to tutor_url(@tutor) }
+      end
     end
   end
 

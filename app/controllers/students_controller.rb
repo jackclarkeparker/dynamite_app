@@ -60,11 +60,14 @@ class StudentsController < ApplicationController
 
   # DELETE /students/1 or /students/1.json
   def destroy
-    @student.destroy
-
     respond_to do |format|
-      format.html { redirect_to students_url, notice: "Student was successfully destroyed." }
-      format.json { head :no_content }
+      if @student.destroy
+        format.html { redirect_to students_url, notice: "Student was successfully destroyed." }
+        format.json { head :no_content }
+      else
+        set_flash_alert_with_errors_of(@student)
+        format.html { redirect_to student_url(@student) }
+      end
     end
   end
 
