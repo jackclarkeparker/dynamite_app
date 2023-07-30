@@ -1,5 +1,6 @@
 class TutorsController < ApplicationController
   include SlowlyChangingDimensionHelpers
+  include ErrorToFlash
 
   before_action :set_tutor, only: %i[ show edit update destroy ]
 
@@ -71,15 +72,13 @@ class TutorsController < ApplicationController
         format.html { redirect_to tutors_url, notice: "Tutor was successfully destroyed." }
         format.json { head :no_content }
       else
-        error_messages = @tutor.errors.full_messages.join("\n")
-        flash[:alert] = error_messages.gsub("\n", "<br>")
+        set_flash_alert_with_errors_of(@tutor)
         format.html { redirect_to tutor_url(@tutor) }
       end
     end
   end
 
   private
-
     def prepare_edit_following_failed_attempt(new_version)
       @render_failed_edit = true
       @original_id = @tutor.id
