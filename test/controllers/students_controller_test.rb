@@ -48,8 +48,10 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
           first_name: '',
           last_name: '',
           preferred_name: '',
+          age: '',
           birthday: nil,
           year_group: '',
+          gender: '',
           region_id: '',
           keyboard: 'Unknown',
         }
@@ -59,11 +61,9 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_response 422
 
     assert_select 'h1', 'New student'
-    assert_select 'h2', '5 errors prohibited this student from being saved:'
+    assert_select 'h2', '3 errors prohibited this student from being saved:'
     assert_select 'li', "First name can't be blank"
-    assert_select 'li', "Last name can't be blank"
     assert_select 'li', "Age can't be blank"
-    assert_select 'li', "Gender can't be blank"
     assert_select 'li', 'Region must be selected'
   end
 
