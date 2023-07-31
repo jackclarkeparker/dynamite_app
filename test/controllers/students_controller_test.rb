@@ -27,9 +27,14 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'main div p', /First name:.{5}Arya/m
   end
 
-  test "should create student without preferred name" do
+  test "should create student when non-required params are omitted" do
     params = default_student_params
+    params[:student][:last_name] = ''
     params[:student][:preferred_name] = ''
+    params[:student][:year_group] = ''
+    params[:student][:birthday] = ''
+    params[:student][:gender] = ''
+    params[:student][:keyboard] = ''
 
     assert_difference("Student.count", 1) do
       post students_url, params: params
@@ -39,6 +44,11 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select 'p', 'Student was successfully created.'
+
+    div = css_select("main div#student_#{Student.last.id}")
+    assert (css_select(div, 'p').any? do |para|
+      para.text =~ /\A\s*Birthday:\s*\z/
+    end)
   end
 
   test "should fail to create student with missing params" do
