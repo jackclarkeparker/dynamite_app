@@ -25,7 +25,8 @@ class Contact < ApplicationRecord
   private
 
     def set_full_name_and_valid_until
-      self.full_name = "#{self.first_name} #{self.last_name}"
+      self.full_name = first_name
+      self.full_name += " #{last_name}" if last_name && last_name.length > 0 
       self.valid_until = ApplicationRecord::FUTURE_EPOCH
     end
 end
