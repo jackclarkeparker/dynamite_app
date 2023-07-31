@@ -67,17 +67,25 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'li', 'Region must be selected'
   end
 
-  test "Should fail to create student with invalid region selection" do
+  test "Should fail to create student with invalid input values" do
     params = default_student_params
     params[:student][:region_id] = 123456789
+    params[:student][:gender] = 'noodle'
+    params[:student][:year_group] = -300
+    params[:student][:birthday] = '2300-04-13'
+    params[:student][:age] = 3
 
     post students_url, params: params
 
     assert_response 422
 
     assert_select 'h1', 'New student'
-    assert_select 'h2', '1 error prohibited this student from being saved:'
+    assert_select 'h2', '5 errors prohibited this student from being saved:'
     assert_select 'li', 'Region must be selected'
+    assert_select 'li', 'Gender must be selected'
+    assert_select 'li', 'Year group cannot be less than 1, or greater than 13'
+    assert_select 'li', "Birthday can't be less than two years ago"
+    assert_select 'li', "Age must be greater than three"
   end
 
   test "should show student" do
