@@ -6,14 +6,21 @@ class Student < ApplicationRecord
   # has_many :lesson_members
   # has_many :student_contacts
 
-  validates :first_name, :last_name, :gender, :age, presence: true
-  validates :age, numericality: { greater_than: 2 }, allow_blank: true
+  validates :first_name, :age, presence: true
+  validates :age, numericality: {
+    greater_than: 3,
+    message: 'must be greater than three'
+  }, allow_blank: true
 
   validate :validate_region_id
   validates :year_group, numericality: {
-    in: 1..13, message: "must be no less than 1, and no greater than 13"
+    in: 1..13, message: "cannot be less than 1, or greater than 13"
   }, allow_blank: true
   validate :validate_birthday_at_least_two_years_ago
+  validates :gender, inclusion: {
+    in: %w(Gender male female other),
+    message: "must be selected"
+  }, allow_blank: true
 
   before_create :set_full_name
 
