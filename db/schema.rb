@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_31_051530) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_31_052812) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,15 +64,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_31_051530) do
   end
 
   create_table "student_contacts", force: :cascade do |t|
-    t.bigint "students_id", null: false
-    t.bigint "contacts_id", null: false
+    t.bigint "student_id", null: false
+    t.bigint "contact_id", null: false
     t.string "relation"
     t.boolean "primary_contact"
     t.boolean "account_holder"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["contacts_id"], name: "index_student_contacts_on_contacts_id"
-    t.index ["students_id"], name: "index_student_contacts_on_students_id"
+    t.index ["contact_id"], name: "index_student_contacts_on_contact_id"
+    t.index ["student_id"], name: "index_student_contacts_on_student_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -122,8 +122,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_31_051530) do
   add_foreign_key "lesson_members", "students"
   add_foreign_key "lessons", "tutors"
   add_foreign_key "lessons", "venues"
-  add_foreign_key "student_contacts", "contacts", column: "contacts_id"
-  add_foreign_key "student_contacts", "students", column: "students_id"
+  add_foreign_key "student_contacts", "contacts"
+  add_foreign_key "student_contacts", "students"
   add_foreign_key "students", "regions"
   add_foreign_key "tutors", "regions"
   add_foreign_key "venues", "regions"
