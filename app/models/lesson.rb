@@ -37,6 +37,18 @@ class Lesson < ApplicationRecord
     Date::DAYNAMES[self.week_day_index]
   end
 
+  def formatted_start_time
+    start_time.strftime("%-l:%M%P")
+  end
+
+  def formatted_end_time
+    end_time.strftime("%-l:%M%P")
+  end
+
+  def to_s
+    "#{formatted_start_time} #{day}s at #{venue.name}"
+  end
+
   private
 
     def validate_day

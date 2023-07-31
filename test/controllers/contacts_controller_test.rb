@@ -163,7 +163,7 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
   #   assert_redirected_to contact_url(@contact)
   #   follow_redirect!
 
-  #   assert_select 'p', "Rejected destruction of contact 'Debbus' because it: - has associated student contacts"
+  #   assert_select 'p', "Rejected destruction of contact 'Dennis' because it: - has associated student contacts"
   # end
 
   test "should destroy contact" do

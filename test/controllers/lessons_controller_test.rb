@@ -218,6 +218,17 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'form div.field_with_errors input', ''
   end
 
+  # test "should fail to destroy lesson with associations" do
+  #   assert_difference('Lesson.count', 0) do
+  #     delete lesson_url(@lesson)
+  #   end
+
+  #   assert_redirected_to lesson_url(@lesson)
+  #   follow_redirect!
+
+  #   assert_select 'p', "Rejected destruction of lesson '3:00pm Mondays at Miramar Community Centre' because it: - has associated student contacts"
+  # end
+
   # test "should destroy lesson" do
   #   assert_difference("Lesson.count", -1) do
   #     delete lesson_url(@lesson)
