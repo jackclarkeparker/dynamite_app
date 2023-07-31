@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+StudentContact.delete_all
 Contact.delete_all
 Student.delete_all
 Lesson.delete_all
@@ -236,11 +237,11 @@ Lesson.create!([
   },
 ])
 
-Student.create!([
+joel, alice = Student.create!([
   {
     first_name: 'Joel',
     last_name: 'Sandwich',
-    full_name: 'Joel Sanwich',
+    full_name: 'Joel Sandwich',
     preferred_name: '',
     age: 10,
     birthday: '2013-04-13',
@@ -261,4 +262,48 @@ Student.create!([
     region_id: wellington.id,
     keyboard: 'Touch-sensitive Keyboard',
   }
+])
+
+dennis, winona = Contact.create!([
+  {
+    first_name: 'Dennis',
+    last_name: '',
+    full_name: '',
+    preferred_name: '',
+    email_address: 'dennis@email.com',
+    phone_number: '',
+    bank_account: '',
+    csc_number: '',
+    valid_until: ApplicationRecord::FUTURE_EPOCH,
+    region_id: wellington.id,
+  },
+  {
+    first_name: 'Winona',
+    last_name: 'Dewie',
+    full_name: 'Winona Dewie',
+    preferred_name: 'Win',
+    email_address: 'Winona@email.com',
+    phone_number: '027 567 1234',
+    bank_account: '12 1234 1234567 123',
+    csc_number: '123 456 789',
+    valid_until: ApplicationRecord::FUTURE_EPOCH,
+    region_id: wellington.id,
+  }
+])
+
+StudentContact.create!([
+  {
+    student_id: joel.id,
+    contact_id: dennis.id,
+    contact_relation: 'Dad',
+    primary_contact: true,
+    account_holder: '',
+  },
+  {
+    student_id: alice.id,
+    contact_id: winona.id,
+    contact_relation: 'Mum',
+    primary_contact: true,
+    account_holder: true,
+  },
 ])

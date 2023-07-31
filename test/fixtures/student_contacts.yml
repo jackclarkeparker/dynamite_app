@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  students: one
-  contacts: one
-  relation: MyString
+dennis_joel:
+  student: joel
+  contact: dennis
+  contact_relation: Dad
   primary_contact: false
   account_holder: false
 
-two:
-  students: two
-  contacts: two
-  relation: MyString
-  primary_contact: false
-  account_holder: false
+winona_alice:
+  student: alice
+  contact: winona
+  contact_relation: Mum
+  primary_contact: true
+  account_holder: true
