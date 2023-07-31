@@ -69,8 +69,8 @@ class ActiveSupport::TestCase
     {
       contact: {
         region_id: regions(:wellington).id,
-        first_name: 'Cal',
-        last_name: 'Newtown',
+        first_name: 'Minnie',
+        last_name: 'Newton',
         preferred_name: '',
         email_address: 'cal@email.com',
         phone_number: '027 345 1267',

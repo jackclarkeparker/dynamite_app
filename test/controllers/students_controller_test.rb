@@ -45,8 +45,8 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select 'p', 'Student was successfully created.'
 
-    div = css_select("main div#student_#{Student.last.id}")
-    assert (css_select(div, 'p').any? do |para|
+    form_div = css_select("main div#student_#{Student.last.id}")
+    assert (css_select(form_div, 'p').any? do |para|
       para.text =~ /\A\s*Birthday:\s*\z/
     end)
   end

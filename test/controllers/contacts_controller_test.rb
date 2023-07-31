@@ -24,23 +24,19 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select 'p', "Contact was successfully created."
-    assert_select 'main div p', /First name:.{5}Cal/m
+    assert_select 'main div p', /First name:.{5}Minnie/m
   end
 
-  test "should create contact with minimum details" do
-    assert_difference("Contact.count") do
-      post contacts_url, params: {
-        contact: {
-          region_id: regions(:wellington).id,
-          first_name: 'Minnie',
-          email_address: 'minnie@email.com',
-          last_name: '',
-          preferred_name: '',
-          phone_number: '',
-          bank_account: '',
-          csc: '',
-        }
-      }
+  test "should create contact when non-required params are omitted" do
+    params = default_contact_params
+    params[:contact][:last_name] = ''
+    params[:contact][:preferred_name] = ''
+    params[:contact][:phone_number] = ''
+    params[:contact][:bank_account] = ''
+    params[:contact][:csc_number] = ''
+
+    assert_difference("Contact.count", 1) do
+      post contacts_url, params: params
     end
 
     assert_redirected_to contact_url(Contact.last)
@@ -48,6 +44,11 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select 'p', "Contact was successfully created."
     assert_select 'main div p', /First name:.{5}Minnie/m
+
+    div = css_select("main div#contact_#{Contact.last.id}")
+    assert (css_select(div, 'p').any? do |p|
+      p.text =~ /\A\s*Phone number:\s*\z/
+    end)
   end
 
   test "should fail to create contact with missing params" do
