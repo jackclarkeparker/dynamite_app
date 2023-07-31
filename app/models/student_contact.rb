@@ -1,4 +1,4 @@
 class StudentContact < ApplicationRecord
-  belongs_to :students
-  belongs_to :contacts
+  belongs_to :student
+  belongs_to :contact
 end
