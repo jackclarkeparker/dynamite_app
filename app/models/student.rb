@@ -36,6 +36,14 @@ class Student < ApplicationRecord
     self.keyboard == other_student.keyboard
   end
 
+  def primary_contact
+    student_contacts.find(&:primary_contact)&.contact
+  end
+
+  def primary_contact_relation
+    student_contacts.find(&:primary_contact)&.contact_relation
+  end
+
   private
 
     def validate_birthday_at_least_two_years_ago

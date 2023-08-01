@@ -22,6 +22,14 @@ class Contact < ApplicationRecord
     csc_number     == other_contact.csc_number
   end
 
+  def to_s
+    if self.preferred_name && self.preferred_name.length > 0
+      self.preferred_name
+    else
+      self.first_name
+    end
+  end
+
   private
 
     def set_full_name_and_valid_until

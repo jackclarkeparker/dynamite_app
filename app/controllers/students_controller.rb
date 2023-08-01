@@ -4,13 +4,13 @@ class StudentsController < ApplicationController
   # GET /students or /students.json
   def index
     # Include :school in join table when we add this
-    @students_by_region = Student.includes(:region).order(
-      :region_id, :first_name
-    ).reduce({}) do |register, student|
-      register[student.region.name] ||= []
-      register[student.region.name] << student
-      register
-    end
+    @students_by_region = Student.includes(:region, { student_contacts: :contact })
+                                 .order(:region_id, :last_name)
+                                 .reduce({}) do |dictionary, student|
+                                   dictionary[student.region.name] ||= []
+                                   dictionary[student.region.name] << student
+                                   dictionary
+                                 end
   end
 
   # GET /students/1 or /students/1.json

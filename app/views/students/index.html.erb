@@ -7,8 +7,12 @@
       <% students.each do |student| %>
         <ul class="list-group list-group-horizontal">
           <li class="list-group-item"><%= student.full_name %></li>
+          <li class="list-group-item">
+            <strong>Primary Contact:</strong>
+            <%= link_to student.primary_contact, contact_path(student.primary_contact) %>
+            <span class="primary-contact-relation"><%= try_display_primary_contact_relation(student) %></span>
+          </li>
           <li class="list-group-item">Year <%= student.year_group %></li>
-          <li class="list-group-item"><%= student.keyboard %></li>
           <li class="list-group-item">
             <%= link_to "Details", student_path(student) %>
           </li>
