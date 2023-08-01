@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   def index
     # Include :school in join table when we add this
     @students_by_region = Student.includes(:region, { student_contacts: :contact })
-                                 .order(:region_id, :last_name)
+                                 .order(:region_id, :last_name, :first_name)
                                  .reduce({}) do |dictionary, student|
                                    dictionary[student.region.name] ||= []
                                    dictionary[student.region.name] << student
