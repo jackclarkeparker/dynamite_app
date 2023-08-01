@@ -68,7 +68,7 @@ class ContactsController < ApplicationController
         format.json { head :no_content }
       else
         set_flash_alert_with_errors_of(@contact)
-        format.html { redirect_to tutor_url(@tutor) }
+        format.html { redirect_to contact_url(@contact) }
       end
     end
   end

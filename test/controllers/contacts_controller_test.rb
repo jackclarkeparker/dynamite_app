@@ -156,20 +156,24 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'form div.field_with_errors input', ''
   end
 
-  # test "should fail to destroy contact with associations" do
-  #   assert_difference(active_contact_count, 0) do
-  #     delete contact_url(@contact)
-  #   end
+  test "should fail to destroy contact with associations" do
+    assert_difference(active_contact_count, 0) do
+      delete contact_url(@contact)
+    end
 
-  #   assert_redirected_to contact_url(@contact)
-  #   follow_redirect!
+    assert_redirected_to contact_url(@contact)
+    follow_redirect!
 
-  #   assert_select 'p', "Rejected destruction of contact 'Dennis' because it: - has associated student contacts"
-  # end
+    assert_select 'p', "Rejected destruction of contact 'Dennis' because it: - has associated student_contacts."
+  end
 
   test "should destroy contact" do
+    assert_difference(active_contact_count, 1) do
+      post contacts_url, params: default_contact_params
+    end
+
     assert_difference(active_contact_count, -1) do
-      delete contact_url(@contact)
+      delete contact_url(Contact.last)
     end
 
     assert_redirected_to contacts_url
