@@ -275,6 +275,7 @@ dennis, winona = Contact.create!([
     bank_account: '',
     csc_number: '',
     valid_until: ApplicationRecord::FUTURE_EPOCH,
+    entity_id: 1,
     region_id: wellington.id,
   },
   {
@@ -287,6 +288,7 @@ dennis, winona = Contact.create!([
     bank_account: '12 1234 1234567 123',
     csc_number: '123 456 789',
     valid_until: ApplicationRecord::FUTURE_EPOCH,
+    entity_id: 2,
     region_id: wellington.id,
   }
 ])
