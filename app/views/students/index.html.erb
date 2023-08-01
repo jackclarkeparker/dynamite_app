@@ -9,8 +9,7 @@
           <li class="list-group-item"><%= student.full_name %></li>
           <li class="list-group-item">
             <strong>Primary Contact:</strong>
-            <%= link_to student.primary_contact, contact_path(student.primary_contact) %>
-            <span class="primary-contact-relation"><%= try_display_primary_contact_relation(student) %></span>
+            <%= primary_contact_field(student) %>
           </li>
           <li class="list-group-item">Year <%= student.year_group %></li>
           <li class="list-group-item">
