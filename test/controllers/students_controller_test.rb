@@ -175,9 +175,24 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'form div.field_with_errors input', ''
   end
 
-  test "should destroy student" do
-    assert_difference("Student.count", -1) do
+  test "should fail to destroy student with associations" do
+    assert_difference("Student.count", 0) do
       delete student_url(@student)
+    end
+
+    assert_redirected_to student_url(@student)
+    follow_redirect!
+
+    assert_select 'p', "Rejected destruction of student 'Joel' because it: - has associated student_contacts."
+  end
+
+  test "should destroy student" do
+    assert_difference("Student.count", 1) do
+      post students_url, params: default_student_params
+    end
+
+    assert_difference("Student.count", -1) do
+      delete student_url(Student.last)
     end
 
     assert_redirected_to students_url

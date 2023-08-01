@@ -44,6 +44,14 @@ class Student < ApplicationRecord
     student_contacts.find(&:primary_contact)&.contact_relation
   end
 
+  def to_s
+    if preferred_name && preferred_name.length > 0
+      preferred_name
+    else
+      first_name
+    end
+  end
+
   private
 
     def validate_birthday_at_least_two_years_ago
