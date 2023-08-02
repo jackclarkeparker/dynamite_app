@@ -33,7 +33,7 @@ class StudentContactsController < ApplicationController
   private
 
     def set_student_with_student_contacts
-      @student = Student.includes(:student_contacts).find(params[:id])
+      @student = Student.includes(:student_contacts).find(params[:student_id])
     end
 
     def student_contact_params
