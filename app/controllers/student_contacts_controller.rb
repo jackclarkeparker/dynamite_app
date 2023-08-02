@@ -1,8 +1,8 @@
 class StudentContactsController < ApplicationController
-  def add_contact
+  def new_contact
   end
 
-  def add_student
+  def new_student
   end
 
   def edit_contact
