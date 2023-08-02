@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
   # GET /students/1 or /students/1.json
   def show
     @student = Student.includes(:region, { student_contacts: :contact })
-                      .order(:primary_contact, "contacts.first_name")
+                      .order("primary_contact DESC", "contacts.first_name")
                       .find(params[:id])
   end
 

@@ -16,4 +16,8 @@ module StudentsHelper
       'N/A'
     end
   end
+
+  def link_to_contact_of_student_contact(student_contact)
+    link_to(student_contact.contact, contact_path(student_contact.contact))
+  end
 end
