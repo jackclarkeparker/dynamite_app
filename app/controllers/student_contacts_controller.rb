@@ -1,22 +1,22 @@
 class StudentContactsController < ApplicationController
-  before_action :set_student_with_student_contacts, only: %i[ new_contact assign_contact ]
+  before_action :set_student_with_student_contacts, only: %i[ new_contact_relationship assign_contact_relationship ]
 
   # GET /students/1/new_contact
-  def new_contact
+  def new_contact_relationship
     @student_contact = StudentContact.new(student_id: @student.id)
   end
 
-  def new_student
+  def new_student_relationship
   end
 
-  def edit_contact
+  def edit_contact_relationship
   end
 
-  def edit_student
+  def edit_student_relationship
   end
 
   # POST /students/1/assign_contact
-  def assign_contact
+  def assign_contact_relationship
     @student_contact = StudentContact.new(student_contact_params)
 
     respond_to do |format|
