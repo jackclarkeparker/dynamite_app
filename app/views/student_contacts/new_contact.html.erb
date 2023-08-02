@@ -1,7 +1,7 @@
 <h1>Assign new contact for <%= @student %></h1>
 <%= form_with(
     scope: @student_contact,
-    url: student_url(@student) + '/assign_contact',
+    url: student_url(@student) + '/contacts',
     method: 'post'
   ) do |form| %>
   <% if @student_contact.errors.any? %>
