@@ -19,7 +19,8 @@ form input, form select {
   height: 2rem;
 }
 
-form input[type="submit"] {
+form input[type="submit"], form button {
+  width: 14.5rem;
   margin-top: 22px;
   height: 3.2rem;
 }
