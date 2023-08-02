@@ -1,0 +1,33 @@
+<div class="student-contacts">
+  <h2>Contacts</h2>
+  <% if student.contacts %>
+    <table>
+      <thead>
+        <tr>
+          <td>Preferred Name</td><td>Relation</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= student.student_contacts.first.contact %></td>
+          <td><%= student.student_contacts.first.contact_relation %></td>
+          <td>PRIMARY</td>
+        </tr>
+        <% student.student_contacts[1..].each do |student_contact| %>
+          <tr>
+            <td><%= student_contact.contact %></td>
+            <td><%= student_contact.contact_relation %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No contacts yet</p>
+  <% end %>
+  <%= link_to "Assign new contact", student_path(@student) + "/new_contact" %>
+</div>
+<!--   
+-> Is it required that a student have a primary contact? Yes. Its not important. Just useful for us.
+  ->> 'student_contacts.primary_contact', 'contacts.first_name' Primary contact first <<-
+ 
+ -->

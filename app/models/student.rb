@@ -44,6 +44,10 @@ class Student < ApplicationRecord
     student_contacts.find(&:primary_contact)&.contact_relation
   end
 
+  def contacts
+    student_contacts.map(&:contact)
+  end
+
   def to_s
     if preferred_name && preferred_name.length > 0
       preferred_name
