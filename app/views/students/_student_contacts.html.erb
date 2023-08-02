@@ -2,12 +2,21 @@
   <h2>Contacts</h2>
   <% if student.contacts %>
     <table>
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Relation</td>
+          <td>Primary</td>
+          <td>Invoice payer</td>
+        </tr>
+      </thead>
       <tbody>
         <% student.student_contacts.each_with_index do |student_contact, i| %>
           <tr>
             <td><%= link_to_contact_of_student_contact(student_contact) %></td>
             <td><%= student_contact.contact_relation %></td>
-            <td><%= i == 0 ? 'PRIMARY' : '' %></td>
+            <td><%= student_contact.primary_contact ? '✅' : '❌' %></td>
+            <td><%= student_contact.account_holder ? '✅' : '❌' %></td>
             <td>
               <%= link_to 'edit relationship',
                   edit_contact_relationship_path(
