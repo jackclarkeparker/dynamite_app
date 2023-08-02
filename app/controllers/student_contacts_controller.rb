@@ -4,14 +4,12 @@ class StudentContactsController < ApplicationController
     :edit_contact_relationship, :update_contact_relationship,
   ]
 
-  # GET /students/1/new_contact
+  # GET /students/1/contacts/new
   def new_contact_relationship
     @student_contact = StudentContact.new(student_id: @student.id)
   end
 
-  def new_student_relationship
-  end
-
+  # GET /students/1/contacts/1/edit
   def edit_contact_relationship
     @student_contact = StudentContact.find_by(
       student_id: params[:student_id],
@@ -19,10 +17,7 @@ class StudentContactsController < ApplicationController
     )
   end
 
-  def edit_student_relationship
-  end
-
-  # POST /students/1/assign_contact
+  # POST /students/1/contacts
   def create_contact_relationship
     @student_contact = StudentContact.new(student_contact_params)
 
@@ -37,7 +32,32 @@ class StudentContactsController < ApplicationController
     end
   end
 
+  # PATCH /students/1/contacts/1
+  def update_contact_relationship
+  end
+
+  # DELETE /students/1/contacts/1
   def destroy_contact_relationship
+  end
+
+  # GET /contacts/1/students/new
+  def new_student_relationship
+  end
+
+  # GET /students/1/contacts/1/edit
+  def edit_student_relationship
+  end
+
+  # POST /contacts/1/students
+  def create_student_relationship
+  end
+
+  # PATCH /contacts/1/students/1
+  def update_student_relationship
+  end
+
+  # DELETE /contacts/1/students/1
+  def destroy_student_relationship
   end
 
   private
