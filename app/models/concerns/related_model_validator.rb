@@ -18,4 +18,16 @@ module RelatedModelValidator
         errors.add(:venue, 'must be selected')
       end
     end
+
+    def validate_student_id
+      if !Student.exists?(id: student_id)
+        errors.add(:student, 'must be selected')
+      end
+    end
+
+    def validate_contact_id
+      if !Contact.exists?(id: contact_id)
+        errors.add(:contact, 'must be selected')
+      end
+    end
 end
