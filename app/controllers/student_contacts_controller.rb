@@ -1,5 +1,8 @@
 class StudentContactsController < ApplicationController
-  before_action :set_student_with_student_contacts, only: %i[ new_contact_relationship assign_contact_relationship ]
+  before_action :set_student_with_student_contacts, only: [
+    :new_contact_relationship, :assign_contact_relationship,
+    :edit_contact_relationship, :update_contact_relationship,
+  ]
 
   # GET /students/1/new_contact
   def new_contact_relationship
@@ -10,6 +13,10 @@ class StudentContactsController < ApplicationController
   end
 
   def edit_contact_relationship
+    @student_contact = StudentContact.find_by(
+      student_id: params[:student_id],
+      contact_id: params[:contact_id],
+    )
   end
 
   def edit_student_relationship
@@ -28,6 +35,9 @@ class StudentContactsController < ApplicationController
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def destroy_contact_relationship
   end
 
   private

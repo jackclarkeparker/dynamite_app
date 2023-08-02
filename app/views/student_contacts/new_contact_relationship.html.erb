@@ -1,4 +1,4 @@
-<h1>Assign new contact for <%= @student %></h1>
+<h1>New contact for <%= @student %></h1>
 <%= form_with(
     scope: @student_contact,
     url: assign_contact_relationship_path(@student),
@@ -39,6 +39,6 @@
   <%= form.hidden_field :student_id, value: @student.id %>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Assign new contact" %>
   </div>
 <% end %>

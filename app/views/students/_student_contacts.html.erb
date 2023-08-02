@@ -27,7 +27,7 @@
   <% else %>
     <p>No contacts yet</p>
   <% end %>
-  <%= link_to "Assign new contact", new_contact_relationship_path(@student) %>
+  <%= link_to "Add contact for #{student}", new_contact_relationship_path(@student) %>
 </div>
 <!--   
 -> Is it required that a student have a primary contact? Yes. Its not important. Just useful for us.
