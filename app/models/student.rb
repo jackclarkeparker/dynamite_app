@@ -36,14 +36,6 @@ class Student < ApplicationRecord
     self.keyboard == other_student.keyboard
   end
 
-  def primary_contact
-    student_contacts.find(&:primary_contact)&.contact
-  end
-
-  def primary_contact_relation
-    student_contacts.find(&:primary_contact)&.contact_relation
-  end
-
   def contacts
     student_contacts.map(&:contact)
   end

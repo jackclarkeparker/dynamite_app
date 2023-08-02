@@ -1,16 +1,15 @@
 module StudentsHelper
-  def try_display_primary_contact_relation(student)
-    relation = student.primary_contact_relation
-    if relation && relation.length > 0
-      ' (' + student.primary_contact_relation + ')'
-    end
+  def try_display_relation(student_contact)
+    relation = student_contact.contact_relation
+    " (#{relation})" if relation && relation.length > 0
   end
 
   def primary_contact_field(student)
-    if student.primary_contact
-      link_to(student.primary_contact) + content_tag(
+    primary_student_contact = student.student_contacts.find(&:primary_contact)
+    if primary_student_contact
+      link_to(primary_student_contact.contact) + content_tag(
         :span,
-        try_display_primary_contact_relation(student),
+        try_display_relation(primary_student_contact),
         class: "primary-contact-relation"
       )
     else
