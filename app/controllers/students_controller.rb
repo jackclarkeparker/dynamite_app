@@ -74,6 +74,11 @@ class StudentsController < ApplicationController
     end
   end
 
+  # GET /students/1/new_contact
+  def new_contact
+    @student_contact = StudentContact.new(student_id: @student.id)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student

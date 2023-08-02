@@ -72,6 +72,28 @@ module SelectHelper
     )
   end
 
+  def contacts_select(student:, student_contact:)
+    excluded_ids = student.student_contacts.map(&:contact_id)
+    contacts = Contact.order(:first_name).reject { |c| excluded_ids.include?(c.id) }
+    select_components = contacts.map do |contact|
+      [contact.full_name, contact.id]
+    end.unshift(['Contact'])
+
+    options_for_select(
+      select_components,
+      selected: default_select_option(:contact_id, student_contact, 'Contact'),
+      disabled: 'Contact'
+    )
+  end
+
+  def boolean_select(entity, boolean_for:)
+    options_for_select(
+      ['Choose one', ['Yes', true], ['No', false]],
+      selected: default_select_option(boolean_for, entity, 'Choose one'),
+      disabled: 'Choose one'
+    )
+  end
+
   private
 
     def default_select_option(attribute, entity, simple_string)

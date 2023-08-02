@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root "regions#index"
 
   get "/lesson_booker", to: 'lessons#booker'
+  get "/students/:id/new_contact", to: 'students#new_contact'
 
   # Some ideas for routes when implementing the LessonBookerController (Not BookingController)
   # get "/lesson_booker", to: 'lesson_booker#lesson_booker'
