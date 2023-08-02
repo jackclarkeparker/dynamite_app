@@ -1,2 +1,44 @@
-<h1>StudentContacts#add_contact</h1>
-<p>Find me in app/views/student_contacts/add_contact.html.erb</p>
+<h1>Assign new contact for <%= @student %></h1>
+<%= form_with(
+    scope: @student_contact,
+    url: student_url(@student) + '/assign_contact',
+    method: 'post'
+  ) do |form| %>
+  <% if @student_contact.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@student_contact.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+        <% @student_contact.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :contact, style: "display: block" %>
+    <%= form.select :contact_id, contacts_select(student: @student, student_contact: @student_contact) %>
+  </div>
+
+  <div>
+    <%= form.label :relationship, style: "display: block" %>
+    <%= form.text_field :contact_relation %>
+  </div>
+
+  <div>
+    <%= form.label "Primary contact for #{@student}?", style: "display: block" %>
+    <%= form.select :primary_contact, boolean_select(@student_contact, boolean_for: :primary_contact) %>
+  </div>
+
+  <div>
+    <%= form.label "Invoice payer for #{@student}?", style: "display: block" %>
+    <%= form.select :account_holder, boolean_select(@student_contact, boolean_for: :account_holder) %>
+  </div>
+
+  <%= form.hidden_field :student_id, value: @student.id %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
