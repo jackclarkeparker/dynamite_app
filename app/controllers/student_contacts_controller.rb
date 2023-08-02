@@ -1,6 +1,6 @@
 class StudentContactsController < ApplicationController
   before_action :set_student_with_student_contacts, only: [
-    :new_contact_relationship, :assign_contact_relationship,
+    :new_contact_relationship, :create_contact_relationship,
     :edit_contact_relationship, :update_contact_relationship,
   ]
 
@@ -23,7 +23,7 @@ class StudentContactsController < ApplicationController
   end
 
   # POST /students/1/assign_contact
-  def assign_contact_relationship
+  def create_contact_relationship
     @student_contact = StudentContact.new(student_contact_params)
 
     respond_to do |format|
@@ -31,7 +31,7 @@ class StudentContactsController < ApplicationController
         format.html { redirect_to student_url(@student), notice: "Contact was successfully added." }
         format.json { render :show, status: :created, location: @student }
       else
-        format.html { render :new_contact, status: :unprocessable_entity }
+        format.html { render :new_contact_relationship, status: :unprocessable_entity }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end

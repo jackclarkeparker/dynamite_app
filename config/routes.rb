@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # StudentContacts routes
   get '/students/:student_id/contacts/new', to: 'student_contacts#new_contact_relationship', as: :new_contact_relationship
-  post '/students/:student_id/contacts', to: 'student_contacts#assign_contact_relationship', as: :assign_contact_relationship
+  post '/students/:student_id/contacts', to: 'student_contacts#create_contact_relationship', as: :create_contact_relationship
 
   get '/students/:student_id/contacts/:contact_id/edit', to: 'student_contacts#edit_contact_relationship', as: :edit_contact_relationship
   patch '/students/:student_id/contacts/:contact_id', to: 'student_contacts#update_contact_relationship', as: :update_contact_relationship
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   delete '/students/:student_id/contacts/:contact_id', to: 'student_contacts#destroy_contact_relationship'
 
   get '/contacts/:contact_id/students/new', to: 'student_contacts#new_student_relationship', as: :new_student_relationship
-  post '/contacts/:contact_id/students', to: 'student_contacts#assign_student_relationship', as: :assign_student_relationship
+  post '/contacts/:contact_id/students', to: 'student_contacts#create_student_relationship', as: :create_student_relationship
 
   get '/contacts/:contact_id/students/:student_id/edit', to: 'student_contacts#edit_student_relationship', as: :edit_student_relationship
   patch '/contacts/:contact_id/students/:student_id', to: 'student_contacts#update_student_relationship', as: :update_student_relationship
