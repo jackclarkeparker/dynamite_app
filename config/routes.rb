@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get "/lesson_booker", to: 'lessons#booker'
   get "/students/:id/new_contact", to: 'students#new_contact'
+  post "/students/:id/assign_contact", to: 'students#assign_contact'
 
   # Some ideas for routes when implementing the LessonBookerController (Not BookingController)
   # get "/lesson_booker", to: 'lesson_booker#lesson_booker'
