@@ -2,11 +2,6 @@
   <h2>Contacts</h2>
   <% if student.contacts %>
     <table>
-      <thead>
-        <tr>
-          <td>Name</td><td>Relation</td>
-        </tr>
-      </thead>
       <tbody>
         <% student.student_contacts.each_with_index do |student_contact, i| %>
           <tr>

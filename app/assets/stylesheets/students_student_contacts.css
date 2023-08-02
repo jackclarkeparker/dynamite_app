@@ -17,11 +17,6 @@ div.show-student div.student-contacts table {
   margin: 0 0 0.6rem 0;
 }
 
-div.show-student div.student-contacts table thead td {
-  font-size: 1.25rem;
-  padding: 0.5rem;
-}
-
 div.show-student div.student-contacts table tbody {
   font-weight: lighter;
 }
@@ -32,4 +27,8 @@ div.show-student div.student-contacts table tbody td {
   border-width: 0.11rem 0 0 0;
   border-style: solid;
   border-color: grey;
+}
+
+div.show-student div.student-contacts table tbody tr:first-of-type td {
+  border-width: 0;
 }
