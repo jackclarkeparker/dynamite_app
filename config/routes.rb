@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'student_contacts/add_contact'
+  get 'student_contacts/add_student'
+  get 'student_contacts/edit_contact'
+  get 'student_contacts/edit_student'
   resources :contacts
   resources :students
   resources :regions
