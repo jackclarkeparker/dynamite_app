@@ -1,3 +1,7 @@
+div.show-instance {
+  padding: 2rem 0 1rem;
+}
+
 div.instance_details {
   margin: 0 0 1rem;
   background-color: #8ec5df;
