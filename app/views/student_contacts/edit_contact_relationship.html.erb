@@ -1,7 +1,10 @@
 <h1>Edit '<%= @student_contact.contact %>' contact relationship with <%= @student %></h1>
 <%= form_with(
     scope: @student_contact,
-    url: update_contact_relationship_path(@student_contact),
+    url: update_contact_relationship_path(
+      student_id: @student_contact.student_id,
+      contact_id: @student_contact.contact_id,
+    ),
     method: 'patch'
   ) do |form| %>
   <% if @student_contact.errors.any? %>
@@ -40,5 +43,8 @@
 <% end %>
 
 <%= button_to "Remove contact relationship",
-              update_contact_relationship_path(@student_contact),
+              update_contact_relationship_path(
+                student_id: @student_contact.student_id,
+                contact_id: @student_contact.contact_id,
+              ),
               method: :delete %>
