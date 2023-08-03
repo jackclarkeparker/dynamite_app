@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'lesson_members/_new_lesson_member'
+  get 'lesson_member/_new_lesson_member'
   # StudentContacts routes
   get '/students/:student_id/contacts/new', to: 'student_contacts#new_contact_relationship', as: :new_contact_relationship
   post '/students/:student_id/contacts', to: 'student_contacts#create_contact_relationship', as: :create_contact_relationship
