@@ -25,10 +25,10 @@ form input[type="submit"], form button {
 }
 
 form input[type="submit"] {
-  margin: 1.5rem 0 1.5rem;
+  margin: 1.5rem 0;
 }
 
-form button {
+form input[type="hidden"][value="delete"] + button {
   margin-top: 14rem;
 }
 
