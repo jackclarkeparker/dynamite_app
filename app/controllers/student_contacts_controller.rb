@@ -1,4 +1,8 @@
 class StudentContactsController < ApplicationController
+  before_action :set_student_contact, only: [
+    :edit_contact_relationship, :update_contact_relationship, :destroy_contact_relationship,
+    :edit_student_relationship, :update_student_relationship, :destroy_student_relationship,
+  ]
   before_action :set_student_with_student_contacts, only: [
     :new_contact_relationship, :create_contact_relationship,
     :edit_contact_relationship, :update_contact_relationship,
@@ -11,10 +15,6 @@ class StudentContactsController < ApplicationController
 
   # GET /students/1/contacts/1/edit
   def edit_contact_relationship
-    @student_contact = StudentContact.find_by(
-      student_id: params[:student_id],
-      contact_id: params[:contact_id],
-    )
   end
 
   # POST /students/1/contacts
@@ -34,10 +34,29 @@ class StudentContactsController < ApplicationController
 
   # PATCH /students/1/contacts/1
   def update_contact_relationship
+    respond_to do |format|
+      if StudentContact.new(student_contact_params) == @student_contact
+        format.html do
+          redirect_to student_url(@student_contact.student_id), alert: 'No changes made to contact relationship.'
+        end
+      elsif @student_contact.update(student_contact_params)
+        format.html { redirect_to student_url(@student_contact.student_id), notice: "Contact was successfully updated." }
+        format.json { render :show, status: :ok, location: @student_contact.student }
+      else
+        format.html { render :edit_contact_relationship, status: :unprocessable_entity }
+        format.json { render json: @student_contact.student.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /students/1/contacts/1
   def destroy_contact_relationship
+    @student_contact.destroy
+
+    respond_to do |format|
+      format.html { redirect_to student_url(@student_contact.student), notice: "Contact relationship was successfully removed." }
+      format.json { head :no_content }
+    end
   end
 
   # GET /contacts/1/students/new
@@ -61,6 +80,10 @@ class StudentContactsController < ApplicationController
   end
 
   private
+
+    def set_student_contact
+      @student_contact = StudentContact.find_by(student_id: params[:student_id], contact_id: params[:contact_id])
+    end
 
     def set_student_with_student_contacts
       @student = Student.includes(:student_contacts).find(params[:student_id])
