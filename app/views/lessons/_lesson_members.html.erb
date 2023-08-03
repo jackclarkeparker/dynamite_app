@@ -1,0 +1,29 @@
+<div class="lesson-members">
+  <h2>Lesson Members</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Practice Log</td>
+        <td>Notes</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% lesson.lesson_members.each do |lesson_member| %>
+        <tr>
+          <td><%= link_to_lesson_member_student(lesson_member) %></td>
+          <td>
+            <%= button_to 'remove from lesson',
+                edit_contact_relationship_path(
+                  lesson_id: lesson_member.lesson_id,
+                  student_id: lesson_member.student_id,
+                ) %>
+          </td>
+          <td>lesson_member.student.practice_log</td>
+          <td>Notes</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "Add student to lesson", new_lesson_member_path(lesson) %>
+</div>

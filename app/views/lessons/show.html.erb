@@ -1,8 +1,17 @@
-<%= render @lesson %>
+<h1 class="lesson-heading"><%= @lesson %></h1>
 
-<div>
-  <%= link_to "Edit this lesson", edit_lesson_path(@lesson) %> |
-  <%= link_to "Back to lessons", lessons_path %>
+<div class="show-instance show-student row">
+  <div class="col">
+    <%= render partial: 'layouts/instance_details', locals: { instance: @lesson } %>
 
-  <%= button_to "Destroy this lesson", @lesson, method: :delete %>
+    <div>
+      <%= link_to "Edit this lesson", edit_lesson_path(@lesson) %> |
+      <%= link_to "Back to lessons", lessons_path %>
+
+      <%= button_to "Destroy this lesson", @lesson, method: :delete %>
+    </div>
+  </div>
+  <div class="col-7">
+    <%= render partial: 'lesson_members', locals: { lesson: @lesson } %>
+  </div>
 </div>
