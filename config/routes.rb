@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   # LessonMembers routes
   get 'lessons/:lesson_id/lesson_members/new', to: 'lesson_members#new_lesson_member', as: :new_lesson_member
-  delete 'lessons/:lesson_id/lesson_members/:lesson_member_id', to: 'lesson_members#destroy_lesson_member', as: :lesson_member
+  post 'lessons/:lesson_id/lesson_members', to: 'lesson_members#create_lesson_member', as: :create_lesson_member
+  delete 'lessons/:lesson_id/lesson_members/:student_id', to: 'lesson_members#destroy_lesson_member', as: :lesson_member
 
   # StudentContacts routes
   get '/students/:student_id/contacts/new', to: 'student_contacts#new_contact_relationship', as: :new_contact_relationship
