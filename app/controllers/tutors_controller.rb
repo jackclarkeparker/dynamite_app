@@ -5,7 +5,7 @@ class TutorsController < ApplicationController
 
   # GET /tutors or /tutors.json
   def index
-    @tutors = Tutor.all.where(valid_until: ApplicationRecord::FUTURE_EPOCH)
+    @tutors = Tutor.active_tutors
   end
 
   # GET /tutors/1 or /tutors/1.json

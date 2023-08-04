@@ -5,6 +5,8 @@ class Tutor < ApplicationRecord
   belongs_to :region, optional: true
   has_many :lessons
 
+  scope :active_tutors, -> { where(valid_until: FUTURE_EPOCH) }
+
   validates :first_name, :last_name, :email_address,
             :phone_number, :delivery_address,
             :entity_id, presence: true
