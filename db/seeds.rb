@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 StudentContact.delete_all
+LessonMember.delete_all
 Contact.delete_all
 Student.delete_all
 Lesson.delete_all
@@ -58,7 +59,7 @@ andy, natalie = Tutor.create!([
   },
 ])
 
-Lesson.create!([
+lessons = Lesson.create!([
   {
     tutor_id: andy.id,
     venue_id: miramar.id,
@@ -307,5 +308,13 @@ StudentContact.create!([
     contact_relation: 'Mum',
     primary_contact: true,
     account_holder: true,
+  },
+])
+
+LessonMember.create!([
+  {
+    lesson_id: lessons[0].id,
+    student_id: joel.id,
+    valid_until: ApplicationRecord::FUTURE_EPOCH,
   },
 ])
