@@ -1,4 +1,4 @@
-div.student-contacts {
+div.lesson-members {
   margin: 0 0 1rem;
   background-color: lightcyan;
   border: 0.3rem solid black;
@@ -6,7 +6,7 @@ div.student-contacts {
   padding: 1.6rem;
 }
 
-div.student-contacts table {
+div.lesson-members table {
   table-layout: auto;
   width: 100%;
   background-color: #D7DFE5;
@@ -17,27 +17,34 @@ div.student-contacts table {
   margin: 0 0 0.6rem 0;
 }
 
-div.student-contacts table td {
+div.lesson-members table td {
   width: auto;
 }
 
-div.student-contacts table td:first-of-type {
+div.lesson-members table td:first-of-type {
   padding: 0.5rem 1rem;
 }
 
-div.student-contacts table thead td {
+div.lesson-members table thead td {
   font-size: 1.25rem;
   padding: 0.5rem;
 }
 
-div.student-contacts table tbody {
+div.lesson-members table tbody {
   font-size: 1.18rem;
   font-weight: 200;
 }
 
-div.student-contacts table tbody td {
+div.lesson-members table tbody td {
   padding: 0.5rem;
   border-width: 0.11rem 0 0 0;
   border-style: solid;
   border-color: grey;
+}
+
+div.lesson-members form input[type="hidden"][value="delete"] + button {
+  margin: 0;
+  width: 10rem;
+  height: 2.5rem;
+  font-size: 1rem;
 }
