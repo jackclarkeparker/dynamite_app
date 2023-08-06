@@ -1,12 +1,32 @@
-<h1>LessonMember#_new_lesson_members</h1>
-<p>Find me in app/views/lesson_members/_new_lesson_member.html.erb</p>
-<p>Probably will be a form_with.</p>
-<p>How will I render this in the table?</p>
-<p>Won't know till it's built.</p>
-<p>Would like to use turbo_streams</p>
-<p>
-  Would need to have them in place for both the table, and for the button to
-  add a new lesson_member. The table would update in real time when a new member
-  was added, without requiring a full page update. The button for adding a new
-  member would create a new \<tr\>
-</p>
+<h1>New lesson member</h1>
+
+<%= form_with(
+    scope: @lesson_member,
+    url: create_lesson_member_path(@lesson_id),
+    method: 'post'
+  ) do |form| %>
+  <% if @lesson_member.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@lesson_member.errors.count, "error") %> prohibited this lesson_member from being saved:</h2>
+
+      <ul>
+        <% @lesson_member.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :student, style: "display: block" %>
+    <%= form.select :student_id, students_select(lesson_id: @lesson_id, lesson_member: @lesson_member) %>
+  </div>
+
+  <%= form.hidden_field :lesson_id, value: @lesson_id %>
+
+  <div>
+    <%= form.submit "Add student to lesson" %>
+  </div>
+<% end %>
+
+<%= link_to "Back to lesson", lesson_path(@lesson_id) %>
