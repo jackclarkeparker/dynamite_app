@@ -9,21 +9,24 @@
       </tr>
     </thead>
     <tbody>
-      <% lesson.lesson_members.each do |lesson_member| %>
+      <% @lesson_members.each do |l_member| %>
         <tr>
-          <td><%= link_to_lesson_member_student(lesson_member) %></td>
+          <td>
+            <%= link_to l_member.student, student_path(l_member.student) %>
+          </td>
+          <td>Link to practice log</td>
+          <td>Link to notes</td>
           <td>
             <%= button_to 'remove from lesson',
-                edit_contact_relationship_path(
-                  lesson_id: lesson_member.lesson_id,
-                  student_id: lesson_member.student_id,
-                ) %>
+                lesson_member_path(
+                  lesson_id: l_member.lesson_id,
+                  student_id: l_member.student_id,
+                ),
+                method: :delete %>
           </td>
-          <td>lesson_member.student.practice_log</td>
-          <td>Notes</td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= link_to "Add student to lesson", new_lesson_member_path(lesson) %>
+  <%= link_to "Add student to lesson", new_lesson_member_path(@lesson) %>
 </div>
