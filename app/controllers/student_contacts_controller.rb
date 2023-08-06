@@ -54,7 +54,7 @@ class StudentContactsController < ApplicationController
     @student_contact.destroy
 
     respond_to do |format|
-      format.html { redirect_to student_url(@student_contact.student), notice: "Contact relationship was successfully removed." }
+      format.html { redirect_to student_url(@student_contact.student_id), notice: "Contact relationship successfully removed." }
       format.json { head :no_content }
     end
   end
@@ -82,7 +82,10 @@ class StudentContactsController < ApplicationController
   private
 
     def set_student_contact
-      @student_contact = StudentContact.find_by(student_id: params[:student_id], contact_id: params[:contact_id])
+      @student_contact = StudentContact.find_by({
+        student_id: params[:student_id],
+        contact_id: params[:contact_id],
+      })
     end
 
     def set_student_with_student_contacts

@@ -6,7 +6,7 @@
   ) do |form| %>
   <% if @student_contact.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(@student_contact.errors.count, "error") %> prohibited this student from being saved:</h2>
+      <h2><%= pluralize(@student_contact.errors.count, "error") %> prohibited this contact relationship from being saved:</h2>
 
       <ul>
         <% @student_contact.errors.each do |error| %>

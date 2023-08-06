@@ -18,6 +18,7 @@ module StudentsHelper
   end
 
   def link_to_contact_of_student_contact(student_contact)
-    link_to(student_contact.contact, contact_path(student_contact.contact))
+    contact = student_contact.contact
+    link_to(contact, contact_path(contact))
   end
 end
