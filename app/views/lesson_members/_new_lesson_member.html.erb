@@ -1,5 +1,4 @@
 <h1>New lesson member</h1>
-
 <%= form_with(
     scope: @lesson_member,
     url: create_lesson_member_path(@lesson_id),
@@ -7,7 +6,7 @@
   ) do |form| %>
   <% if @lesson_member.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(@lesson_member.errors.count, "error") %> prohibited this lesson_member from being saved:</h2>
+      <h2><%= pluralize(@lesson_member.errors.count, "error") %> prohibited this lesson member from being saved:</h2>
 
       <ul>
         <% @lesson_member.errors.each do |error| %>

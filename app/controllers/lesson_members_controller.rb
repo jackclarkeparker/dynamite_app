@@ -19,7 +19,7 @@ class LessonMembersController < ApplicationController
         format.html { redirect_to lesson_url(@lesson_id), notice: "Student added to lesson." }
         format.json { render :show, status: :created, location: @lesson_member }
       else
-        format.html { render partial: 'new_lesson_member', status: :unprocessable_entity }
+        format.html { render '_new_lesson_member', status: :unprocessable_entity }
         format.json { render json: @lesson_member.errors, status: :unprocessable_entity }
       end
     end
