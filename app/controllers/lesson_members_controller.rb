@@ -29,7 +29,6 @@ class LessonMembersController < ApplicationController
     @lesson_member = LessonMember.find_by({
       lesson_id: params[:lesson_id],
       student_id: params[:student_id],
-      valid_until: ApplicationRecord::FUTURE_EPOCH,
     })
     decomission_old_version(@lesson_member, decomission_timestamp: Time.now)
 

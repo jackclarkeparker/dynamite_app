@@ -3,9 +3,9 @@
 joel_miramar:
   lesson: miramar_lesson
   student: joel
-  valid_until: ApplicationRecord::FUTURE_EPOCH
+  valid_until: <%= ApplicationRecord::FUTURE_EPOCH %>
 
 alice_miramar:
   lesson: miramar_lesson
   student: alice
-  valid_until: ApplicationRecord::FUTURE_EPOCH
+  valid_until: <%= ApplicationRecord::FUTURE_EPOCH %>
