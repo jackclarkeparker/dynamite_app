@@ -86,6 +86,26 @@ module SelectHelper
     )
   end
 
+  def students_select(lesson_id:, lesson_member:)
+    current_members = LessonMember.where(
+      lesson_id: lesson_id,
+      valid_until: ApplicationRecord::FUTURE_EPOCH,
+    )
+
+    excluded_ids = current_members.pluck(:student_id)
+    students = Student.order(:first_name).reject do |s|
+      excluded_ids.include?(s.id)
+    end
+
+    select_components = students.pluck(:full_name, :id).unshift(['Student'])
+
+    options_for_select(
+      select_components,
+      selected: default_select_option(:student_id, lesson_member, 'Student'),
+      disabled: 'Student'
+    )
+  end
+
   def boolean_select(entity, boolean_for:)
     options_for_select(
       ['Choose one', ['Yes', true], ['No', false]],
