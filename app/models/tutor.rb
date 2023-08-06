@@ -5,7 +5,7 @@ class Tutor < ApplicationRecord
   belongs_to :region, optional: true
   has_many :lessons
 
-  scope :active_tutors, -> { where(valid_until: FUTURE_EPOCH) }
+  default_scope { where(valid_until: FUTURE_EPOCH) }
 
   validates :first_name, :last_name, :email_address,
             :phone_number, :delivery_address,
@@ -18,7 +18,7 @@ class Tutor < ApplicationRecord
   }, allow_blank: true
   validates_with UniqueTutorPhoneAndEmailValidator
 
-  before_create :set_full_name_and_valid_until
+  before_create :set_full_name
 
   def ==(other_tutor)
     self.preferred_name == other_tutor.preferred_name &&
@@ -39,8 +39,7 @@ class Tutor < ApplicationRecord
 
   private
 
-    def set_full_name_and_valid_until
+    def set_full_name
       self.full_name = "#{self.first_name} #{self.last_name}"
-      self.valid_until = ApplicationRecord::FUTURE_EPOCH
     end
 end

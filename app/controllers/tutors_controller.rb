@@ -5,7 +5,7 @@ class TutorsController < ApplicationController
 
   # GET /tutors or /tutors.json
   def index
-    @tutors = Tutor.active_tutors
+    @tutors = Tutor.all
   end
 
   # GET /tutors/1 or /tutors/1.json
