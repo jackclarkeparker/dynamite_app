@@ -1,13 +1,12 @@
-div.show-student div.student-contacts {
+div.student-contacts {
   margin: 0 0 1rem;
-/*  background-color: #8ec5df;*/
   background-color: lightcyan;
   border: 0.3rem solid black;
   border-radius: 2rem;
   padding: 1.6rem;
 }
 
-div.show-student div.student-contacts table {
+div.student-contacts table {
   table-layout: auto;
   width: 100%;
   font-size: 1.18rem;
@@ -19,24 +18,24 @@ div.show-student div.student-contacts table {
   margin: 0 0 0.6rem 0;
 }
 
-div.show-student div.student-contacts table td {
+div.student-contacts table td {
   width: auto;
 }
 
-div.show-student div.student-contacts table td:first-of-type {
+div.student-contacts table td:first-of-type {
   padding: 0.5rem 1rem;
 }
 
-div.show-student div.student-contacts table thead td {
+div.student-contacts table thead td {
   font-size: 1.25rem;
   padding: 0.5rem;
 }
 
-div.show-student div.student-contacts table tbody {
+div.student-contacts table tbody {
   font-weight: 200;
 }
 
-div.show-student div.student-contacts table tbody td {
+div.student-contacts table tbody td {
 /*  width: 10rem;*/
   padding: 0.5rem;
   border-width: 0.11rem 0 0 0;
