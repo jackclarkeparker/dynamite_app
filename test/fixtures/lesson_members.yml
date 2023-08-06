@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# one:
-#   lesson: one
-#   student: one
-#   valid_until: 2023-07-29 03:14:11
+joel_miramar:
+  lesson: miramar_lesson
+  student: joel
+  valid_until: ApplicationRecord::FUTURE_EPOCH
 
-# two:
-#   lesson: two
-#   student: two
-#   valid_until: 2023-07-29 03:14:11
+alice_miramar:
+  lesson: miramar_lesson
+  student: alice
+  valid_until: ApplicationRecord::FUTURE_EPOCH
