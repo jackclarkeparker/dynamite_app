@@ -6,7 +6,7 @@ class LessonMembersController < ApplicationController
     @lesson_id = params[:lesson_id]
 
     respond_to do |format|
-      format.html { render partial: 'new_lesson_member' }
+      format.html { render '_new_lesson_member' }
     end
   end
 
