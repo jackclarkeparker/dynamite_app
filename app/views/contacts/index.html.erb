@@ -1,12 +1,28 @@
 <h1>Contacts</h1>
 
 <div id="contacts">
-  <% @contacts.each do |contact| %>
-    <%= render contact %>
-    <p>
-      <%= link_to "Show this contact", contact %>
-    </p>
-  <% end %>
+  <table>
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Phone</td>
+        <td>Invoices</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @contacts.each do |contact| %>
+        <tr>
+          <td><%= contact %></td>
+          <td><%= contact.email_address %></td>
+          <td><%= contact.phone_number %></td>
+          <td>Invoices Link</td>
+          <td><%= link_to "Details", contact %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <%= link_to "New contact", new_contact_path %>

@@ -1,0 +1,39 @@
+div#contacts {
+  margin-bottom: 1rem;
+}
+
+div#contacts table {
+  table-layout: auto;
+  width: 100%;
+  background-color: #E8B8BD;
+  border: 0.14rem solid #311F0C;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 1rem;
+}
+
+div#contacts table td {
+  width: auto;
+}
+
+div#contacts table td:first-of-type {
+  padding-left: 1rem;
+}
+
+div#contacts table thead td {
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 0.5rem;
+}
+
+div#contacts table tbody {
+  font-size: 1.18rem;
+  font-weight: 300;
+}
+
+div#contacts table tbody td {
+  padding: 0.5rem;
+  border-top-width: 0.11rem;
+  border-style: solid;
+  border-color: grey;
+}
