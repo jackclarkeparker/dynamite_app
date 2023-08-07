@@ -1,8 +1,13 @@
-<%= render @region %>
+<h1><%= @region %></h1>
+<div class="show-instance row">
+  <div class="col">    
+    <%= render partial: 'layouts/instance_details', locals: { instance: @region } %>
 
-<div>
-  <%= link_to "Edit this region", edit_region_path(@region) %> |
-  <%= link_to "Back to regions", regions_path %>
+    <div>
+      <%= link_to "Edit this region", edit_region_path(@region) %> |
+      <%= link_to "Back to regions", regions_path %>
 
-  <%= button_to "Destroy this region", @region, method: :delete %>
+      <%= button_to "Destroy this region", @region, method: :delete %>
+    </div>
+  </div>
 </div>
