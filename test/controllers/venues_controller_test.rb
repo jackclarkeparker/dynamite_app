@@ -172,6 +172,12 @@ class VenuesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy venue" do
+    joel_miramar = lesson_members(:joel_miramar)
+    delete lesson_member_url({
+      lesson_id: joel_miramar.lesson_id,
+      student_id: joel_miramar.student_id,
+    })
+
     delete lesson_url(lessons(:miramar_lesson))
 
     assert_difference("Venue.count", -1) do
