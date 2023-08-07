@@ -6,10 +6,12 @@ class Contact < ApplicationRecord
 
   has_many :student_contacts
 
+  default_scope { where(valid_until: FUTURE_EPOCH)}
+
   validates :first_name, :email_address, presence: true
   validate :validate_region_id
 
-  before_create :set_full_name_and_valid_until
+  before_create :set_full_name
 
   def ==(other_contact)
     region_id      == other_contact.region_id &&
@@ -32,9 +34,8 @@ class Contact < ApplicationRecord
 
   private
 
-    def set_full_name_and_valid_until
+    def set_full_name
       self.full_name = first_name
       self.full_name += " #{last_name}" if last_name && last_name.length > 0 
-      self.valid_until = ApplicationRecord::FUTURE_EPOCH
     end
 end

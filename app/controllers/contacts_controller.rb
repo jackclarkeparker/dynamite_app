@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts or /contacts.json
   def index
-    @contacts = Contact.all.where(valid_until: ApplicationRecord::FUTURE_EPOCH)
+    @contacts = Contact.all
   end
 
   # GET /contacts/1 or /contacts/1.json
