@@ -30,4 +30,10 @@ module RelatedModelValidator
         errors.add(:contact, 'must be selected')
       end
     end
+
+    def validate_lesson_id
+      if !Lesson.exists?(id: lesson_id)
+        errors.add(:lesson, 'must be selected')
+      end
+    end
 end
