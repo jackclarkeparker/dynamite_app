@@ -15,10 +15,8 @@ class LessonsController < ApplicationController
   # GET /lessons/1 or /lessons/1.json
   def show
     @lesson_members = LessonMember.includes(:student)
-                                  .where({
-                                    valid_until: ApplicationRecord::FUTURE_EPOCH,
-                                    lesson_id: @lesson.id
-                                  }).order(
+                                  .where(lesson_id: @lesson.id)
+                                  .order(
                                     "students.last_name",
                                     "students.first_name"
                                   )
