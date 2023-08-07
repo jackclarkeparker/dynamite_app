@@ -5,6 +5,7 @@ class Lesson < ApplicationRecord
   belongs_to :venue, optional: true
 
   has_many :lesson_members
+  before_destroy :destroy_inactive_lesson_members
 
   before_validation :set_end_time
 
@@ -92,5 +93,13 @@ class Lesson < ApplicationRecord
       if is_a_clash
         errors.add(:venue, "is already being used during this timeslot")
       end
+    end
+
+    def destroy_inactive_lesson_members
+      inactives = LessonMember.unscoped.where(
+        "valid_until != ?", FUTURE_EPOCH
+      ).where(lesson_id: self.id)
+
+      inactives.each(&:destroy)
     end
 end
