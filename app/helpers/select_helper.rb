@@ -1,8 +1,6 @@
 module SelectHelper
   def tutors_select(entity)
-    tutors = Tutor.order(:first_name)
-                  .where(valid_until: ApplicationRecord::FUTURE_EPOCH)
-    select_components = tutors.map do |tutor|
+    select_components = Tutor.order(:first_name).map do |tutor|
       [tutor.preferred_name, tutor.id]
     end.unshift(['Tutor'])
 
@@ -87,12 +85,8 @@ module SelectHelper
   end
 
   def students_select(lesson_id:, lesson_member:)
-    current_members = LessonMember.where(
-      lesson_id: lesson_id,
-      valid_until: ApplicationRecord::FUTURE_EPOCH,
-    )
+    excluded_ids = LessonMember.where(lesson_id: lesson_id).pluck(:student_id)
 
-    excluded_ids = current_members.pluck(:student_id)
     students = Student.order(:first_name).reject do |s|
       excluded_ids.include?(s.id)
     end
