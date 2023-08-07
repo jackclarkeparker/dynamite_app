@@ -8,7 +8,7 @@
 
 StudentContact.delete_all
 LessonMember.unscoped.delete_all
-Contact.delete_all
+Contact.unscoped.delete_all
 Student.delete_all
 Lesson.delete_all
 Tutor.unscoped.delete_all
