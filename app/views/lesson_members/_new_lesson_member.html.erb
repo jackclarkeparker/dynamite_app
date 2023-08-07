@@ -1,7 +1,7 @@
 <h1>New lesson member</h1>
 <%= form_with(
     scope: @lesson_member,
-    url: create_lesson_member_path(@lesson_id),
+    url: lesson_members_path(@lesson_id),
     method: 'post'
   ) do |form| %>
   <% if @lesson_member.errors.any? %>
