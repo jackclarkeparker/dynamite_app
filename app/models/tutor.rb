@@ -1,6 +1,7 @@
 class Tutor < ApplicationRecord
   include PhoneNumberFormatting
   include RelatedModelValidator
+  include EntityHelper
 
   belongs_to :region, optional: true
   has_many :lessons
@@ -8,8 +9,7 @@ class Tutor < ApplicationRecord
   default_scope { where(valid_until: FUTURE_EPOCH) }
 
   validates :first_name, :last_name, :email_address,
-            :phone_number, :delivery_address,
-            :entity_id, presence: true
+            :phone_number, :delivery_address, presence: true
   validate :validate_region_id
 
   validates :phone_number, format: {
@@ -18,7 +18,7 @@ class Tutor < ApplicationRecord
   }, allow_blank: true
   validates_with UniqueTutorPhoneAndEmailValidator
 
-  before_create :set_full_name
+  before_create :set_full_name, :set_entity_id
 
   def ==(other_tutor)
     self.preferred_name == other_tutor.preferred_name &&

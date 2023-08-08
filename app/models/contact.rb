@@ -1,6 +1,7 @@
 class Contact < ApplicationRecord
   include RelatedModelValidator
   include PhoneNumberFormatting
+  include EntityHelper
 
   belongs_to :region, optional: true
 
@@ -11,7 +12,7 @@ class Contact < ApplicationRecord
   validates :first_name, :email_address, presence: true
   validate :validate_region_id
 
-  before_create :set_full_name
+  before_create :set_full_name, :set_entity_id
 
   def ==(other_contact)
     region_id      == other_contact.region_id &&

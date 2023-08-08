@@ -24,7 +24,6 @@ class TutorsController < ApplicationController
   # POST /tutors or /tutors.json
   def create
     @tutor = Tutor.new(tutor_params)
-    set_entity_id(@tutor)
 
     respond_to do |format|
       if @tutor.save

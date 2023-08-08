@@ -24,7 +24,6 @@ class ContactsController < ApplicationController
   # POST /contacts or /contacts.json
   def create
     @contact = Contact.new(contact_params)
-    set_entity_id(@contact)
 
     respond_to do |format|
       if @contact.save
@@ -88,6 +87,6 @@ class ContactsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:entity_id, :first_name, :last_name, :full_name, :preferred_name, :email_address, :phone_number, :bank_account, :csc_number, :valid_until, :region_id)
+      params.require(:contact).permit(:first_name, :last_name, :full_name, :preferred_name, :email_address, :phone_number, :bank_account, :csc_number, :valid_until, :region_id)
     end
 end

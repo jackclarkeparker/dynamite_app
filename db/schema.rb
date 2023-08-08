@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_31_053319) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_08_040453) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_31_053319) do
     t.index ["region_id"], name: "index_contacts_on_region_id"
   end
 
+  create_table "entity_id_references", force: :cascade do |t|
+    t.integer "tutor_entity_id", default: 0
+    t.integer "contact_entity_id", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "lesson_members", force: :cascade do |t|
     t.bigint "lesson_id", null: false
     t.bigint "student_id"
@@ -42,8 +49,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_31_053319) do
   end
 
   create_table "lessons", force: :cascade do |t|
-    t.integer "tutor_id", null: false
-    t.integer "venue_id", null: false
+    t.bigint "tutor_id", null: false
+    t.bigint "venue_id", null: false
     t.integer "week_day_index"
     t.time "start_time"
     t.integer "capacity"
