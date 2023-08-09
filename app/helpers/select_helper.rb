@@ -110,10 +110,12 @@ module SelectHelper
 
     def default_select_option(attribute, entity, simple_string)
       entity_symbol = to_symbol(entity)
+      parameter = params[entity_symbol] && params[entity_symbol][attribute]
+      existing_attribute = entity.send(attribute)
 
-      params[entity_symbol] && params[entity_symbol][attribute] ||
-      entity.send(attribute) ||
-      simple_string
+      return parameter          unless parameter.nil?
+      return existing_attribute unless existing_attribute.nil?
+      return simple_string
     end
 
     def to_symbol(entity)
