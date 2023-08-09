@@ -8,6 +8,8 @@ class LessonMembersControllerTest < ActionDispatch::IntegrationTest
   test "should display lesson_members" do
     get lesson_url(@lesson)
 
+    assert_response 200
+
     assert_select 'div.lesson-members' do
       assert_select 'h2', 'Lesson Members'
       assert_select 'table a', 'Joel'
@@ -30,6 +32,15 @@ class LessonMembersControllerTest < ActionDispatch::IntegrationTest
           student_id: students(:alice).id,
         }
       }
+    end
+
+    assert_redirected_to lesson_url(@lesson)
+    follow_redirect!
+
+    assert_select 'p', 'Student added to lesson.'
+
+    assert_select 'div.lesson-members' do
+      assert_select 'table a', 'Alice'
     end
   end
 
