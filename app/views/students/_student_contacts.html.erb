@@ -14,8 +14,12 @@
         <tr>
           <td><%= link_to_contact_of_student_contact(student_contact) %></td>
           <td><%= student_contact.contact_relation %></td>
-          <td><%= student_contact.primary_contact ? '✅' : '❌' %></td>
-          <td><%= student_contact.account_holder ? '✅' : '❌' %></td>
+          <td>
+            <%= display_boolean(student_contact.primary_contact) %>
+          </td>
+          <td>
+            <%= display_boolean(student_contact.account_holder) %>
+          </td>
           <td>
             <%= link_to 'edit relationship',
                 edit_contact_relationship_path(
