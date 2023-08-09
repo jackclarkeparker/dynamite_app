@@ -218,22 +218,29 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'form div.field_with_errors input', ''
   end
 
-  # test "should fail to destroy lesson with associations" do
-  #   assert_difference('Lesson.count', 0) do
-  #     delete lesson_url(@lesson)
-  #   end
+  test "should fail to destroy lesson with associations" do
+    assert_difference('Lesson.count', 0) do
+      delete lesson_url(@lesson)
+    end
 
-  #   assert_redirected_to lesson_url(@lesson)
-  #   follow_redirect!
+    assert_redirected_to lesson_url(@lesson)
+    follow_redirect!
 
-  #   assert_select 'p', "Rejected destruction of lesson '3:00pm Mondays at Miramar Community Centre' because it: - has associated student contacts"
-  # end
+    assert_select 'p', "Rejected destruction of lesson '3:00pm Mondays at Miramar Community Centre' because it: - has associated lesson_members."
+  end
 
-  # test "should destroy lesson" do
-  #   assert_difference("Lesson.count", -1) do
-  #     delete lesson_url(@lesson)
-  #   end
+  test "should destroy lesson" do
+    assert_difference("Lesson.count", 1) do
+      post lessons_url, params: default_lesson_params
+    end
 
-  #   assert_redirected_to lessons_url
-  # end
+    assert_difference("Lesson.count", -1) do
+      delete lesson_url(Lesson.last)
+    end
+
+    assert_redirected_to lessons_url
+    follow_redirect!
+
+    assert_select 'p', 'Lesson was successfully destroyed.'
+  end
 end
