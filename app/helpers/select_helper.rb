@@ -73,9 +73,7 @@ module SelectHelper
   def contacts_select(student:, student_contact:)
     excluded_ids = student.student_contacts.pluck(:contact_id)
     contacts = Contact.order(:first_name).reject { |c| excluded_ids.include?(c.id) }
-    select_components = contacts.map do |contact|
-      [contact.full_name, contact.id]
-    end.unshift(['Contact'])
+    select_components = contacts.pluck(:full_name, :id).unshift(['Contact'])
 
     options_for_select(
       select_components,
