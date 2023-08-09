@@ -5,6 +5,8 @@ class Lesson < ApplicationRecord
   belongs_to :venue, optional: true
 
   has_many :lesson_members
+  has_many :students, through: :lesson_members
+
   before_destroy :destroy_inactive_lesson_members
 
   before_validation :set_end_time

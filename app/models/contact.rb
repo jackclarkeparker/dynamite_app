@@ -6,6 +6,7 @@ class Contact < ApplicationRecord
   belongs_to :region, optional: true
 
   has_many :student_contacts
+  has_many :students, through: :student_contacts
 
   default_scope { where(valid_until: FUTURE_EPOCH)}
 

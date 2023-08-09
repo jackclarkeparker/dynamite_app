@@ -11,7 +11,6 @@ class Tutor < ApplicationRecord
   validates :first_name, :last_name, :email_address,
             :phone_number, :delivery_address, presence: true
   validate :validate_region_id
-
   validates :phone_number, format: {
     with: /\s/,
     message: 'suffix must be between six and nine digits long'

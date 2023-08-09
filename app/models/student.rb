@@ -4,7 +4,10 @@ class Student < ApplicationRecord
   belongs_to :region, optional: true
 
   has_many :lesson_members
+  has_many :lessons, through: :lesson_members
+
   has_many :student_contacts
+  has_many :contacts, through: :student_contacts
 
   validates :first_name, :age, presence: true
   validates :age, numericality: {
@@ -34,10 +37,6 @@ class Student < ApplicationRecord
     self.birthday == other_student.birthday &&
     self.gender == other_student.gender &&
     self.keyboard == other_student.keyboard
-  end
-
-  def contacts
-    student_contacts.map(&:contact)
   end
 
   def to_s
