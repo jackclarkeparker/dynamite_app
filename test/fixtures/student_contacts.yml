@@ -4,7 +4,7 @@ dennis_joel:
   student: joel
   contact: dennis
   contact_relation: Dad
-  primary_contact: false
+  primary_contact: true
   account_holder: false
 
 winona_alice:

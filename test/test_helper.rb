@@ -94,4 +94,16 @@ class ActiveSupport::TestCase
   def default_region_params
     { region: { name: 'Auckland' } }
   end
+
+  def default_contact_relationship_params
+    {
+      student_contact: {
+        student_id: students(:joel).id,
+        contact_id: contacts(:winona).id,
+        contact_relation: 'Auntie',
+        primary_contact: false,
+        account_holder: true,
+      }
+    }
+  end
 end
