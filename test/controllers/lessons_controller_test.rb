@@ -226,7 +226,7 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to lesson_url(@lesson)
     follow_redirect!
 
-    assert_select 'p', "Rejected destruction of lesson '3:00pm Mondays at Miramar Community Centre' because it: - has associated lesson_members."
+    assert_select 'p', "Rejected destruction of lesson '3:00pm Mondays at Miramar Community Centre' because it: - has associated students."
   end
 
   test "should destroy lesson" do

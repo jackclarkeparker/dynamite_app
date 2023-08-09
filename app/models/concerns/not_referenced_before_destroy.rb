@@ -10,7 +10,7 @@ module NotReferencedBeforeDestroy
     def ensure_not_referenced
       references = []
 
-      self.class.reflect_on_all_associations(:has_many).each do |association|
+      non_join_table_associations.each do |association|
         if send(association.name).any?
           references << " - has associated #{association.name.to_s.pluralize}."
         end
@@ -24,6 +24,14 @@ module NotReferencedBeforeDestroy
 
         errors.add(:base, message)
         throw :abort
+      end
+    end
+
+    def non_join_table_associations
+      all_associations = self.class.reflect_on_all_associations(:has_many)
+      
+      all_associations.reject do |association|
+        all_associations.any? { |a| a.options[:through] == association.name }
       end
     end
 end

@@ -183,7 +183,7 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to student_url(@student)
     follow_redirect!
 
-    assert_select 'p', "Rejected destruction of student 'Joel' because it: - has associated lesson_members. - has associated student_contacts."
+    assert_select 'p', "Rejected destruction of student 'Joel' because it: - has associated lessons. - has associated contacts."
   end
 
   test "should destroy student" do
