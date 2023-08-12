@@ -42,7 +42,6 @@ andy, natalie = Tutor.create!([
     phone_number: '021 123 4567',
     delivery_address: '13 Clyde Street, Island Bay, 6023',
     region_id: wellington.id,
-    entity_id: 1,
     valid_until: ApplicationRecord::FUTURE_EPOCH,
   },
   {
@@ -54,7 +53,6 @@ andy, natalie = Tutor.create!([
     phone_number: '021 765 4321',
     delivery_address: '18 Blackbridge Road, Wadestown, 6012',
     region_id: wellington.id,
-    entity_id: 2,
     valid_until: ApplicationRecord::FUTURE_EPOCH,
   },
 ])
@@ -276,7 +274,6 @@ dennis, winona = Contact.create!([
     bank_account: '',
     csc_number: '',
     valid_until: ApplicationRecord::FUTURE_EPOCH,
-    entity_id: 1,
     region_id: wellington.id,
   },
   {
@@ -289,7 +286,6 @@ dennis, winona = Contact.create!([
     bank_account: '12 1234 1234567 123',
     csc_number: '123 456 789',
     valid_until: ApplicationRecord::FUTURE_EPOCH,
-    entity_id: 2,
     region_id: wellington.id,
   }
 ])

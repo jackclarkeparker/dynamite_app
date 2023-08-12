@@ -39,7 +39,6 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1 or /contacts/1.json
   def update
     new_version = Contact.new(contact_params)
-    new_version.entity_id = @contact.entity_id
 
     respond_to do |format|
       if new_version == @contact

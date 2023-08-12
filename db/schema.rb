@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_08_040453) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_12_232624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "contacts", force: :cascade do |t|
-    t.integer "entity_id"
     t.string "first_name"
     t.string "last_name"
     t.string "full_name"
@@ -29,13 +28,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_040453) do
     t.datetime "updated_at", null: false
     t.bigint "region_id", null: false
     t.index ["region_id"], name: "index_contacts_on_region_id"
-  end
-
-  create_table "entity_id_references", force: :cascade do |t|
-    t.integer "tutor_entity_id", default: 0
-    t.integer "contact_entity_id", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "lesson_members", force: :cascade do |t|
@@ -108,7 +100,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_040453) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "full_name"
-    t.integer "entity_id"
     t.datetime "valid_until", precision: nil
     t.bigint "region_id", null: false
     t.index ["region_id"], name: "index_tutors_on_region_id"

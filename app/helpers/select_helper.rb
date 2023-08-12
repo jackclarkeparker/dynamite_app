@@ -1,7 +1,7 @@
 module SelectHelper
   def tutors_select(entity)
     select_components = Tutor.order(:first_name).map do |tutor|
-      [tutor.preferred_name, tutor.id]
+      [tutor.full_name, tutor.id]
     end.unshift(['Tutor'])
 
     options_for_select(

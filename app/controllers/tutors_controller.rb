@@ -39,7 +39,6 @@ class TutorsController < ApplicationController
   # PATCH/PUT /tutors/1 or /tutors/1.json
   def update
     new_version = Tutor.new(tutor_params)
-    new_version.entity_id = @tutor.entity_id
 
     respond_to do |format|
       if new_version == @tutor

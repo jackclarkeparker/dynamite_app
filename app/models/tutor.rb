@@ -1,7 +1,6 @@
 class Tutor < ApplicationRecord
   include PhoneNumberFormatting
   include RelatedModelValidator
-  include EntityHelper
 
   belongs_to :region, optional: true
   has_many :lessons
@@ -17,7 +16,7 @@ class Tutor < ApplicationRecord
   }, allow_blank: true
   validates_with UniqueTutorPhoneAndEmailValidator
 
-  before_create :set_full_name, :set_entity_id
+  before_create :set_full_name
 
   def ==(other_tutor)
     self.preferred_name == other_tutor.preferred_name &&

@@ -1,7 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 dennis:
-  entity_id: 1
   region: wellington
   first_name: 'Dennis'
   last_name: ''
@@ -14,7 +13,6 @@ dennis:
   valid_until: <%= ApplicationRecord::FUTURE_EPOCH %>
 
 winona:
-  entity_id: 2
   region: wellington
   first_name: 'Winona'
   last_name: 'Dewie'
