@@ -1,5 +1,5 @@
 class LessonMembersController < ApplicationController
-  include SlowlyChangingDimensionHelpers
+  include Decomissionable
 
   def new_lesson_member
     @lesson_member = LessonMember.new

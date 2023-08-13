@@ -1,4 +1,4 @@
-module SlowlyChangingDimensionHelpers
+module Decomissionable
   private
 
     def decomission_old_version(old_version, decomission_timestamp:)

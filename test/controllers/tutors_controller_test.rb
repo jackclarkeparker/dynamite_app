@@ -151,9 +151,7 @@ class TutorsControllerTest < ActionDispatch::IntegrationTest
       }
     }
 
-    refute response['Location'] =~ /\/tutors\/#{@tutor.id}\z/
-    assert response['Location'] =~ /\/tutors\/\d+\z/
-
+    assert_redirected_to tutor_url(@tutor)
     follow_redirect!
 
     assert_select 'p', "Tutor was successfully updated."

@@ -10,7 +10,6 @@ class TutorTest < ActiveSupport::TestCase
       delivery_address: '137 Clyde Street, Island Bay',
       region_id: regions(:wellington).id
     })
-    jack.entity_id = 1
     jack.save
 
     assert jack.valid?

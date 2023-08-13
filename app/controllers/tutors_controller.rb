@@ -1,5 +1,5 @@
 class TutorsController < ApplicationController
-  include SlowlyChangingDimensionHelpers
+  include Decomissionable
 
   before_action :set_tutor, only: %i[ show edit update destroy ]
 
@@ -38,21 +38,13 @@ class TutorsController < ApplicationController
 
   # PATCH/PUT /tutors/1 or /tutors/1.json
   def update
-    new_version = Tutor.new(tutor_params)
-
     respond_to do |format|
-      if new_version == @tutor
-        format.html do
-          redirect_to tutor_url(@tutor), alert: "No changes made to tutor."
-        end
-      elsif new_version.save
-        decomission_old_version(@tutor, decomission_timestamp: new_version.created_at)
-        format.html do
-          redirect_to tutor_url(new_version), notice: "Tutor was successfully updated."
-        end
-        format.json { render :show, status: :ok, location: new_version }
+      if Tutor.new(tutor_params) == @tutor
+        format.html { redirect_to tutor_url(@tutor), alert: "No changes made to tutor." }
+      elsif @tutor.update(tutor_params)
+        format.html { redirect_to tutor_url(@tutor), notice: "Tutor was successfully updated." }
+        format.json { render :show, status: :ok, location: @tutor }
       else
-        prepare_edit_following_failed_attempt(new_version)
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @tutor.errors, status: :unprocessable_entity }
       end
@@ -76,11 +68,6 @@ class TutorsController < ApplicationController
   end
 
   private
-    def prepare_edit_following_failed_attempt(new_version)
-      @render_failed_edit = true
-      @original_id = @tutor.id
-      @tutor = new_version
-    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_tutor

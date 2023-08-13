@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  include SlowlyChangingDimensionHelpers
+  include Decomissionable
 
   before_action :set_contact, only: %i[ show edit update destroy ]
 
@@ -38,17 +38,13 @@ class ContactsController < ApplicationController
 
   # PATCH/PUT /contacts/1 or /contacts/1.json
   def update
-    new_version = Contact.new(contact_params)
-
     respond_to do |format|
-      if new_version == @contact
+      if Contact.new(contact_params) == @contact
         format.html { redirect_to contact_url(@contact), alert: "No changes made to contact." }
-      elsif new_version.save
-        decomission_old_version(@contact, decomission_timestamp: new_version.created_at)
-        format.html { redirect_to contact_url(new_version), notice: "Contact was successfully updated." }
-        format.json { render :show, status: :ok, location: new_version }
+      elsif @contact.update(contact_params)
+        format.html { redirect_to contact_url(@contact), notice: "Contact was successfully updated." }
+        format.json { render :show, status: :ok, location: @contact }
       else
-        prepare_edit_following_failed_attempt(new_version)
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
@@ -72,12 +68,6 @@ class ContactsController < ApplicationController
   end
 
   private
-
-    def prepare_edit_following_failed_attempt(new_version)
-      @render_failed_edit = true
-      @original_id = @contact.id
-      @contact = new_version
-    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_contact

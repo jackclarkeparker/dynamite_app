@@ -89,7 +89,6 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
   test "should update contact" do
     patch contact_url(@contact), params: {
       contact: {
-        entity_id: @contact.entity_id,
         region_id: @contact.region_id,
         first_name: @contact.region_id,
         last_name: 'The-Menace',
@@ -101,9 +100,7 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
       }
     }
 
-    refute response['Location'] =~ /\/contacts\/#{@contact.id}\z/
-    assert response['Location'] =~ /\/contacts\/\d+\z/
-
+    assert_redirected_to contact_url(@contact)
     follow_redirect!
 
     assert_select 'p', "Contact was successfully updated."
@@ -113,7 +110,6 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
   test "should alert of update without changes" do
     patch contact_url(@contact), params: {
       contact: {
-        entity_id: @contact.entity_id,
         region_id: @contact.region_id,
         first_name: @contact.first_name,
         last_name: @contact.last_name,
@@ -134,7 +130,6 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
   test "should fail to update contact when missing params" do
     patch contact_url(@contact), params: {
       contact: {
-        entity_id: @contact.entity_id,
         region_id: @contact.region_id,
         first_name: '',
         last_name: @contact.last_name,
