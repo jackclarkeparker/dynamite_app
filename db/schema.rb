@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_13_042740) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_13_235113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.string "type"
+    t.bigint "lesson_id", null: false
+    t.bigint "contact_id", null: false
+    t.string "additional_details"
+    t.string "form_values"
+    t.boolean "currently_on_list"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_bookings_on_contact_id"
+    t.index ["lesson_id"], name: "index_bookings_on_lesson_id"
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string "first_name"
@@ -115,6 +128,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_042740) do
     t.index ["region_id"], name: "index_venues_on_region_id"
   end
 
+  add_foreign_key "bookings", "contacts"
+  add_foreign_key "bookings", "lessons"
   add_foreign_key "contacts", "regions"
   add_foreign_key "lesson_members", "lessons"
   add_foreign_key "lesson_members", "students"

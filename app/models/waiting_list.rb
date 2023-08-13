@@ -1,0 +1,2 @@
+class WaitingList < Booking
+end

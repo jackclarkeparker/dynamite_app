@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  lesson: one
+  contact: one
+  additional_details: MyString
+  form_values: MyString
+  currently_on_list: false
+
+two:
+  type: 
+  lesson: two
+  contact: two
+  additional_details: MyString
+  form_values: MyString
+  currently_on_list: false
