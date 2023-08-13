@@ -42,7 +42,6 @@ class ActiveSupport::TestCase
         start_time: '09:00:00',
         duration: 30,
         capacity: 4,
-        availability: 4,
         standard_price: 16,
       }
     }

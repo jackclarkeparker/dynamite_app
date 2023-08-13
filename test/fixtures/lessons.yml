@@ -8,5 +8,4 @@ miramar_lesson:
   end_time: '15:30:00'
   duration: 30
   capacity: 4
-  availability: 0
   standard_price: 16

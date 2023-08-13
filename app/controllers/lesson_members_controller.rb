@@ -16,6 +16,7 @@ class LessonMembersController < ApplicationController
 
     respond_to do |format|
       if @lesson_member.save
+        increment_lesson_members_count
         format.html { redirect_to lesson_url(@lesson_id), notice: "Student added to lesson." }
         format.json { render :show, status: :created, location: @lesson_member }
       else
@@ -31,6 +32,7 @@ class LessonMembersController < ApplicationController
       student_id: params[:student_id],
     })
     decomission_old_version(@lesson_member, decomission_timestamp: Time.now)
+    decrement_lesson_members_count
 
     respond_to do |format|
       format.html { redirect_to lesson_url(@lesson_member.lesson_id), notice: "Student removed from lesson." }
@@ -39,6 +41,18 @@ class LessonMembersController < ApplicationController
   end
 
   private
+
+    def increment_lesson_members_count
+      lesson = Lesson.find(@lesson_id)
+      lesson.lesson_members_count += 1
+      lesson.save
+    end
+
+    def decrement_lesson_members_count
+      lesson = Lesson.find(@lesson_member.lesson_id)
+      lesson.lesson_members_count -= 1
+      lesson.save
+    end
 
     def lesson_member_params
       params.require(:lesson_member).permit(:lesson_id, :student_id)

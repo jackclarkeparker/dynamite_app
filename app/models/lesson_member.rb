@@ -1,7 +1,7 @@
 class LessonMember < ApplicationRecord
   include RelatedModelValidator
 
-  belongs_to :lesson, optional: true
+  belongs_to :lesson, optional: true, counter_cache: true
   belongs_to :student, optional: true
 
   default_scope { where(valid_until: FUTURE_EPOCH) }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_12_232624) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_13_042740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,9 +49,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_232624) do
     t.decimal "standard_price", precision: 4, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "availability"
     t.integer "duration"
     t.time "end_time"
+    t.integer "lesson_members_count", default: 0
     t.index ["tutor_id"], name: "index_lessons_on_tutor_id"
     t.index ["venue_id"], name: "index_lessons_on_venue_id"
   end

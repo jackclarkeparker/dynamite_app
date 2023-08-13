@@ -1,10 +1,6 @@
 <h1>Editing tutor</h1>
 
-<% if @render_failed_edit %>
-  <%= render "failed_edit", tutor: @tutor, original_id: @original_id %>
-<% else %>
-  <%= render "form", tutor: @tutor %>
-<% end %>
+<%= render "form", tutor: @tutor %>
 
 <br>
 

@@ -36,6 +36,10 @@ class Lesson < ApplicationRecord
     self.standard_price == other_lesson.standard_price
   end
 
+  def availability
+    capacity - lesson_members_count
+  end
+
   def day
     Date::DAYNAMES[self.week_day_index]
   end
