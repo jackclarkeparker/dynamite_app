@@ -8,10 +8,6 @@ class LessonsController < ApplicationController
     @lesson_schedule = lessons_by_venue_by_day(other_includes: [:tutor])
   end
 
-  def booker
-    @lesson_schedule = lessons_by_venue_by_day
-  end
-
   # GET /lessons/1 or /lessons/1.json
   def show
     @lesson_members = LessonMember.includes(:student)

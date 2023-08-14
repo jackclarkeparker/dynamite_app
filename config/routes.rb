@@ -35,8 +35,6 @@ Rails.application.routes.draw do
   # Defines the root path route ('/')
   root 'regions#index'
 
-  get '/lesson_booker', to: 'lessons#booker'
-
   # Some ideas for routes when implementing the LessonBookerController (Not BookingController)
   # get "/lesson_booker", to: 'lesson_booker#lesson_booker'
   # get "/lesson_booker/:lesson_id/book_now", to: 'lesson_booker#book_now'

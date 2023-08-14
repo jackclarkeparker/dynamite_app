@@ -1,2 +1,38 @@
-<h1>Bookings#lessons</h1>
-<p>Find me in app/views/bookings/lessons.html.erb</p>
+<h1>Lessons</h1>
+
+<div id="lesson-booker">
+  <% @lesson_schedule.each_pair do |venue, days| %>
+    <h2><%= venue %></h2>
+      <% days.each_pair do |day, lessons| %>
+        <h3><%= day %></h3>
+        <table class="ms-3 table">
+          <tbody>
+            <% lessons.each do |lesson| %>
+              <% if lesson.availability > 0 %>
+                <tr>
+                  <td class="rounded-start-pill" scope="row"><%= display_lesson_time_range(lesson) %></td>
+                  <td>
+                    <%= lesson.availability %>
+                    <%= "availability".pluralize(lesson.availability) %>
+                  </td>
+                  <td>
+                    <%= button_to "Book now", "/lessons/#{lesson.id}/waitlist" %>
+                  </td>
+                </tr>
+              <% else %>
+                <tr>
+                  <td class="rounded-start-pill"  scope="row"><%=  display_lesson_time_range(lesson) %></td>
+                  <td>
+                    No availabilities
+                  </td>
+                  <td>
+                    <%= button_to "Join waitlist", "/lessons/#{lesson.id}/booking_page" %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+  <% end %>
+</div>
