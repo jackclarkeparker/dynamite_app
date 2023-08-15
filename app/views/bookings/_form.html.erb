@@ -1,0 +1,50 @@
+<%= form_with(model: booking) do |form| %>
+  <% if booking.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being made:</h2>
+
+      <ul>
+        <% booking.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label "Student name", style: "display: block" %>
+    <%= form.text_field :student_name %>
+  </div>
+
+  <div>
+    <%= form.label "Student age", style: "display: block" %>
+    <%= form.number_field :student_age, in: 4..120, step: 1 %>
+  </div>
+
+  <div>
+    <%= form.label "Caregiver name", style: "display: block" %>
+    <%= form.text_field :contact_name %>
+  </div>
+
+  <div>
+    <%= form.label "Caregiver email address", style: "display: block" %>
+    <%= form.text_field :contact_email %>
+  </div>
+
+  <div>
+    <%= form.label "Caregiver phone number", style: "display: block" %>
+    <%= form.text_field :contact_phone %>
+  </div>
+
+  <div>
+    <%= form.label "Anything else you'd like to add?", style: "display: block" %>
+    <%= form.text_area :additional_details, size: "70x5" %>
+  </div>
+
+  <%= form.hidden_field :lesson_id, value: @lesson_id %>
+  <%= form.hidden_field :region_id, value: @region_id %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
