@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   # Booking / WaitingList routes
   get 'bookings/lessons'
-  get 'bookings/new_booking'
-  get 'bookings/new_waiting_list_entry'
+  get 'bookings/lessons/:lesson_id/booking/new', to: 'bookings#new_booking', as: :new_booking
+  post 'bookings/lessons/:lesson_id/booking', to: 'bookings#create_booking', as: :bookings
+  get 'bookings/new_waiting_list_entry', to: 'bookings#new_waiting_list_entry', as: :new_waiting_list_entry
 
   # LessonMembers routes
   get 'lessons/:lesson_id/lesson_members/new', to: 'lesson_members#new_lesson_member', as: :new_lesson_member

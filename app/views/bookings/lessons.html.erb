@@ -16,7 +16,7 @@
                     <%= "availability".pluralize(lesson.availability) %>
                   </td>
                   <td>
-                    <%= button_to "Book now", "/lessons/#{lesson.id}/waitlist" %>
+                    <%= button_to "Book now", new_booking_path(lesson), method: :get %>
                   </td>
                 </tr>
               <% else %>
@@ -26,7 +26,7 @@
                     No availabilities
                   </td>
                   <td>
-                    <%= button_to "Join waitlist", "/lessons/#{lesson.id}/booking_page" %>
+                    <%= button_to "Join waitlist", new_waiting_list_entry_path(lesson), method: :get %>
                   </td>
                 </tr>
               <% end %>
