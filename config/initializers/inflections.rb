@@ -15,6 +15,6 @@
 #   inflect.acronym "RESTful"
 # end
 
-ActiveSupport::Inflector.inflections(:en) do |inflect|
-  inflect.acronym 'ID'
-end
+# ActiveSupport::Inflector.inflections(:en) do |inflect|
+#   inflect.acronym 'ID'
+# end
