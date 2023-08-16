@@ -11,8 +11,12 @@ class BookingsController < ApplicationController
   end
 
   def create_booking
-    contact = Booking.contact_from_booking_params(booking_params)
-    student = Booking.student_from_booking_params(booking_params)
+    @booking = Booking.new(booking_params)
+
+    debugger
+
+    # contact = Booking.contact_from_booking_params(booking_params)
+    # student = Booking.student_from_booking_params(booking_params)
 
     # contact.insert!
     # student.insert!
@@ -50,6 +54,10 @@ class BookingsController < ApplicationController
     end
 
     def booking_params
-      params.require(:booking).permit(:student_name, :student_age, :contact_name, :contact_email, :contact_phone, :additional_details, :lesson_id, :region_id)
+      params.require(:booking).permit(
+        :additional_details, :lesson_id,
+        student_attributes: [:full_name, :age, :region_id],
+        contact_attributes: [:full_name, :email_address, :phone_number, :region_id]
+      )
     end
 end
