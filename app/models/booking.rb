@@ -6,7 +6,7 @@ class Booking < ApplicationRecord
 
   # I think we'll want to set this to :students instead of :student
   # once the booking form allows more than one student to be booked.
-  accepts_nested_attributes_for :contact, :student
+  # accepts_nested_attributes_for :contact, :student
 
   def student_attributes=(attributes)
     processed_student_attributes = process_name(attributes)
