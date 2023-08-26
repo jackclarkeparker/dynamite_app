@@ -11,17 +11,16 @@ class BookingsController < ApplicationController
   end
 
   def create_booking
+    debugger
     @booking = Booking.new(booking_params)
 
-    debugger
-
-    # contact = Booking.contact_from_booking_params(booking_params)
-    # student = Booking.student_from_booking_params(booking_params)
-
-    # contact.insert!
-    # student.insert!
-
-    # LessonMember.create(lesson_id: @lesson_id, student_id: student.id)
+    respond_to do |format|
+      if @booking.save
+        format.html { redirect_to 'bookings/lessons', notice: 'Booking was successfully created.' }
+      else
+        format.html { render :new_booking, status: :unprocessable_entity }
+      end
+    end
   end
 
   # def create
@@ -56,8 +55,8 @@ class BookingsController < ApplicationController
     def booking_params
       params.require(:booking).permit(
         :additional_details, :lesson_id,
-        student_attributes: [:full_name, :age, :region_id],
-        contact_attributes: [:full_name, :email_address, :phone_number, :region_id]
+        students_attributes: [:first_name, :last_name, :age, :region_id],
+        contact_attributes: [:first_name, :last_name, :email_address, :phone_number, :region_id]
       )
     end
 end

@@ -1,26 +1,29 @@
 class Booking < ApplicationRecord
   belongs_to :lesson
-  belongs_to :contact
+  belongs_to :contact, inverse_of: :booking
 
-  has_one :booking_students
-  has_one :student, through: :booking_students
+  has_many :booking_students, inverse_of: :booking
+  has_many :students, through: :booking_students
 
-  accepts_nested_attributes_for :contact, :student
+  accepts_nested_attributes_for :contact, :students
+  # validates_associated :contact#, :students
 
-  before_validation :build_contact_and_student
+  # validates :contact, presence: true
+  # validates :students <Not empty>
+  # Maybe the validations will be taken care of by Student already.
+  # In that case, we do need to create the students before creating the
+  # booking
 
-  def student_attributes=(attributes)
-    add_first_name_last_name_to(attributes)
-    set_form_inputs_in(attributes)
+  # With inverse_of, the 
 
-    # super(attributes)
+  # before_validation :build_contact_and_student
+
+  def students_attributes=(attributes)
+    students.build(attributes)
   end
 
   def contact_attributes=(attributes)
-    add_first_name_last_name_to(attributes)
-    set_form_inputs_in(attributes)
-
-    # super(attributes)
+    build_contact(attributes)
   end
 
   private
@@ -39,33 +42,16 @@ class Booking < ApplicationRecord
       Contact.set_callback(:create, :before, :set_full_name)
     end
 
-    def build_student(attributes)
-      student.build(attributes)
-    end
-
-    def build_contact(attributes)
-      contact.build(attributes)
-    end
-
-    def attributes_for_student
-      booking_params[:student_attributes]
-    end
-
-    def attributes_for_contact
-      booking_params[:contact_attributes]
-    end
-
-    def add_first_name_last_name_to(attributes)
-      full_name = attributes[:full_name]
-      first, last = first_last_from_full_name(full_name)
-      attributes.merge!(first_name: first, last_name: last)
+    def with_first_and_last_name(attributes)
+      first, last = first_last_from_full_name(attributes[:full_name])
+      attributes.merge(first_name: first, last_name: last)
     end
 
     def set_form_inputs_in(attributes)
     end
 
     def first_last_from_full_name(full_name)
-      name_parts = full_name.split(' ')
+      name_parts = full_name.strip.split(' ')
 
       first = name_parts[0]
       last = name_parts.length > 1 ? name_parts[-1] : nil

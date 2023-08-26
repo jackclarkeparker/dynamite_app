@@ -11,10 +11,15 @@
     </div>
   <% end %>
 
-  <%= form.fields_for :student_attributes do |student| %>
+  <%= form.fields_for :students_attributes do |student| %>
     <div>
-      <%= student.label "Student name", style: "display: block" %>
-      <%= student.text_field :full_name %>
+      <%= student.label "Student first name", style: "display: block" %>
+      <%= student.text_field :first_name %>
+    </div>
+
+    <div>
+      <%= student.label "Student last name", style: "display: block" %>
+      <%= student.text_field :last_name %>
     </div>
 
     <div>
@@ -27,8 +32,13 @@
 
   <%= form.fields_for :contact_attributes do |contact| %>
     <div>
-      <%= contact.label "Caregiver name", style: "display: block" %>
-      <%= contact.text_field :full_name %>
+      <%= contact.label "Caregiver first name", style: "display: block" %>
+      <%= contact.text_field :first_name %>
+    </div>
+
+    <div>
+      <%= contact.label "Caregiver last name", style: "display: block" %>
+      <%= contact.text_field :last_name %>
     </div>
 
     <div>
