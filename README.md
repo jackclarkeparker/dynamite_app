@@ -4,14 +4,14 @@ Lesson Manager is an ongoing project aimed at automating admin tasks and deliver
 ## Future Enhancements
 The current version focuses on core CRUD functionalities, but the project has plenty of exciting future development paths:
 
-#### Front-end for Customers:
-Implement a customer-facing front-end for booking lessons, viewing practice updates and other notices, and viewing current and past invoices.
+**Front-end for Customers**   
+A customer-facing front-end for booking lessons, viewing practice updates and other notices, and viewing current and past invoices.
 
-#### Back-end for Tutors:
-Develop a dedicated back-end for tutors, enabling lesson scheduling updates, client-record management, roll generation, attendance tracking, and practice update delivery.
+**Back-end for Tutors**   
+A dedicated back-end for tutors, enabling lesson scheduling updates, client-record management, roll generation, attendance tracking, and practice update delivery.
 
-#### Invoicing and Payments:
-Integrate a robust invoicing system with the above to aid in sending and tracking invoices.
+**Invoicing and Payments**   
+Integrate a robust invoicing system to aid in sending and tracking invoices.
 
-#### Student "Practice Diary":
+**Student "Practice Diary"**   
 A portal for tracking practice reps through the week, a metronome to practice alongside, and the opportunity to record performances to share with friends.
