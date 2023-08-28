@@ -1,24 +1,17 @@
-# README
+# Lesson Manager
+Lesson Manager is an ongoing project aimed at automating admin tasks and delivering improved customer experiences in interactions with a music teaching business. It currently focuses on core functionalities for storing validated business entity data in a Postgres database through a user-friendly interface.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Future Enhancements
+The current version focuses on core CRUD functionalities, but the project has plenty of exciting future development paths:
 
-Things you may want to cover:
+#### Front-end for Customers:
+Implement a customer-facing front-end for booking lessons, viewing practice updates and other notices, and viewing current and past invoices.
 
-* Ruby version
+#### Back-end for Tutors:
+Develop a dedicated back-end for tutors, enabling lesson scheduling updates, client-record management, roll generation, attendance tracking, and practice update delivery.
 
-* System dependencies
+#### Invoicing and Payments:
+Integrate a robust invoicing system with the above to aid in sending and tracking invoices.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### Student "Practice Diary":
+A portal for tracking practice reps through the week, a metronome to practice alongside, and the opportunity to record performances to share with friends.
