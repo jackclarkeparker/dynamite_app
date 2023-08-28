@@ -7,6 +7,8 @@ class Contact < ApplicationRecord
   has_many :student_contacts
   has_many :students, through: :student_contacts
 
+  has_one :booking, inverse_of: :contact
+
   default_scope { where(valid_until: FUTURE_EPOCH)}
 
   validates :first_name, :email_address, presence: true

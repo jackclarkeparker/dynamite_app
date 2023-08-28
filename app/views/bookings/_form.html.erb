@@ -11,30 +11,48 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label "Student name", style: "display: block" %>
-    <%= form.text_field :student_name %>
-  </div>
+  <%= form.fields_for :students_attributes do |student| %>
+    <div>
+      <%= student.label "Student first name", style: "display: block" %>
+      <%= student.text_field :first_name %>
+    </div>
 
-  <div>
-    <%= form.label "Student age", style: "display: block" %>
-    <%= form.number_field :student_age, in: 4..120, step: 1 %>
-  </div>
+    <div>
+      <%= student.label "Student last name", style: "display: block" %>
+      <%= student.text_field :last_name %>
+    </div>
 
-  <div>
-    <%= form.label "Caregiver name", style: "display: block" %>
-    <%= form.text_field :contact_name %>
-  </div>
+    <div>
+      <%= student.label "Student age", style: "display: block" %>
+      <%= student.number_field :age, in: 4..120, step: 1 %>
+    </div>
 
-  <div>
-    <%= form.label "Caregiver email address", style: "display: block" %>
-    <%= form.text_field :contact_email %>
-  </div>
+    <%= student.hidden_field :region_id, value: @region_id %>
+  <% end %>
 
-  <div>
-    <%= form.label "Caregiver phone number", style: "display: block" %>
-    <%= form.text_field :contact_phone %>
-  </div>
+  <%= form.fields_for :contact_attributes do |contact| %>
+    <div>
+      <%= contact.label "Caregiver first name", style: "display: block" %>
+      <%= contact.text_field :first_name %>
+    </div>
+
+    <div>
+      <%= contact.label "Caregiver last name", style: "display: block" %>
+      <%= contact.text_field :last_name %>
+    </div>
+
+    <div>
+      <%= contact.label "Caregiver email address", style: "display: block" %>
+      <%= contact.text_field :email_address %>
+    </div>
+
+    <div>
+      <%= contact.label "Caregiver phone number", style: "display: block" %>
+      <%= contact.text_field :phone_number %>
+    </div>
+
+    <%= contact.hidden_field :region_id, value: @region_id %>
+  <% end %>
 
   <div>
     <%= form.label "Anything else you'd like to add?", style: "display: block" %>
@@ -42,7 +60,6 @@
   </div>
 
   <%= form.hidden_field :lesson_id, value: @lesson_id %>
-  <%= form.hidden_field :region_id, value: @region_id %>
 
   <div>
     <%= form.submit %>

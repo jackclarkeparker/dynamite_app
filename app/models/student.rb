@@ -9,6 +9,9 @@ class Student < ApplicationRecord
   has_many :student_contacts
   has_many :contacts, through: :student_contacts
 
+  has_many :booking_students, inverse_of: :student
+  has_many :bookings, through: :booking_students
+
   validates :first_name, :age, presence: true
   validates :age, numericality: {
     greater_than: 3,
