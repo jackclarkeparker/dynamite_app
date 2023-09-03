@@ -11,12 +11,11 @@ class BookingsController < ApplicationController
   end
 
   def create_booking
-    debugger
     @booking = Booking.new(booking_params)
 
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to 'bookings/lessons', notice: 'Booking was successfully created.' }
+        format.html { redirect_to '/bookings/lessons', notice: 'Booking was successfully created.' }
       else
         format.html { render :new_booking, status: :unprocessable_entity }
       end
